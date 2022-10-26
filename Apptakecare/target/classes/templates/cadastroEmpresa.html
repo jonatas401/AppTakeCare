@@ -63,13 +63,13 @@
 
 
 	<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2" >
-		<form action="/salvarCadastroEmpresa" th:object="${empresa}" method="post">
+		<form action="/salvarCadastroEmpresa" th:object="${empresa}"  method="post">
 		<input type="hidden"  th:field="*{Id}">
 		
 		<div id='primeiro'>
 					<div class="form-group">
 						<label for="nome">Nome</label> <input type="text"  th:field="*{nome}"
-							class="form-control" id="nome" placeholder="Nome da torta" required>
+							class="form-control" id="nome" placeholder="Seu Nome" required>
 					</div>
 					
 					<div class="form-group">
@@ -78,53 +78,63 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="ingredientes">Email</label> <input type="text" th:field="*{Email}"
-							class="form-control" id="ingredientes" placeholder="Ingredientes" required>
+						<label for="email">Email</label> <input type="text" th:field="*{Email}"
+							class="form-control" id="email" placeholder="Seu Email" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="calorias">Senha</label> <input type="text" th:field="*{senha}"
-							class="form-control" id="calorias" placeholder="calorias" required>
+						<label for="calorias">Senha</label> <input type="password" th:field="*{senha}"
+							class="form-control" id="senha" placeholder="Senha" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="Empresa">Loja</label> <input type="text" th:field="*{nomeEmpresa}"
+						<label for="Empresa">Nome da Empresa</label> <input type="text" th:field="*{nomeEmpresa}"
 							class="form-control" id="Empresa" placeholder="Nome da Loja" required>
+					</div>
+					
+					<div class="form-group">
+						<label for="TipoEmpresa"> Tipo da Empresa</label>
+						
+						<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" required>
+							<option th:value="''">selecione</option>
+							<option th:each="empresa :  ${T(br.ifpe.web3.model.TipoEmpresa).values()}"  th:text="${empresa}" th:value="${empresa}"></option>
+							
+						</select>
 					</div>
 			
 			</div>
 			
-			<div id="segundo">
+			<div id="segundo" th:object="${endereco}" >
 			
 					<div class="form-group">
-						<label for="calorias">Cep</label> <input type="text" th:field="*{cep}"
-							class="form-control" id="cep" placeholder="calorias" required>
+						<label for="cep">Cep</label> <input type="text" th:field="*{cep}"
+							class="form-control" id="cep" placeholder="cep" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="Ncasa">Nº</label> <input type="text"  th:field="*{N}"
+						<label for="Ncasa">Nº</label> <input type="text"  th:field="*{numeroResidencia}"
 							class="form-control" id="Ncasa" placeholder="Numero da casa" required>
 					</div>
 					
 					
 					<div class="form-group">
-						<label for="calorias">Rua</label> <input type="text"  th:field="*{rua}"
-							class="form-control" id="rua" placeholder="calorias" required>
+						<label for="rua">Rua</label> <input type="text"  th:field="*{rua}"
+							class="form-control" id="rua" placeholder="Rua" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="calorias">Bairro</label> <input type="text" th:field="*{bairro}"
-							class="form-control" id="bairro" placeholder="calorias" required>
+						<label for="bairro">Bairro</label> <input type="text" th:field="*{bairro}"
+							class="form-control" id="bairro" placeholder="Bairro" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="calorias">Cidade</label> <input type="text"  th:field="*{cidade}"
-							class="form-control" id="cidade" placeholder="calorias" required>
+						<label for="cidade">Cidade</label> <input type="text"  th:field="*{cidade}"
+							class="form-control" id="cidade" placeholder="Cidade" required>
 					</div>
 					
 					<div class="form-group">
-						<label for="calorias">Estado</label> <input type="text" th:field="*{estado}"
-							class="form-control" id="estado" placeholder="calorias" required>
+						<label for="estado">Estado</label> <input type="text" th:field="*{estado}"
+							class="form-control" id="estado" placeholder="Estado" required>
 					</div>
 					
 					

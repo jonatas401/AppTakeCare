@@ -6,16 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import br.ifpe.web3.model.CadastroCliente;
+import br.ifpe.web3.model.CadastroEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
-import br.ifpe.web3.model.TakeCareCadastroCliente;
-import br.ifpe.web3.model.TakeCareCadastroEmpresa;
+import br.ifpe.web3.model.Endereco;
 
 @Controller
-public class takeCareController {
+public class Controler {
 	
 	@Autowired
 	private EmpresaDAO empresaDao;
+	@Autowired
 	private ClienteDAO clienteDao;
 	
 	
@@ -25,12 +27,16 @@ public class takeCareController {
 	}
 	
 	@GetMapping("/cadastroCliente")
-	public String cadastroCliente(TakeCareCadastroCliente cliente) {
+	public String cadastroCliente(CadastroCliente cliente, Endereco endereco, Model model) {
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("endereco", endereco);
 		return "cadastroCliente";
 	}
 	
 	@GetMapping("/cadastroEmpresa")
-	public String cadastroEmpresa(TakeCareCadastroCliente empresa) {
+	public String cadastroEmpresa(CadastroEmpresa empresa, Endereco endereco, Model model) {
+		model.addAttribute("empresa", empresa);
+		model.addAttribute("endereco", endereco);
 		return "cadastroEmpresa";
 	}
 	
@@ -47,13 +53,13 @@ public class takeCareController {
 	}
 	
 	@PostMapping("/salvarCadastroCliente")
-	public String salvarCadastroCliente(TakeCareCadastroCliente cliente) {
-			clienteDao.save(cliente);	
+	public String salvarCadastroCliente(CadastroCliente cliente, Endereco endereco) {
+		clienteDao.save(cliente);	
 		return "redirect:/login";
 	}
 	
 	@PostMapping("/salvarCadastroEmpresa")
-	public String salvarCadastroEmpresa(TakeCareCadastroEmpresa empresa) {
+	public String salvarCadastroEmpresa(CadastroEmpresa empresa) {
 			empresaDao.save(empresa);	
 		return "redirect:/login";
 	}
@@ -73,14 +79,14 @@ public class takeCareController {
 	
 	@GetMapping("/editarCadastroCliente")
 	public String editarCliente(Integer Id, Model model) {
-		TakeCareCadastroCliente cliente = clienteDao.findById(Id).orElse(null);
+		CadastroCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
 		return "cadastroCliente";
 	}
 	
 	@GetMapping("/editarCadastroEmpresa")
 	public String editarEmpresa(Integer Id, Model model) {
-		TakeCareCadastroEmpresa empresa = empresaDao.findById(Id).orElse(null);
+		CadastroEmpresa empresa = empresaDao.findById(Id).orElse(null);
 		model.addAttribute("empresa", empresa);
 		return "cadastroEmpresa";
 	}

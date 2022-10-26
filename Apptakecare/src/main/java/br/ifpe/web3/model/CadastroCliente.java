@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TakeCareCadastroCliente {
+public class CadastroCliente {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
@@ -14,11 +14,7 @@ public class TakeCareCadastroCliente {
 	private String sobreNome;
 	private String Email;
 	private String senha;
-	private String cep;
-	private String rua;
-	private String bairro;
-	private String cidade;
-	private String estado;
+	private Endereco endereco;
 	
 	
 	
@@ -53,40 +49,11 @@ public class TakeCareCadastroCliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getCep() {
-		return cep;
+	public Endereco getEndereco() {
+		return endereco;
 	}
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
-	
-	
-	
-	
-	
+
 }

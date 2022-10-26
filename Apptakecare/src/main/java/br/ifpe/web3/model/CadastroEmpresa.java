@@ -1,12 +1,13 @@
 package br.ifpe.web3.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TakeCareCadastroEmpresa {
+public class CadastroEmpresa {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
@@ -15,21 +16,18 @@ public class TakeCareCadastroEmpresa {
 	private String Email;
 	private String senha;
 	private String nomeEmpresa;
-	private String cep;
-	private String rua;
-	private String bairro;
-	private String cidade;
-	private String estado;
-	private String N;
+	@Column
+	private TipoEmpresa tipoEmpresa;
+	private Endereco endereco;
 	
 	
 	
 	
-	public String getN() {
-		return N;
+	public Endereco getEndereco() {
+		return endereco;
 	}
-	public void setN(String n) {
-		N = n;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	public Integer getId() {
 		return Id;
@@ -67,40 +65,12 @@ public class TakeCareCadastroEmpresa {
 	public void setNomeEmpresa(String nomeEmpresa) {
 		this.nomeEmpresa = nomeEmpresa;
 	}
-	public String getCep() {
-		return cep;
+	public TipoEmpresa getTipoEmpresa() {
+		return tipoEmpresa;
 	}
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+		this.tipoEmpresa = tipoEmpresa;
 	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
-	
-	
-	
-	
 	
 }
+	
