@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmpresaDAO extends JpaRepository<CadastroEmpresa, Integer> {
 
+	//boolean findOne(CadastroEmpresa usuario);
+
 }

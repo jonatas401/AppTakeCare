@@ -22,21 +22,24 @@ public class Controler {
 	
 	
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(CadastroEmpresa empresa, CadastroCliente cliente,Model model) {
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("empresa", empresa);
+		
 		return "login";
 	}
 	
+	
+	
 	@GetMapping("/cadastroCliente")
-	public String cadastroCliente(CadastroCliente cliente, Endereco endereco, Model model) {
+	public String cadastroCliente(CadastroCliente cliente,  Model model) {
 		model.addAttribute("cliente", cliente);
-		model.addAttribute("endereco", endereco);
 		return "cadastroCliente";
 	}
 	
 	@GetMapping("/cadastroEmpresa")
-	public String cadastroEmpresa(CadastroEmpresa empresa, Endereco endereco, Model model) {
+	public String cadastroEmpresa(CadastroEmpresa empresa, Model model) {
 		model.addAttribute("empresa", empresa);
-		model.addAttribute("endereco", endereco);
 		return "cadastroEmpresa";
 	}
 	
@@ -90,6 +93,8 @@ public class Controler {
 		model.addAttribute("empresa", empresa);
 		return "cadastroEmpresa";
 	}
+	
+	
 	
 }
 
