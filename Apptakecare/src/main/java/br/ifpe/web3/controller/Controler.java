@@ -1,5 +1,7 @@
 package br.ifpe.web3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class Controler {
 	private EmpresaDAO empresaDao;
 	@Autowired
 	private ClienteDAO clienteDao;
+	
+	//*******Rotas fora do acesso***********
+	
 	
 	
 	@GetMapping("/login")
@@ -68,6 +73,50 @@ public class Controler {
 	}
 	
 
+	
+	
+	//*******************Rotas de acesso a paginas de usuarios logados*************************
+	
+	
+	@GetMapping("/meusDados")
+	public String meusDados() {
+		
+		return "meusDados";
+	}
+	
+	@GetMapping("/lojas")
+	public String lojas() {
+		
+		return "lojas";
+	}
+	
+	@GetMapping("/agendamentos")
+	public String agendamentos() {
+		
+		return "agendamentos";
+	}
+	
+	@GetMapping("/configuracao")
+	public String configuracao() {
+		
+		return "configuracao";
+	}
+	
+	@GetMapping("/logoff")
+	public String logoff(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/login";
+	}
+	
+	
+	
+	
+	
+	
+	//********** Rotas para remover e editar***********
+	
+	
 	@GetMapping("/removerloginCliente")
 	public String removerCliente(Integer Id,Model model) {
 		clienteDao.deleteById(Id);

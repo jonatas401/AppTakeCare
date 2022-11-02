@@ -1,18 +1,23 @@
 package br.ifpe.web3.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
+
 public class CadastroCliente {
+	
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	private String nome;
 	private String sobreNome;
-	private String Email;
+	private String email;
 	private String senha;
 	private Endereco endereco;
 	
@@ -38,10 +43,10 @@ public class CadastroCliente {
 		this.sobreNome = sobreNome;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getSenha() {
 		return senha;
@@ -55,5 +60,22 @@ public class CadastroCliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, senha);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CadastroCliente other = (CadastroCliente) obj;
+		return Objects.equals(email, other.email) && Objects.equals(senha, other.senha);
+	}
+	
+	
 
 }

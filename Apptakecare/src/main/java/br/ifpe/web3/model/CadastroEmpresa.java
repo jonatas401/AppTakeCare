@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class CadastroEmpresa {
 	
@@ -13,7 +14,7 @@ public class CadastroEmpresa {
 	private Integer Id;
 	private String nome;
 	private String sobreNome;
-	private String Email;
+	private String email;
 	private String senha;
 	private String nomeEmpresa;
 	@Column
@@ -48,10 +49,10 @@ public class CadastroEmpresa {
 		this.sobreNome = sobreNome;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getSenha() {
 		return senha;

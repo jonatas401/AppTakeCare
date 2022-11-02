@@ -1,6 +1,5 @@
 package br.ifpe.web3.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,21 +30,23 @@ public class LoginController {
 	
 	
 	@RequestMapping("/efetuarLogin")
-	public String EfetuarLogin( String email, HttpSession session) {	
-		List<CadastroEmpresa> usuario = empresaDao.findAll();
-		System.out.println(usuario);
-		for(CadastroEmpresa e : usuario) {
-			if(e.getEmail().equals(email)) {
-				System.out.println(e.getEmail());
-		          session.setAttribute("usuarioLogado", e);
-		          return "contaUsuario";
-		      } 
-			else {
-		          System.out.println("nao encontrado");
-		      }
-		}
-	 
+	public String EfetuarLogin( String email, String senha, HttpSession session) {	
+		 CadastroEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
+		 CadastroCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
+		 if(usuarioEmpresa != null) {
 		
+		          session.setAttribute("usuarioLogado", usuarioEmpresa);
+		          return "redirect:/contaUsuario";
+		      } 
+		else if(usuarioCliente != null) {
+				
+				 session.setAttribute("usuarioLogado", usuarioCliente);
+				 return "redirect:/contaUsuario";
+		      }
+		 else{
+			 System.out.println("nao encontrado");
+		 }
+	 
 	
 		return "redirect:/login";
 	}
