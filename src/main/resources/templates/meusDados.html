@@ -12,10 +12,29 @@
 	#navConta{
 		width:300px;
 		border-radius: 15px;
-		float:left;
+		position:fixed;
+		top:0px;
 	}
 	#navDados{
 		margin-left:15px;
+	}
+	
+	#primeiro{
+		float:left;
+	}
+	
+	#segundo{
+		float:right;
+	}
+	#button{
+		float:rigth;
+	}
+	a{
+		color:white;
+		text-decoration:none;
+	}
+	a:hover{
+		color:white;
 	}
 	
 	</style>
@@ -24,7 +43,7 @@
 
 
 <nav id="navConta" class="navbar navbar-dark bg-dark">
- 		<a style="margin-left: 20px;" class="navbar-brand" href="/contaUsuario">TakeCare</a>
+ 		<a style="margin-left: 20px;" class="navbar-brand" href="/contaUsuario">Menu</a>
      <div class="container-fluid">
    
     <button style="margin-left: 200px; margin-top: -40px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navDados" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,12 +78,78 @@
       </div>
 
 </nav>
-<div >
+
+	
+	<div >
 			
 			
 			<div style="margin-left:40%; ">
-				<h2>Bem vindo Sr.(a):  <span th:text="${session.usuarioLogado.nome}"></span></h2>
+				
 			</div>
+			
+			
+
+	<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2" >
+		
+		<h4>Meus dados:</h4>
+		<input type="hidden" th:value="${Id}" >
+		
+		<div id='primeiro'>
+					<div class="form-group">
+						<label for="nome">Nome</label> <input type="text"   th:value="${session.usuarioLogado.nome}"
+							class="form-control" id="nome" placeholder="Nome" disabled>
+					</div>
+					
+					<div class="form-group">
+						<label for="sobrenome">Sobrenome</label> <input type="text" th:value="${session.usuarioLogado.sobreNome}"
+							class="form-control" id="sobrenome" placeholder="Sobrenome" disabled>
+					</div>
+					
+					
+					<div class="form-group">
+						<label for="email">Email</label> <input type="email" th:value="${session.usuarioLogado.Email}"
+							class="form-control" id="email" placeholder="Seu Email" disabled>
+					</div>
+					
+			
+			</div>
+			
+			<div id="segundo" >
+			
+					<div class="form-group">
+						<label for="cep">Cep</label> <input type="text" th:value="${session.usuarioLogado.endereco.cep}"
+							class="form-control" id="cep" placeholder="cep" disabled>
+					</div>
+					
+					<div class="form-group">
+						<label for="rua">Rua</label> <input type="text" th:value="${session.usuarioLogado.endereco.rua}"
+							class="form-control" id="rua" placeholder="Rua" disabled>
+					</div>
+					
+				
+					
+					<div class="form-group">
+						<label for="bairro">Bairro</label> <input type="text" th:value="${session.usuarioLogado.endereco.bairro}"
+							class="form-control" id="bairro" placeholder="Bairro" disabled>
+					</div>
+					
+					<div class="form-group">
+						<label for="cidade">Cidade</label> <input type="text" th:value="${session.usuarioLogado.endereco.cidade}"
+							class="form-control" id="cidade" placeholder="cidade" disabled>
+					</div>
+					
+					<div class="form-group">
+						<label for="estado">Estado</label> <input type="text"  th:value="${session.usuarioLogado.endereco.estado}"
+							class="form-control" id="estado" placeholder="estado" disabled>
+					</div>
+					
+								<a  class="btn btn-dark" style=" margin-left:20px; margin-top:17px;" th:href="@{/editarCadastroCliente(Id=${session.usuarioLogado.Id})}">Editar</a>
+			</div>
+		
+		
+		
+
+	</div>
 
 
 </div>
