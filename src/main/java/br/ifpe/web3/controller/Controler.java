@@ -1,5 +1,9 @@
 package br.ifpe.web3.controller;
 
+
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,7 @@ public class Controler {
 	@Autowired
 	private ClienteDAO clienteDao;
 	
-	//*******Rotas fora do acesso***********
+	//*******Rotas fora do acesso do usuario***********
 	
 	
 	
@@ -84,11 +88,27 @@ public class Controler {
 		return "meusDados";
 	}
 	
-	@GetMapping("/lojas")
-	public String lojas() {
+	@GetMapping("/listEstabelecimentos")
+	public String listLojas(CadastroEmpresa empresa, Model model) {
+	
+	List <CadastroEmpresa> nomeEmpresa = empresaDao.findAll();
 		
-		return "lojas";
+	model.addAttribute("listarLojas", nomeEmpresa);
+		return "listarEstabelecimentos";
 	}
+	
+	
+	@GetMapping("/estabelecimento")
+	public String loja(Integer id, Model model) {
+		CadastroEmpresa empresa =  empresaDao.findById(id).orElse(null);
+		
+		model.addAttribute( "loja",empresa);
+	
+		
+		return "estabelecimento";
+	}
+	
+	
 	
 	@GetMapping("/agendamentos")
 	public String agendamentos() {
@@ -104,7 +124,7 @@ public class Controler {
 	
 	@GetMapping("/logoff")
 	public String logoff(HttpSession session) {
-		session.invalidate();
+			session.invalidate();
 		
 		return "redirect:/login";
 	}
