@@ -129,6 +129,20 @@ public class Controler {
 		return "redirect:/login";
 	}
 	
+	@PostMapping("/CadastroClienteEditado")
+	public String CadastroClienteEditado(CadastroCliente cliente) {
+		clienteDao.save(cliente);	
+	
+		return "redirect:/meusDados";
+	}
+
+	@PostMapping("/CadastroEmpresaEditado")
+	public String CadastroEmpresaEditado(CadastroEmpresa empresa) {
+		System.out.println(empresa.getTipoEmpresa());
+		empresaDao.save(empresa);	
+	
+		return "redirect:/meusDados";
+	}
 	
 	
 	
@@ -153,14 +167,14 @@ public class Controler {
 	public String editarCliente(Integer Id, Model model) {
 		CadastroCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
-		return "cadastroCliente";
+		return "editarCadastroCliente";
 	}
 	
 	@GetMapping("/editarCadastroEmpresa")
 	public String editarEmpresa(Integer Id, Model model) {
 		CadastroEmpresa empresa = empresaDao.findById(Id).orElse(null);
 		model.addAttribute("empresa", empresa);
-		return "cadastroEmpresa";
+		return "editarCadastroEmpresa";
 	}
 	
 	

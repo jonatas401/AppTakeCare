@@ -8,113 +8,44 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	
-	<style type="text/css">
-	#navConta{
-		width:300px;
-		border-radius: 15px;
-		position:fixed;
-		top:0px;
-	}
-	#navDados{
-		margin-left:15px;
-	}
 	
-	#primeiro{
-		float:left;
-	}
+ <link rel="stylesheet" type="text/css" media="all" 
+          href="../static/css/style.css" th:href="@{/css/style.css}" />
 	
-	#segundo{
-		float:right;
-	}
-	#button{
-		float:rigth;
-	}
-	a{
-		color:white;
-		text-decoration:none;
-	}
-	a:hover{
-		color:white;
-		opacity:0.5;
-		background: black;
-	}
 	
-	</style>
 </head>
 <body  >
 
 
-<nav id="navConta" class="navbar navbar-dark bg-dark">
- 		<a style="margin-left: 20px;" class="navbar-brand" href="/contaUsuario">Menu</a>
-     <div class="container-fluid">
-   
-    <button style="margin-left: 200px; margin-top: -40px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navDados" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    </div>
-    <div  class="collapse navbar-collapse" id="navDados">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      
-      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/meusDados">Meus Dados</a>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listEstabelecimentos">Estabelecimentos</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/agendamentos">Agendamentos</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/configuracao">Configurações</a>       
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/logoff">Sair</a>
-        </li>
-        
-        
-      </ul>
-      </div>
+ <div th:replace="navBar :: #navConta"></div>
 
-</nav>
 
-	
 	<div >
-			
-			
-			<div style="margin-left:40%; ">
 				
-			</div>
+		<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2" >
 			
+			<h4>Meus dados:</h4>
+			<input type="hidden" th:value="${Id}" >
 			
-
-	<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2" >
-		
-		<h4>Meus dados:</h4>
-		<input type="hidden" th:value="${Id}" >
-		
-		<div id='primeiro'>
-					<div class="form-group">
-						<label for="nome">Nome</label> <input type="text"   th:value="${session.usuarioLogado.nome}"
-							class="form-control" id="nome" placeholder="Nome" disabled>
-					</div>
-					
-					<div class="form-group">
-						<label for="sobrenome">Sobrenome</label> <input type="text" th:value="${session.usuarioLogado.sobreNome}"
-							class="form-control" id="sobrenome" placeholder="Sobrenome" disabled>
-					</div>
-					
-					
-					<div class="form-group">
-						<label for="email">Email</label> <input type="email" th:value="${session.usuarioLogado.Email}"
-							class="form-control" id="email" placeholder="Seu Email" disabled>
-					</div>
-					
-			
-			</div>
+			<div id='primeiro'>
+						<div class="form-group">
+							<label for="nome">Nome</label> <input type="text"   th:value="${session.usuarioLogado.nome}"
+								class="form-control" id="nome" placeholder="Nome" disabled>
+						</div>
+						
+						<div class="form-group">
+							<label for="sobrenome">Sobrenome</label> <input type="text" th:value="${session.usuarioLogado.sobreNome}"
+								class="form-control" id="sobrenome" placeholder="Sobrenome" disabled>
+						</div>
+						
+						
+						<div class="form-group">
+							<label for="email">Email</label> <input type="email" th:value="${session.usuarioLogado.Email}"
+								class="form-control" id="email" placeholder="Seu Email" disabled>
+						</div>
+						
+				
+				</div>
 			
 			<div id="segundo" >
 			
@@ -144,9 +75,9 @@
 						<label for="estado">Estado</label> <input type="text"  th:value="${session.usuarioLogado.endereco.estado}"
 							class="form-control" id="estado" placeholder="estado" disabled>
 					</div>
-					
-								<a  class="btn btn-dark" style=" margin-left:20px; margin-top:17px;" th:href="@{/editarCadastroCliente(Id=${session.usuarioLogado.Id})}">Editar</a>
-			</div>
+								
+								<a  class="btn btn-dark" style=" margin-left:20px; margin-top:17px;" th:href="@{'/editarCadastro' + ${session.tipo}(Id=${session.usuarioLogado.Id})}">Editar</a>
+					</div>
 		
 		
 		
@@ -155,5 +86,6 @@
 
 
 </div>
+
 </body>
 </html>

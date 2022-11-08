@@ -1,6 +1,5 @@
 package br.ifpe.web3.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +16,9 @@ public class CadastroEmpresa {
 	private String email;
 	private String senha;
 	private String nomeEmpresa;
-	@Column
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
-	
+	private byte[] fotoPortifolio;
 	
 	
 	
@@ -63,15 +61,26 @@ public class CadastroEmpresa {
 	public String getNomeEmpresa() {
 		return nomeEmpresa;
 	}
+	
 	public void setNomeEmpresa(String nomeEmpresa) {
 		this.nomeEmpresa = nomeEmpresa;
 	}
+	
 	public TipoEmpresa getTipoEmpresa() {
 		return tipoEmpresa;
 	}
+	
 	public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
 		this.tipoEmpresa = tipoEmpresa;
 	}
+	
+	public byte[] getFotoPortifolio() {
+		return fotoPortifolio;
+	}
+	public void setFotoPortifolio(byte[] fotoPortifolio) {
+		this.fotoPortifolio = fotoPortifolio;
+	}
+	
 	
 }
 	
