@@ -18,16 +18,36 @@
 		
 		<div th:replace="navBar :: #navConta"></div>
 	
-		<div id="lista" >
+		<div id="lista"  th:each="cont : ${loja}"  >
+		
+		<div id="portifolio"> 
+			
+			<div th:replace="portifolio :: #carouselExampleIndicators"></div>
+			
+			<div id="infomacoes">
+			<div >
+			<span th:text="${cont.nomeEmpresa}"></span>
+			<span th:text="${cont.numero}"></span><br>
+			<span th:text="${cont.endereco.rua}"></span>,<span th:text="${cont.endereco.bairro}"></span>  
+			
+			<h6>horario de funcionamento</h6>
+			</div>
+			
+		</div>	
+		</div>
+		
+		
 			
 					
-				<div  th:each="cont : ${loja}"  class="row">
-					
-					<div id="nomeloja" >
-		  			<h4 th:text="${cont.nomeEmpresa}"></h4>	
-			 		</div>
-			 		
-				</div>
+		<div class="row" id="left">
+			
+		
+		<div id="nomeloja" >
+  			
+  			<h4 th:text="${cont.nomeEmpresa}"></h4>	
+	 	</div>
+	 		
+		
 						
 						
 			<div id="listaServ">
@@ -38,13 +58,16 @@
 					<a>Agendar</a>
 					</div>
 					<div>
-					<a>Beneficios</a>
+					<a >Beneficios</a>
 					</div>
 			</div>
 			
-					<div style="margin-left:20px; margin-top:10px;">
-						<a th:href="@{/listEstabelecimentos}" class="btn btn-dark">Voltar</a>
-					</div>
+			<div style="margin-left:20px; margin-top:10px;">
+					<a th:href="@{/listEstabelecimentos}" class="btn btn-dark">Voltar</a>
+			</div>
+			
+			
+		</div>
 		
 
 		</div>

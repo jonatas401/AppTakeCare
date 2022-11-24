@@ -32,16 +32,53 @@
 		background: black;
 	}
 	
-	#lista{
-			width:500px;
-			 margin-left:30%; 
-			 margin-top:10%;"
-			 background-color:gray;
-			 border:black solid;
-	}
+	
+	
 	#list-tab{
 		width:400px;
 		border-radius:20px;
 		text-align:center;
 	}
+	
+		/******listaestabelecimento********/
+	
+	#listaEstabelecimento{
+			width:500px;
+			 margin-left:30%; 
+			 margin-top:10%;
+			 background-color:gray;
+			 border:black solid;
+	}
+	
+	/******estabelecimento********/
+	
+	#lista{
+	
+		width:50%;
+		height:50%;
+		margin-left:30%; 
+		margin-top:10%;
+		background-color:gray;
+		border:black solid;
+	}
+	
+	#portifolio{
+		height:300px;
+		float:right;
+		margin-right:40px;
+		
+	
+	}
+	#carouselExampleIndicators{
+		width:500px;
+		height:150px;
+	}
+	
+	#infomacoes{
+		width:200px;
+		border:solid red;
+		
+	
+	}
+	
 	

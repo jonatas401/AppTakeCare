@@ -13,6 +13,7 @@ public class CadastroEmpresa {
 	private Integer id;
 	private String nome;
 	private String sobreNome;
+	private String numero;
 	private String email;
 	private String senha;
 	private String nomeEmpresa;
@@ -45,6 +46,12 @@ public class CadastroEmpresa {
 	}
 	public void setSobreNome(String sobreNome) {
 		this.sobreNome = sobreNome;
+	}
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 	public String getEmail() {
 		return email;

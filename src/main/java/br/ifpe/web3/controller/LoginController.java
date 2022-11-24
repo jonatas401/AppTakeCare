@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.CadastroCliente;
 import br.ifpe.web3.model.CadastroEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
@@ -30,9 +31,16 @@ public class LoginController {
 	
 	
 	@RequestMapping("/efetuarLogin")
-	public String EfetuarLogin( String email, String senha, HttpSession session) {	
-		 CadastroEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
+	public String EfetuarLogin( String email, String senha, HttpSession session) throws LoginExceptions {	
+		
+	try {
 		 CadastroCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
+		 CadastroEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
+		
+		 if(email == null) {
+		 throw new LoginExceptions("email nullo");
+		 
+		 }
 		 if(usuarioEmpresa != null) {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
@@ -45,8 +53,15 @@ public class LoginController {
 				  session.setAttribute("tipo", "Cliente");
 				 return "redirect:/contaUsuario";
 		      }
-		 else{
+		 
+		 
 			 System.out.println("nao encontrado");
+			 
+		 }catch( LoginExceptions e ) {
+			System.out.println(e);
+			throw new LoginExceptions("não encontrado");
+			 
+			
 		 }
 	 
 	

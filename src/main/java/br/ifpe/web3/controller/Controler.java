@@ -5,6 +5,7 @@ package br.ifpe.web3.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import br.ifpe.web3.exceptions.LoginExceptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,8 +90,11 @@ public class Controler {
 	}
 	
 	@GetMapping("/listEstabelecimentos")
-	public String listLojas(CadastroEmpresa empresa, Model model) {
-	
+	public String listLojas(CadastroEmpresa empresa, Model model, HttpSession session)  {
+//		if(session.) {
+//			
+//		}
+	System.out.println();
 	List <CadastroEmpresa> nomeEmpresa = empresaDao.findAll();
 		
 	model.addAttribute("listarLojas", nomeEmpresa);
@@ -130,17 +134,20 @@ public class Controler {
 	}
 	
 	@PostMapping("/CadastroClienteEditado")
-	public String CadastroClienteEditado(CadastroCliente cliente) {
+	public String CadastroClienteEditado(CadastroCliente cliente, HttpSession session) {
 		clienteDao.save(cliente);	
-	
+		session.setAttribute("usuarioLogado", cliente);
+			
 		return "redirect:/meusDados";
 	}
-
-	@PostMapping("/CadastroEmpresaEditado")
-	public String CadastroEmpresaEditado(CadastroEmpresa empresa) {
-		System.out.println(empresa.getTipoEmpresa());
-		empresaDao.save(empresa);	
 	
+	
+	
+	@PostMapping("/CadastroEmpresaEditado")
+	public String CadastroEmpresaEditado(CadastroEmpresa empresa, HttpSession session) {
+		
+		empresaDao.save(empresa);	
+		session.setAttribute("usuarioLogado", empresa);
 		return "redirect:/meusDados";
 	}
 	
