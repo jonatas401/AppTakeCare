@@ -18,18 +18,17 @@
 	
 		<div>
 			
-			<div  id="lista"  class="row">
+			<div  id="listaEstabelecimento"  >
 			
-				<h3 style="margin-left:80px;">Estabelecimentos</h3>		
+					<h3 style="margin-left:80px; width:20%;">Estabelecimentos</h3>		
 		
-				  <div    class="col-4">
-				  
-				  <div th:each="cont : ${listarLojas}"   class="list-group" id="list-tab" role="tablist">
-				     <a class="list-group-item"  th:href="@{/estabelecimento(id=${cont.Id})}" role="tab" th:text="${cont.nomeEmpresa}"></a>
-				    </div>
+				  <div id="nomesEstabelecimentos"  class="col-4">
+					  
+					  <div  th:each="cont : ${listarLojas}"   class="list-group" id="list-tab" role="tablist">
+					    	 <a  class="list-group-item"  th:href="@{/estabelecimento(id=${cont.Id})}" role="tab" th:text="${cont.nomeEmpresa}"></a>
+					   </div>
 			    
-			
-			  </div>
+			 	 </div>
 			</div>
 					
 				

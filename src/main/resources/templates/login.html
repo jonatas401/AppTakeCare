@@ -1,78 +1,112 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	<style>
-	#email{
-		width:300px;
-	}
-	#senha{
-		width:300px;
-	}
-	#conteinerLogin{
-		margin-left:33%; margin-top:10%;
-	}
-	
-	
-	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
+
+
 </head>
+
+
+
 <body>
-	<nav  class="navbar navbar-dark bg-dark">
-		<a style="margin-left: 20px;" class="navbar-brand" href="/">TakeCare</a>
-    	 <div class="container-fluid">
-   
-	    <button style="margin-left: 100px; margin-top: -40px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-	    </div>
-    	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
- 
-   <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/login">Login</a>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/opcaoCadastro">Cadastro</a>
-        </li>
-  
-      </ul>
-      </div>
 
-</nav>
+	<header>
 
-	
+		<nav class="navbar navbar-dark bg-dark">
+			<a style="margin-left: 20px;" class="navbar-brand" href="/">TakeCare</a>
+			<div class="container-fluid">
 
-
-	<div id="conteinerLogin" class="container col-sm-12 col-md-6 col-md-offset-2" >
-		<h1>AppTakeCare</h1>
-		<form action="/efetuarLogin"   method="post">
-			
-			<div class="form-group">
-				<label for="email">Email</label> <input type="text"  name="email"
-					class="form-control" id="email" placeholder="E-mail" required>
+				<button style="margin-left: 100px; margin-top: -40px;" class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 			</div>
-			
-			<div class="form-group">
-				<label for="senha">Senha</label> <input type="password"  name="senha"
-					class="form-control" id="senha" placeholder="senha" required>
-			</div>
-			
-		
-			<button style="margin-top: 15px;" type="submit" class="btn btn-dark">Entrar</button>
-				<a class="btn btn-dark" style="text-decoration:none; color:white;  margin-left:20px; margin-top:17px;" th:href="@{/esqueciSenha}">Esqueci a senha</a>
-		</form>
-		
-		
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-	</div>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/login">Login</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/opcaoCadastro">Cadastro</a>
+					</li>
+
+				</ul>
+			</div>
+
+		</nav>
+
+
+	</header>
+
+
+
+
+
+	<main>
+		<section class="tela-login">
+
+
+
+
+			<div id="conteinerLogin" class="container col-sm-12 col-md-6 col-md-offset-2">
+
+
+				<h1 class="text-h1">AppTakeCare</h1>
+
+				<form action="/efetuarLogin" method="post">
+
+					<div class="form-group">
+						<label id="labelLogin" for="email">Email</label> <input type="text" name="email" class="form-control" id="emailLogin"
+							placeholder="E-mail" required>
+					</div>
+
+					<div class="form-group">
+						<label id="labelLogin" for="senha">Senha</label> <input type="password" name="senha" class="form-control"
+							id="senhaLogin" placeholder="senha" required>
+					</div>
+
+
+					<button style="margin-top: 15px;" type="submit" class="btn btn-dark">Entrar</button>
+					<a class="btn btn-dark"
+						style="text-decoration:none; color:white;  margin-left:20px; margin-top:17px;"
+						th:href="@{/esqueciSenha}">Esqueci a senha</a>
+					<br>
+					<a class="btn btn-dark"
+						style="text-decoration:none; color:white;  margin-left:20px; margin-top:17px;"
+						href="/opcaoCadastro">Faça seu Cadastro</a>
+
+				</form>
+
+
+
+
+
+
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+
 
 
 
 </body>
+
 </html>
