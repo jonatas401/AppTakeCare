@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 
+/********pagina do navbar*********/
 	#navConta{
 		width:300px;
 		border-radius: 15px;
@@ -11,17 +12,6 @@
 		margin-left:15px;
 	}
 	
-	#primeiro{
-		float:left;
-		width:40%;
-	}
-	
-	#segundo{
-		float:right;
-	}
-	#button{
-		float:rigth;
-	}
 	a{
 		color:white;
 		text-decoration:none;
@@ -59,10 +49,9 @@
 		color:white;
 	}
 	
-	#lista{
+	#paginaLoja{
 	
 		width:50%;
-		
 		margin-left:30%; 
 		margin-top:5%;
 		background-color:gray;
@@ -72,10 +61,7 @@
 	
 	#portifolio{
 		height:300px;
-		margin-left:250px;
-		
-		
-		
+		margin-left:250px;	
 	
 	}
 	#carouselExampleIndicators{
@@ -85,8 +71,9 @@
 	}
 	#left{
 			width:200px;
-			margin-top:-270px;
 			margin-left:20px;
+			margin-top:-250px;
+			
 	}
 	#listaServ{
 		margin-top:30px;
@@ -134,6 +121,255 @@
 		margin-top: 10%;
 	}
 	
+
+
+/******listaestabelecimento********/
+
+#listaEstabelecimento {
+	width:30%;
+	height: 40%;
+	margin-left: 30%;
+	margin-top: 10%;
+	background-color: gray;
+	border-radius:20px;
+	border: gray;
+}
+#nomesEstabelecimentos{
+	margin-left:20px;
+	width:20%;
 	
+}
+#list-tab {
+	width: 300px;
+	border-radius: 20px;
+	text-align: center;
+	}
+
+
+
+/**********pagina de inicio  do site(index)***********/
+
+.home {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+
+	background-image: linear-gradient(to bottom, #283547, black);
+
+
+
+	/*background-image: url('/img/tela.png');
+		background-size: 100%;*/
+
+	/*background-image: linear-gradient(to bottom, red ,black );*/
+
+	/*background-image: url('/img/tela.png');*/
+
+}
+
+
+.home-text {
+	max-width: 37rem;
+
+
+}
+
+.home-text .text-h4 {
+	font-size: 1.5rem;
+	color: #A3AAAF;
+	margin-bottom: 1rem;
+
+
+}
+
+
+.home-text .text-h1 {
+	font-size: 4rem;
+	color: #A3AAAF;
+	margin-bottom: 1rem;
+	line-height: 4rem;
+}
+
+.home-text p {
+	margin-bottom: 4rem;
+	color: #A3AAAF;
+
+}
+
+
+.home-img img {
+	width: 100%;
+
+}
+
+
+/**********pagina login ***********/
+
+label#labelLogin{
 	
+	color:white;
+}
+
+#emailLogin {
+	width: 300px;
+
+}
+
+#senhaLogin {
+	width: 300px;
 	
+}
+
+#conteinerLogin {
+	margin-left: 33%;
+	margin-bottom: 10px;
+}
+
+.btn btn-dark {
+	margin-top: 10px;
+}
+
+#botaocadastro {
+	margin-top: 10px;
+	margin-left: 33%;
+}
+
+
+
+
+.tela-login {
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+	background-image: url('/img/telaicon.png');
+
+
+}
+
+#conteinerLogin .text-h1{
+
+	font-size: 3rem;
+	margin-bottom: 7rem;
+	line-height: 4rem;
+}
+
+
+
+/**********pagina opção de cadastro ***********/
+
+.opcao-cadastro {
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+	background-image: url('/img/telaicon.png');
+
+}
+
+
+
+.cadastro-text .text-h1 {
+	font-size: 3rem;
+	color: black;
+	margin-bottom: 1rem;
+	line-height: 4rem;
+	width: 50%;
+	height: 50vh;
+	margin-left: 110%;
+}
+
+
+.cadastro-button {
+
+	margin-left: 80px;
+	font-size: 3rem;
+
+}
+
+/**********pagina cadastro cliente ***********/
+
+.cadastro-cliente {
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+	background-image: url('/img/tela1.png');
+
+
+	/*background-color: red;*/
+
+
+
+
+}
+
+
+
+/**********pagina cadastro Empresa ***********/
+
+
+.cadastro-empresa {
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+	background-image: url('/img/tela1.png');
+
+
+	/*background-color: red;*/
+}
+#labelCadastro{
+	color:gray;
+}
+
+/**********pagina meus dados************/
+
+#meusDados{
+	margin-top:20px;
+}
+
+#conteinerDados{
+		background: gray;
+		width:40%;
+		margin-left:30%; 
+		margin-top:5%;
+		height: 75vh;
+		border-radius:20px;
+	
+		
+}
+
+	#primeiro{
+		float:left;
+		width:40%;
+		margin-top:20px;
+		
+	}
+	
+	#segundo{
+		float:right;
+		width:40%;
+		margin-top:20px;
+		
+	}
+	#button{
+		float:rigth;
+	}
+
