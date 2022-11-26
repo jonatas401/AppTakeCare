@@ -58,7 +58,7 @@
 
 
 			<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2">
-				<form action="/salvarCadastroEmpresa" th:object="${empresa}" method="post">
+				<form action="/salvarUsuarioEmpresa" th:object="${empresa}" method="post">
 					<input type="hidden" th:field="*{Id}">
 
 					<div id='primeiro'>
@@ -70,6 +70,11 @@
 						<div class="form-group">
 							<label for="preco">Sobrenome</label> <input type="text" th:field="*{sobreNome}"
 								class="form-control" id="preco" placeholder="Sobrenome" required>
+						</div>
+						
+						<div class="form-group">
+							<label id="labelCadastro" for="numero celular">Numero de celular</label> <input type="text" th:field="*{numero}"
+								class="form-control" id="numeroCelular" placeholder="numero de celular" >
 						</div>
 
 						<div class="form-group">
@@ -103,7 +108,7 @@
 					<div id="segundo">
 
 						<div class="form-group">
-							<label for="cep">Cep</label> <input type="text" th:field="*{endereco.cep}"
+							<label for="cep">Cep</label> <input type="text" onblur="pesquisaCep(this.value)" th:field="*{endereco.cep}"
 								class="form-control" id="cep" placeholder="cep" required>
 						</div>
 
@@ -130,7 +135,7 @@
 
 						<div class="form-group">
 							<label for="estado">Estado</label> <input type="text" th:field="*{endereco.estado}"
-								class="form-control" id="estado" placeholder="Estado" required>
+								class="form-control" id="uf" placeholder="Estado" required>
 						</div>
 
 
@@ -146,6 +151,33 @@
 				</form>
 
 
+					<!--   API VIACEP   -->
+				<script th:inline="javascript">
+				   
+				    	
+				            function pesquisaCep(cep){
+				            console.log("hola")
+				                console.log(cep)
+				                let ajax = new XMLHttpRequest();
+				                ajax.open('GET', 'https://viacep.com.br/ws/'+cep+'/json/')
+				                //console.log(ajax)
+				                ajax.onreadystatechange = ()=>{
+				                    //console.log(ajax.readyState)
+				                    
+				                    if(ajax.readyState == 4 && ajax.status == 200){
+				                    let res = ajax.responseText
+				                    let ajaxOBJ = JSON.parse(res);
+				                    console.log(ajaxOBJ)
+				                    document.getElementById('rua').value = ajaxOBJ.logradouro;
+				                    document.getElementById('bairro').value = ajaxOBJ.bairro;
+				                    document.getElementById('cidade').value = ajaxOBJ.localidade;
+				                    document.getElementById('uf').value = ajaxOBJ.uf;
+				                    }
+				                }
+				                ajax.send()
+				            }
+				 
+				        </script>
 
 			</div>
 

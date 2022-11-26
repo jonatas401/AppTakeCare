@@ -18,7 +18,6 @@ public class UsuarioCliente {
 	private String nome;
 	private String sobreNome;
 	private String numero;
-	
 	private String email;
 	private String senha;
 	private Endereco endereco;

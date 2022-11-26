@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class CadastroEmpresa {
+public class UsuarioEmpresa {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

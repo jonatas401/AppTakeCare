@@ -9,7 +9,40 @@
 </head>
 
 <body>
-    <h1> TESTE DE PAGINA </h1>
+
+	 <script th:inline="javascript">
+   
+    	
+            function pesquisaCep(cep){
+                console.log(cep)
+                let ajax = new XMLHttpRequest();
+                ajax.open('GET', 'https://viacep.com.br/ws/'+cep+'/json/')
+                //console.log(ajax)
+                ajax.onreadystatechange = ()=>{
+                    //console.log(ajax.readyState)
+                    
+                    if(ajax.readyState == 4 && ajax.status == 200){
+                    let res = ajax.responseText
+                    let ajaxOBJ = JSON.parse(res);
+                    console.log(ajaxOBJ)
+                    document.getElementById('rua').value = ajaxOBJ.logradouro;
+                    document.getElementById('bairro').value = ajaxOBJ.bairro;
+                    document.getElementById('cidade').value = ajaxOBJ.localidade;
+                    document.getElementById('uf').value = ajaxOBJ.uf;
+                    }
+                }
+                ajax.send()
+            }
+ 
+        </script>
+        
+        <div class="form-group">
+							<label for="cep">Cep</label> <input onblur="pesquisaCep(this.value)" type="text"
+								class="form-control" id="cep" placeholder="cep" required>
+						</div>
+        
+	   
+
 </body>
 
 </html>

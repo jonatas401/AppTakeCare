@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.ifpe.web3.model.UsuarioCliente;
-import br.ifpe.web3.model.CadastroEmpresa;
+import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
@@ -32,7 +32,7 @@ public class Controler {
 	
 	
 	@GetMapping("/login")
-	public String login(CadastroEmpresa empresa, UsuarioCliente cliente,Model model) {
+	public String login(UsuarioEmpresa empresa, UsuarioCliente cliente,Model model) {
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("empresa", empresa);
 		
@@ -48,7 +48,7 @@ public class Controler {
 	}
 	
 	@GetMapping("/cadastroEmpresa")
-	public String cadastroEmpresa(CadastroEmpresa empresa, Model model) {
+	public String cadastroEmpresa(UsuarioEmpresa empresa, Model model) {
 		model.addAttribute("empresa", empresa);
 		return "cadastroEmpresa";
 	}
@@ -71,8 +71,8 @@ public class Controler {
 		return "redirect:/login";
 	}
 	
-	@PostMapping("/salvarCadastroEmpresa")
-	public String salvarCadastroEmpresa(CadastroEmpresa empresa) {
+	@PostMapping("/salvarUsuarioEmpresa")
+	public String salvarCadastroEmpresa(UsuarioEmpresa empresa) {
 			empresaDao.save(empresa);	
 		return "redirect:/login";
 	}
@@ -91,12 +91,15 @@ public class Controler {
 	}
 	
 	@GetMapping("/listEstabelecimentos")
-	public String listLojas(CadastroEmpresa empresa, Model model, HttpSession session)  {
-//		if(session.) {
-//			
-//		}
-	System.out.println();
-	List <CadastroEmpresa> nomeEmpresa = empresaDao.findAll();
+	public String listLojas(UsuarioEmpresa empresa, Model model, HttpSession session)  {
+		/* validar sessao*/
+		
+		if(session.getAttribute("tipo").equals("Empresa")) {
+			return "redirect:/contaUsuario";
+		}
+		
+		/* listar estabelecimentos*/
+	List <UsuarioEmpresa> nomeEmpresa = empresaDao.findAll();
 	
 		
 	model.addAttribute("listarLojas", nomeEmpresa);
@@ -105,8 +108,9 @@ public class Controler {
 	
 	
 	@GetMapping("/estabelecimento")
-	public String loja(Integer id, Model model) {
-		CadastroEmpresa empresa =  empresaDao.findById(id).orElse(null);
+	public String loja(Integer id, Model model, HttpSession session ) {
+		
+		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 		
 		model.addAttribute( "loja",empresa);
 	
@@ -121,6 +125,7 @@ public class Controler {
 		
 		return "agendamentos";
 	}
+	
 	@PostMapping("/agendar")
 	public String agendars() {
 		
@@ -150,8 +155,8 @@ public class Controler {
 	
 	
 	
-	@PostMapping("/CadastroEmpresaEditado")
-	public String CadastroEmpresaEditado(CadastroEmpresa empresa, HttpSession session) {
+	@PostMapping("/UsuarioEmpresaEditado")
+	public String CadastroEmpresaEditado(UsuarioEmpresa empresa, HttpSession session) {
 		
 		empresaDao.save(empresa);	
 		session.setAttribute("usuarioLogado", empresa);
@@ -184,9 +189,9 @@ public class Controler {
 		return "editarUsuarioCliente";
 	}
 	
-	@GetMapping("/editarCadastroEmpresa")
+	@GetMapping("/editarUsuarioEmpresa")
 	public String editarEmpresa(Integer Id, Model model) {
-		CadastroEmpresa empresa = empresaDao.findById(Id).orElse(null);
+		UsuarioEmpresa empresa = empresaDao.findById(Id).orElse(null);
 		model.addAttribute("empresa", empresa);
 		return "editarCadastroEmpresa";
 	}

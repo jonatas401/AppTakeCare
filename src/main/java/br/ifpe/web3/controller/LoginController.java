@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
-import br.ifpe.web3.model.CadastroEmpresa;
+import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -25,7 +25,7 @@ public class LoginController {
 	private ClienteDAO clienteDao;
 	
 	@GetMapping("/contaUsuario")
-	public String contaUsuario(CadastroEmpresa empresa, Model model) {	
+	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
 		return "contaUsuario";
 	}
 	
@@ -35,7 +35,7 @@ public class LoginController {
 		
 	try {
 		 UsuarioCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
-		 CadastroEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
+		 UsuarioEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
 		
 		 if(email == null) {
 		 throw new LoginExceptions("email nullo");

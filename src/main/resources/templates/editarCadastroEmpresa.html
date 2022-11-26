@@ -19,8 +19,10 @@
 	
 	<div th:replace="navBar :: #navConta"></div>
 
-	<div Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2" >
-		<form action="/CadastroEmpresaEditado" th:object="${empresa}"  method="post">
+	<div id="conteinerDados"  class="container col-sm-12 col-md-6 col-md-offset-2" >
+		<form action="/UsuarioEmpresaEditado" th:object="${empresa}"  method="post">
+		
+		
 		<input type="hidden"  th:field="*{Id}">
 		
 		<div id='primeiro'>
