@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 
-public class CadastroCliente {
+public class UsuarioCliente {
 	
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,7 +80,7 @@ public class CadastroCliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CadastroCliente other = (CadastroCliente) obj;
+		UsuarioCliente other = (UsuarioCliente) obj;
 		return Objects.equals(email, other.email) && Objects.equals(senha, other.senha);
 	}
 	

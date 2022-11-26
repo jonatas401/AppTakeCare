@@ -25,6 +25,7 @@
 	a{
 		color:white;
 		text-decoration:none;
+		cursor: pointer;
 	}
 	a:hover{
 		color:white;
@@ -39,6 +40,9 @@
 		border-radius:20px;
 		text-align:center;
 	}
+	label.agend{
+		color:white;
+	}
 	
 		/******listaestabelecimento********/
 	
@@ -51,34 +55,85 @@
 	}
 	
 	/******estabelecimento********/
+	a.linkAgendamentos{
+		color:white;
+	}
 	
 	#lista{
 	
 		width:50%;
-		height:50%;
+		
 		margin-left:30%; 
-		margin-top:10%;
+		margin-top:5%;
 		background-color:gray;
-		border:black solid;
+		border:#34393dsolid;
+		border-radius:10px;
 	}
 	
 	#portifolio{
 		height:300px;
-		float:right;
-		margin-right:40px;
+		margin-left:250px;
+		
+		
 		
 	
 	}
 	#carouselExampleIndicators{
-		width:500px;
+		width:400px;
 		height:150px;
-	}
-	
-	#infomacoes{
-		width:200px;
-		border:solid red;
 		
-	
 	}
+	#left{
+			width:200px;
+			margin-top:-270px;
+			margin-left:20px;
+	}
+	#listaServ{
+		margin-top:30px;
+	}
+	
+	#informacoes{
+		width:180px;
+		margin-left:300px;
+		
+	}
+	#agenda{
+		width:400px;
+		height:150px;
+		display:none;
+		background-color:#555753;
+		
+		
+	}
+	#imagens{
+		margin-top:20px;
+		display:none;
+		width:430px;
+		background-color:#555753;
+		border-radius:10px;
+		padding-bottom:5px;
+		
+	}
+	#dataAgendamento{
+		
+		margin-left:100px;
+	}
+	.horaAgendamento{
+		width:60px;
+		
+	}
+	#buttonAgenda{
+		margin-left:70%;
+		margin-top:10px;
+	}
+	
+	/******* pagina de agendamentos*********/
+	table.table{
+		width:30%;
+		margin-left: 30%;
+		margin-top: 10%;
+	}
+	
+	
 	
 	

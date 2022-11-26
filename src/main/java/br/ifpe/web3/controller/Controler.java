@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.ifpe.web3.model.CadastroCliente;
+import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.CadastroEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
@@ -32,7 +32,7 @@ public class Controler {
 	
 	
 	@GetMapping("/login")
-	public String login(CadastroEmpresa empresa, CadastroCliente cliente,Model model) {
+	public String login(CadastroEmpresa empresa, UsuarioCliente cliente,Model model) {
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("empresa", empresa);
 		
@@ -41,8 +41,8 @@ public class Controler {
 	
 	
 	
-	@GetMapping("/cadastroCliente")
-	public String cadastroCliente(CadastroCliente cliente,  Model model) {
+	@GetMapping("/UsuarioCliente")
+	public String UsuarioCliente(UsuarioCliente cliente,  Model model) {
 		model.addAttribute("cliente", cliente);
 		return "cadastroCliente";
 	}
@@ -65,8 +65,8 @@ public class Controler {
 		return "esqueciSenha";
 	}
 	
-	@PostMapping("/salvarCadastroCliente")
-	public String salvarCadastroCliente(CadastroCliente cliente, Endereco endereco) {
+	@PostMapping("/salvarUsuarioCliente")
+	public String salvarUsuarioCliente(UsuarioCliente cliente, Endereco endereco) {
 		clienteDao.save(cliente);	
 		return "redirect:/login";
 	}
@@ -84,8 +84,9 @@ public class Controler {
 	
 	
 	@GetMapping("/meusDados")
-	public String meusDados() {
-		
+	public String meusDados() throws LoginExceptions {
+	
+		System.out.println();
 		return "meusDados";
 	}
 	
@@ -96,6 +97,7 @@ public class Controler {
 //		}
 	System.out.println();
 	List <CadastroEmpresa> nomeEmpresa = empresaDao.findAll();
+	
 		
 	model.addAttribute("listarLojas", nomeEmpresa);
 		return "listarEstabelecimentos";
@@ -119,6 +121,11 @@ public class Controler {
 		
 		return "agendamentos";
 	}
+	@PostMapping("/agendar")
+	public String agendars() {
+		
+		return agendamentos();
+	}
 	
 	@GetMapping("/configuracao")
 	public String configuracao() {
@@ -133,8 +140,8 @@ public class Controler {
 		return "redirect:/login";
 	}
 	
-	@PostMapping("/CadastroClienteEditado")
-	public String CadastroClienteEditado(CadastroCliente cliente, HttpSession session) {
+	@PostMapping("/UsuarioClienteEditado")
+	public String UsuarioClienteEditado(UsuarioCliente cliente, HttpSession session) {
 		clienteDao.save(cliente);	
 		session.setAttribute("usuarioLogado", cliente);
 			
@@ -170,11 +177,11 @@ public class Controler {
 		return "/";
 	}
 	
-	@GetMapping("/editarCadastroCliente")
+	@GetMapping("/editarUsuarioCliente")
 	public String editarCliente(Integer Id, Model model) {
-		CadastroCliente cliente = clienteDao.findById(Id).orElse(null);
+		UsuarioCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
-		return "editarCadastroCliente";
+		return "editarUsuarioCliente";
 	}
 	
 	@GetMapping("/editarCadastroEmpresa")

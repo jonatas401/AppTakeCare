@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
-import br.ifpe.web3.model.CadastroCliente;
 import br.ifpe.web3.model.CadastroEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.UsuarioCliente;
 
 @Controller
 public class LoginController {
@@ -34,23 +34,28 @@ public class LoginController {
 	public String EfetuarLogin( String email, String senha, HttpSession session) throws LoginExceptions {	
 		
 	try {
-		 CadastroCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
+		 UsuarioCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
 		 CadastroEmpresa usuarioEmpresa = empresaDao.findByEmailAndSenha(email, senha);
 		
 		 if(email == null) {
 		 throw new LoginExceptions("email nullo");
+		
 		 
 		 }
-		 if(usuarioEmpresa != null) {
+		 else if(email == "") {
+			 throw new LoginExceptions("email vazio");
+		
+			 }
+		 else if(usuarioEmpresa != null) {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
 		          session.setAttribute("tipo", "Empresa");
 		          return "redirect:/contaUsuario";
 		      } 
-		else if(usuarioCliente != null) {
+		 else if(usuarioCliente != null) {
 				
 				 session.setAttribute("usuarioLogado", usuarioCliente);
-				  session.setAttribute("tipo", "Cliente");
+				 session.setAttribute("tipo", "Cliente");
 				 return "redirect:/contaUsuario";
 		      }
 		 
@@ -59,8 +64,9 @@ public class LoginController {
 			 
 		 }catch( LoginExceptions e ) {
 			System.out.println(e);
-			throw new LoginExceptions("não encontrado");
-			 
+			return "redirect:/login";
+			
+			
 			
 		 }
 	 
