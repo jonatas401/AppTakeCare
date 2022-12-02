@@ -1,12 +1,22 @@
 @charset "UTF-8";
 
+@import url('./agendamento/agendamento.css');
 
+body{
+	background-image: linear-gradient(to bottom, #283547, black) ;
+	
+	width: 100%;
+	height: 100vh;
+	
+	
+}
 /********pagina do navbar*********/
 	#navConta{
 		width:300px;
 		border-radius: 15px;
 		position:fixed;
 		top:0px;
+		left:0px;
 	}
 	#navDados{
 		margin-left:15px;
@@ -30,16 +40,15 @@
 		border-radius:20px;
 		text-align:center;
 	}
-	label.agend{
+	label{
 		color:white;
 	}
 	
 		/******listaestabelecimento********/
 	
 	#listaEstabelecimento{
-			width:500px;
-			 margin-left:30%; 
-			 margin-top:10%;
+			width:100%;
+			margin-top:10px;
 			 background-color:gray;
 			 border:black solid;
 	}
@@ -51,21 +60,23 @@
 	
 	#paginaLoja{
 	
-		width:50%;
-		margin-left:30%; 
+		width:70%;
+		margin-left:25%; 
 		margin-top:5%;
-		background-color:gray;
-		border:#34393dsolid;
+		background-color:#041e29;
+		border:#34393d solid;
 		border-radius:10px;
 	}
-	
+	#nomeLoja{
+		color:white;
+	}
 	#portifolio{
 		height:300px;
 		margin-left:250px;	
 	
 	}
 	#carouselExampleIndicators{
-		width:400px;
+		width:500px;
 		height:150px;
 		
 	}
@@ -76,12 +87,14 @@
 			
 	}
 	#listaServ{
-		margin-top:30px;
+		width:500px;
+		padding-top:50px;
 	}
 	
 	#informacoes{
 		width:180px;
 		margin-left:300px;
+		color:white;
 		
 	}
 	#agenda{
@@ -93,9 +106,9 @@
 		
 	}
 	#imagens{
-		margin-top:20px;
+		margin-top:30px;
 		display:none;
-		width:430px;
+		width:500px;WWW
 		background-color:#555753;
 		border-radius:10px;
 		padding-bottom:5px;
@@ -130,7 +143,7 @@
 	height: 40%;
 	margin-left: 30%;
 	margin-top: 10%;
-	background-color: gray;
+	background-color:#041e29;
 	border-radius:20px;
 	border: gray;
 }
@@ -209,10 +222,6 @@
 
 /**********pagina login ***********/
 
-label#labelLogin{
-	
-	color:white;
-}
 
 #emailLogin {
 	width: 300px;
@@ -244,11 +253,8 @@ label#labelLogin{
 .tela-login {
 	width: 100%;
 	height: 91.1vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-beween;
-	padding: 0px 10%;
-	border: black solid;
+	
+	
 	background-image: url('/img/telaicon.png');
 
 
@@ -261,6 +267,27 @@ label#labelLogin{
 	line-height: 4rem;
 }
 
+
+.cadastro{
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+
+	/*background-color: red;*/
+}
+main{
+	background-image: url('/img/tela1.png');
+}
+#formCad{
+	background:  #283555;
+	width:50%;
+	border-radius: 20px;
+	
+}
 
 
 /**********pagina opção de cadastro ***********/
@@ -297,56 +324,21 @@ label#labelLogin{
 
 }
 
-/**********pagina cadastro cliente ***********/
-
-.cadastro-cliente {
-	width: 100%;
-	height: 91.1vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-beween;
-	padding: 0px 10%;
-	border: black solid;
-	background-image: url('/img/tela1.png');
-
-
-	/*background-color: red;*/
 
 
 
 
-}
 
-
-
-/**********pagina cadastro Empresa ***********/
-
-
-.cadastro-empresa {
-	width: 100%;
-	height: 91.1vh;
-	display: flex;
-	align-items: center;
-	justify-content: space-beween;
-	padding: 0px 10%;
-	border: black solid;
-	background-image: url('/img/tela1.png');
-
-
-	/*background-color: red;*/
-}
-#labelCadastro{
-	color:gray;
-}
 
 /**********pagina meus dados************/
 
 #meusDados{
 	margin-top:20px;
+	color:white;
 }
 
 #conteinerDados{
-		background: gray;
+		background: #041e29;
 		width:40%;
 		margin-left:30%; 
 		margin-top:5%;

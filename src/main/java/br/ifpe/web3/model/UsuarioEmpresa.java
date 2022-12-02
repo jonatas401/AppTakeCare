@@ -12,14 +12,13 @@ public class UsuarioEmpresa {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String sobreNome;
 	private String numero;
 	private String email;
 	private String senha;
 	private String nomeEmpresa;
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
-	private byte[] fotoPortifolio;
+	private byte[] fotoPerfil;
 	
 	
 	
@@ -41,12 +40,7 @@ public class UsuarioEmpresa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getSobreNome() {
-		return sobreNome;
-	}
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
-	}
+	
 	public String getNumero() {
 		return numero;
 	}
@@ -82,10 +76,10 @@ public class UsuarioEmpresa {
 	}
 	
 	public byte[] getFotoPortifolio() {
-		return fotoPortifolio;
+		return fotoPerfil;
 	}
-	public void setFotoPortifolio(byte[] fotoPortifolio) {
-		this.fotoPortifolio = fotoPortifolio;
+	public void setFotoPortifolio(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
 	
 	

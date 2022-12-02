@@ -24,10 +24,7 @@ public class LoginController {
 	@Autowired
 	private ClienteDAO clienteDao;
 	
-	@GetMapping("/contaUsuario")
-	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
-		return "contaUsuario";
-	}
+	
 	
 	
 	@RequestMapping("/efetuarLogin")
@@ -50,13 +47,13 @@ public class LoginController {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
 		          session.setAttribute("tipo", "Empresa");
-		          return "redirect:/contaUsuario";
+		          return "redirect:/contaUsuarioEmpresa";
 		      } 
 		 else if(usuarioCliente != null) {
 				
 				 session.setAttribute("usuarioLogado", usuarioCliente);
 				 session.setAttribute("tipo", "Cliente");
-				 return "redirect:/contaUsuario";
+				 return "redirect:/contaUsuarioCliente";
 		      }
 		 
 		 

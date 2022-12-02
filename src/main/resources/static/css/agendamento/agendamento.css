@@ -1,0 +1,31 @@
+.homeAgenda ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: center;
+  margin-left:200px;
+  margin-top: 10%;
+}
+
+.homeAgenda ul li {
+  width: 320px;
+  flex: 1;
+  min-width: 260px;
+}
+
+.homeAgenda  div.img {
+  width: 30%;
+  height: 50px;
+  min-height: 20px;
+  border-radius: 8px;
+  background-color: grey;
+}
+
+.homeAgenda ul li span {
+  display: block;
+  margin-top: 10px;
+}
+.homeAgenda#table{
+	margin-top: 30px;
+}
+

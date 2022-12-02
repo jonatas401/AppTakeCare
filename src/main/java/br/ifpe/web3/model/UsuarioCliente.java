@@ -16,15 +16,21 @@ public class UsuarioCliente {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	private String nome;
-	private String sobreNome;
 	private String numero;
 	private String email;
 	private String senha;
 	private Endereco endereco;
+	private byte[] fotoPerfil;
 	
 	
 	
 	
+	public byte[] getFotoPerfil() {
+		return fotoPerfil;
+	}
+	public void setFotoPerfil(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
 	public Integer getId() {
 		return Id;
 	}
@@ -37,12 +43,7 @@ public class UsuarioCliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getSobreNome() {
-		return sobreNome;
-	}
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
-	}
+	
 	public String getNumero() {
 		return numero;
 	}

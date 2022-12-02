@@ -27,7 +27,7 @@ public class Controler {
 	@Autowired
 	private ClienteDAO clienteDao;
 	
-	//*******Rotas fora do acesso do usuario***********
+	//*******Rotas de acesso geral***********
 	
 	
 	
@@ -44,13 +44,13 @@ public class Controler {
 	@GetMapping("/UsuarioCliente")
 	public String UsuarioCliente(UsuarioCliente cliente,  Model model) {
 		model.addAttribute("cliente", cliente);
-		return "cadastroCliente";
+		return "cliente/cadastroCliente";
 	}
 	
-	@GetMapping("/cadastroEmpresa")
+	@GetMapping("/UsuarioEmpresa")
 	public String cadastroEmpresa(UsuarioEmpresa empresa, Model model) {
 		model.addAttribute("empresa", empresa);
-		return "cadastroEmpresa";
+		return "empresa/cadastroEmpresa";
 	}
 	
 	
@@ -77,25 +77,57 @@ public class Controler {
 		return "redirect:/login";
 	}
 	
+	
+	//*******************Rotas de acesso a paginas de ambos usuarios*************************
 
 	
+	@GetMapping("/logoff")
+	public String logoff(HttpSession session) {
+			session.invalidate();
+		
+		return "redirect:/login";
+		
+	}
 	
-	//*******************Rotas de acesso a paginas de usuarios logados*************************
+	//*******************Rotas de acesso a paginas de usuarios cliente*************************
 	
+	@GetMapping("/contaUsuarioCliente")
+	public String contaUsuario(UsuarioCliente cliente, Model model) {	
+		return "cliente/contaUsuarioCliente";
+	}
 	
-	@GetMapping("/meusDados")
+	@GetMapping("/dadosCliente")
 	public String meusDados() throws LoginExceptions {
 	
 		System.out.println();
-		return "meusDados";
+		return "cliente/dadosCliente";
 	}
 	
+	@GetMapping("/agendamentosCliente")
+	public String agendamentos() {
+		
+		return "cliente/agendamentosCliente";
+	}
+	
+	@GetMapping("/agendarCliente")
+	public String agendar() {
+		
+		return "cliente/agendarCliente";
+	}
+	
+	@GetMapping("/configuracaoCliente")
+	public String configuracao() {
+		
+		return "cliente/configuracaoCliente";
+	}
+	
+
 	@GetMapping("/listEstabelecimentos")
 	public String listLojas(UsuarioEmpresa empresa, Model model, HttpSession session)  {
 		/* validar sessao*/
 		
 		if(session.getAttribute("tipo").equals("Empresa")) {
-			return "redirect:/contaUsuario";
+			return "redirect:/empresa/contaUsuarioEmpresa";
 		}
 		
 		/* listar estabelecimentos*/
@@ -103,7 +135,7 @@ public class Controler {
 	
 		
 	model.addAttribute("listarLojas", nomeEmpresa);
-		return "listarEstabelecimentos";
+		return "cliente/listarEstabelecimentos";
 	}
 	
 	
@@ -115,86 +147,107 @@ public class Controler {
 		model.addAttribute( "loja",empresa);
 	
 		
-		return "estabelecimento";
+		return "cliente/estabelecimento";
 	}
-	
-	
-	
-	@GetMapping("/agendamentos")
-	public String agendamentos() {
-		
-		return "agendamentos";
-	}
-	
-	@PostMapping("/agendar")
-	public String agendars() {
-		
-		return agendamentos();
-	}
-	
-	@GetMapping("/configuracao")
-	public String configuracao() {
-		
-		return "configuracao";
-	}
-	
-	@GetMapping("/logoff")
-	public String logoff(HttpSession session) {
-			session.invalidate();
-		
-		return "redirect:/login";
-	}
-	
+
 	@PostMapping("/UsuarioClienteEditado")
 	public String UsuarioClienteEditado(UsuarioCliente cliente, HttpSession session) {
 		clienteDao.save(cliente);	
 		session.setAttribute("usuarioLogado", cliente);
 			
-		return "redirect:/meusDados";
+		return "redirect:/cliente/dadosCliente";
 	}
-	
-	
-	
-	@PostMapping("/UsuarioEmpresaEditado")
-	public String CadastroEmpresaEditado(UsuarioEmpresa empresa, HttpSession session) {
-		
-		empresaDao.save(empresa);	
-		session.setAttribute("usuarioLogado", empresa);
-		return "redirect:/meusDados";
-	}
-	
-	
-	
-	
-	
-	//********** Rotas para remover e editar***********
-	
-	
 	@GetMapping("/removerloginCliente")
 	public String removerCliente(Integer Id,Model model) {
 		clienteDao.deleteById(Id);
 		return "/";
 	}
 	
-	@GetMapping("/removerloginEmpresa")
-	public String removerEmpresa(Integer Id,Model model) {
-		clienteDao.deleteById(Id);
-		return "/";
-	}
-	
+
 	@GetMapping("/editarUsuarioCliente")
 	public String editarCliente(Integer Id, Model model) {
 		UsuarioCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
-		return "editarUsuarioCliente";
+		return "cliente/editarUsuarioCliente";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//*******************Rotas de acesso a paginas de usuarios empresa*************************
+	
+	@GetMapping("/contaUsuarioEmpresa")
+	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
+		return "empresa/contaUsuarioEmpresa";
+	}
+	
+	@GetMapping("/dadosEmpresa")
+	public String dadosEmpresa() throws LoginExceptions {
+	
+		System.out.println();
+		return "empresa/dadosEmpresa";
+	}
+	
+	
+	@GetMapping("/portifolio")
+	public String portifolio() throws LoginExceptions {
+	
+		System.out.println();
+		return "empresa/addPortifolio";
+	}
+	
+	@GetMapping("/agendamentosEmpresa")
+	public String agendamentosEmpresa() {
+		
+		return "empresa/agendamentosEmpresa";
+	}
+	
+	@GetMapping("/agendarEmpresa")
+	public String agendarEmpresa() {
+		
+		return "empresa/agendarEmpresa";
+	}
+	
+	@GetMapping("/configuracaoEmpresa")
+	public String configuracaoEmpresa() {
+		
+		return "empresa/configuracaoEmpresa";
 	}
 	
 	@GetMapping("/editarUsuarioEmpresa")
 	public String editarEmpresa(Integer Id, Model model) {
 		UsuarioEmpresa empresa = empresaDao.findById(Id).orElse(null);
 		model.addAttribute("empresa", empresa);
-		return "editarCadastroEmpresa";
+		return "empresa/editarCadastroEmpresa";
 	}
+	
+	@PostMapping("/UsuarioEmpresaEditado")
+	public String CadastroEmpresaEditado(UsuarioEmpresa empresa, HttpSession session) {
+		
+		empresaDao.save(empresa);	
+		session.setAttribute("usuarioLogado", empresa);
+		return "redirect:/empresa/dadosEmpresa";
+	}
+	
+	@GetMapping("/removerloginEmpresa")
+	public String removerEmpresa(Integer Id,Model model) {
+		clienteDao.deleteById(Id);
+		return "/login";
+	}
+	
+	//********** Rotas para ***********
+	
+	
+	
+	
+
 	
 	
 	
