@@ -225,7 +225,7 @@ public class Controler {
 	public String editarEmpresa(Integer Id, Model model) {
 		UsuarioEmpresa empresa = empresaDao.findById(Id).orElse(null);
 		model.addAttribute("empresa", empresa);
-		return "empresa/editarCadastroEmpresa";
+		return "empresa/editarCadastroEmpresa"; 
 	}
 	
 	@PostMapping("/UsuarioEmpresaEditado")
@@ -233,7 +233,7 @@ public class Controler {
 		
 		empresaDao.save(empresa);	
 		session.setAttribute("usuarioLogado", empresa);
-		return "redirect:/empresa/dadosEmpresa";
+		return "redirect:empresa/dadosEmpresa";
 	}
 	
 	@GetMapping("/removerloginEmpresa")

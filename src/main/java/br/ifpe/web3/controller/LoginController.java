@@ -47,7 +47,7 @@ public class LoginController {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
 		          session.setAttribute("tipo", "Empresa");
-		          return "redirect:/contaUsuarioEmpresa";
+		          return "redirect:/agendarEmpresa";
 		      } 
 		 else if(usuarioCliente != null) {
 				

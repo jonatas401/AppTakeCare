@@ -1,6 +1,6 @@
 #FileLock
-#Fri Dec 02 14:37:40 BRT 2022
-server=127.0.1.1\:42723
-hostName=jonatas-Aspire
+#Sun Dec 04 04:14:55 UTC 2022
+server=localhost\:45543
+hostName=localhost
 method=file
-id=184d3ea55010d3df48833bf381187b96711e56418b9
+id=184db58133f863f91b2f99e0908246e17d40bf76068
