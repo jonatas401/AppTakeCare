@@ -53,7 +53,7 @@ public class LoginController {
 				
 				 session.setAttribute("usuarioLogado", usuarioCliente);
 				 session.setAttribute("tipo", "Cliente");
-				 return "redirect:/contaUsuarioCliente";
+				 return "redirect:/listEstabelecimentos";
 		      }
 		 
 		 

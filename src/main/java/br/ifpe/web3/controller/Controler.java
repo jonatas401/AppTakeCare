@@ -155,7 +155,7 @@ public class Controler {
 		clienteDao.save(cliente);	
 		session.setAttribute("usuarioLogado", cliente);
 			
-		return "redirect:/cliente/dadosCliente";
+		return "cliente/dadosCliente";
 	}
 	@GetMapping("/removerloginCliente")
 	public String removerCliente(Integer Id,Model model) {
