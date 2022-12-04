@@ -2,6 +2,7 @@
 
 @import url('./agendamento/agendamento.css');
 
+
 body{
 	background-image: linear-gradient(to bottom, #283547, black) ;
 	
@@ -12,8 +13,8 @@ body{
 }
 /********pagina do navbar*********/
 	#navConta{
-		width:300px;
-		border-radius: 15px;
+		width:25%;
+		height: 100vh;
 		position:fixed;
 		top:0px;
 		left:0px;
@@ -108,7 +109,7 @@ body{
 	#imagens{
 		margin-top:30px;
 		display:none;
-		width:500px;WWW
+		width:500px;
 		background-color:#555753;
 		border-radius:10px;
 		padding-bottom:5px;
