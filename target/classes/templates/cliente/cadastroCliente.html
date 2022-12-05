@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-		xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
@@ -12,16 +11,16 @@
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 		crossorigin="anonymous"></script>
 
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}" />
-			
-	
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/Cliente/cadastroCliente.css}" />
+
+
 
 </head>
 
 
 <body>
-<script type="module" th:src="@{/js/script.js}"></script>
-	
+	<script type="module" th:src="@{/js/script.js}"></script>
+
 	<header>
 		<nav class="navbar navbar-dark bg-dark">
 			<a style="margin-left: 20px;" class="navbar-brand" href="/">TakeCare</a>
@@ -55,21 +54,23 @@
 		<section class="cadastro">
 
 
-			<div id="formCad" Style="margin-left:25%; margin-top:5%;" class="container col-sm-12 col-md-6 col-md-offset-2">
+			<div id="formCad" Style="margin-left:25%; margin-top:5%;"
+				class="container col-sm-12 col-md-6 col-md-offset-2">
 				<form action="/salvarUsuarioCliente" th:object="${cliente}" method="post">
 
 					<input type="hidden" th:field="*{Id}">
 
 					<div id='primeiro'>
 						<div class="form-group">
-							<label id="labelCadastro" for="nome">Nome</label> <input type="text" th:field="*{nome}" class="form-control"
-								id="nome" placeholder="Nome" required>
+							<label id="labelCadastro" for="nome">Nome</label> <input type="text" th:field="*{nome}"
+								class="form-control" id="nome" placeholder="Nome" required>
 						</div>
 
-						
+
 						<div class="form-group">
-							<label id="labelCadastro" for="numero celular">Numero de celular</label> <input type="text"th:field="*{numero}"
-								class="form-control" id="numeroCelular" placeholder="numero de celular" >
+							<label id="labelCadastro" for="numero celular">Numero de celular</label> <input type="text"
+								th:field="*{numero}" class="form-control" id="numeroCelular"
+								placeholder="numero de celular">
 						</div>
 
 
@@ -80,8 +81,8 @@
 
 
 						<div class="form-group">
-							<label id="labelCadastro" for="senha">Senha</label> <input type="password" th:field="*{senha}"
-								class="form-control" id="senha" placeholder="Senha" required>
+							<label id="labelCadastro" for="senha">Senha</label> <input type="password"
+								th:field="*{senha}" class="form-control" id="senha" placeholder="Senha" required>
 						</div>
 
 					</div>
@@ -89,35 +90,40 @@
 					<div id="segundo">
 
 						<div class="form-group">
-							<label id="labelCadastro" for="cep">Cep</label> <input  type="text" onblur="pesquisaCep(this.value)" th:field="*{endereco.cep}"
-								class="form-control" id="cep" placeholder="cep" required>
-						</div>
-						
-						<div class="form-group">
-							<label id="labelCadastro" for="Ncasa">Nº</label> <input type="text" th:field="*{endereco.numeroResidencia}"
-								class="form-control" id="Ncasa" placeholder="Numero da casa" required>
-						</div>
-						
-
-						<div class="form-group">
-							<label id="labelCadastro" for="rua">Rua</label> <input type="text" th:field="*{endereco.rua}"
-								class="form-control" id="rua" placeholder="Rua" required>
-						</div>
-
-						
-						<div class="form-group">
-							<label id="labelCadastro" for="bairro">Bairro</label> <input type="text" th:field="*{endereco.bairro}"
-								class="form-control" id="bairro" placeholder="Bairro" required>
+							<label id="labelCadastro" for="cep">Cep</label> <input type="text"
+								onblur="pesquisaCep(this.value)" th:field="*{endereco.cep}" class="form-control"
+								id="cep" placeholder="cep" required>
 						</div>
 
 						<div class="form-group">
-							<label id="labelCadastro" for="cidade">Cidade</label> <input type="text" th:field="*{endereco.cidade}"
-								class="form-control" id="cidade" placeholder="cidade" required>
+							<label id="labelCadastro" for="Ncasa">Nº</label> <input type="text"
+								th:field="*{endereco.numeroResidencia}" class="form-control" id="Ncasa"
+								placeholder="Numero da casa" required>
+						</div>
+
+
+						<div class="form-group">
+							<label id="labelCadastro" for="rua">Rua</label> <input type="text"
+								th:field="*{endereco.rua}" class="form-control" id="rua" placeholder="Rua" required>
+						</div>
+
+
+						<div class="form-group">
+							<label id="labelCadastro" for="bairro">Bairro</label> <input type="text"
+								th:field="*{endereco.bairro}" class="form-control" id="bairro" placeholder="Bairro"
+								required>
 						</div>
 
 						<div class="form-group">
-							<label id="labelCadastro" for="estado">Estado</label> <input type="text" th:field="*{endereco.estado}"
-								class="form-control" id="uf" placeholder="estado" required>
+							<label id="labelCadastro" for="cidade">Cidade</label> <input type="text"
+								th:field="*{endereco.cidade}" class="form-control" id="cidade" placeholder="cidade"
+								required>
+						</div>
+
+						<div class="form-group">
+							<label id="labelCadastro" for="estado">Estado</label> <input type="text"
+								th:field="*{endereco.estado}" class="form-control" id="uf" placeholder="estado"
+								required>
 						</div>
 
 
@@ -133,37 +139,37 @@
 				</form>
 
 
-				
+
 			</div>
 
 		</section>
 
 	</main>
-	
-	
+
+
 	<script th:inline="javascript">
-	 function pesquisaCep(cep){
-	
-                console.log(cep)
-                let ajax = new XMLHttpRequest();
-                ajax.open('GET', 'https://viacep.com.br/ws/'+cep+'/json/')
-                //console.log(ajax)
-                ajax.onreadystatechange = ()=>{
-                    //console.log(ajax.readyState)
-                    
-                    if(ajax.readyState == 4 && ajax.status == 200){
-                    let res = ajax.responseText
-                    let ajaxOBJ = JSON.parse(res);
-                    console.log(ajaxOBJ)
-                    document.getElementById('rua').value = ajaxOBJ.logradouro;
-                    document.getElementById('bairro').value = ajaxOBJ.bairro;
-                    document.getElementById('cidade').value = ajaxOBJ.localidade;
-                    document.getElementById('uf').value = ajaxOBJ.uf;
-                    }
-                }
-                ajax.send()
-                
-			}</script>
+		function pesquisaCep(cep) {
+
+			console.log(cep)
+			let ajax = new XMLHttpRequest();
+			ajax.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/')
+			//console.log(ajax)
+			ajax.onreadystatechange = () => {
+				//console.log(ajax.readyState)
+
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					let res = ajax.responseText
+					let ajaxOBJ = JSON.parse(res);
+					console.log(ajaxOBJ)
+					document.getElementById('rua').value = ajaxOBJ.logradouro;
+					document.getElementById('bairro').value = ajaxOBJ.bairro;
+					document.getElementById('cidade').value = ajaxOBJ.localidade;
+					document.getElementById('uf').value = ajaxOBJ.uf;
+				}
+			}
+			ajax.send()
+
+		}</script>
 </body>
 
 </html>
