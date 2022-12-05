@@ -47,13 +47,13 @@ public class LoginController {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
 		          session.setAttribute("tipo", "Empresa");
-		          return "redirect:/contaUsuarioEmpresa";
+		          return "redirect:/agendarEmpresa";
 		      } 
 		 else if(usuarioCliente != null) {
 				
 				 session.setAttribute("usuarioLogado", usuarioCliente);
 				 session.setAttribute("tipo", "Cliente");
-				 return "redirect:/contaUsuarioCliente";
+				 return "redirect:/listEstabelecimentos";
 		      }
 		 
 		 

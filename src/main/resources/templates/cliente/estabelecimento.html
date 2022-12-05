@@ -37,9 +37,9 @@
 </head>
 <body >
 
-		
-		<div th:replace="cliente/navBarCliente :: #navConta"></div>
 	
+			<div th:replace="cliente/navBarCliente :: #navConta"></div>
+		
 	<section>
 			<div id="paginaLoja"  th:each="cont : ${loja}"  >
 			
@@ -51,8 +51,8 @@
 				
 				<!-- ----------- parte de agendamento  ---------------- -->
 				
-				
-					<div id="agenda">
+					<section id="agenda">
+					
 						<form action="agendar" method="post">
 							<div style="margin-left:20px;">
 								<h4>Serviços</h4>
@@ -67,8 +67,8 @@
 							</div>
 							
 						</form>
-					 </div>
 					 
+					</section>
 					 		<!-- ----------- parte de portifolio  ---------------- -->
 					 <div id="imagens">
 						<div style="margin-left:20px; ">
@@ -148,19 +148,18 @@
 				
 			</div>
 			
-			
-				<div id="informacoes">
-					
+			<section id="informacoes">
+				
 					<h6 th:text="${cont.nomeEmpresa}"></h6>
 					<strong>Contato - </strong><span th:text="${cont.numero}"></span><br>
-					<strong>Endereço - </strong><span th:text="${cont.endereco.rua}"></span>-
+					<strong>Endereço - </strong><span th:text="${cont.endereco.rua}"></span><br>-
 					<span th:text="${cont.endereco.bairro}"></span><br>
 					<strong>Cep - </strong><span th:text="${cont.endereco.cep}"></span>
 					<h6>horario de funcionamento</h6>
 					
 				
-				</div>	
-			
+				
+			</section>
 
 		</div>
 	</section>

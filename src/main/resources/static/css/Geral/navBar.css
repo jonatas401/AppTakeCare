@@ -1,0 +1,39 @@
+
+
+#navConta{
+  width:20%;
+  height:100vh
+   
+}
+.nav-item{
+    width: 43vh;
+    padding: 5px;
+
+}
+.nav-link{
+    padding:15px;
+}
+#navDados{
+    margin-left:15px;
+}
+
+a{
+    color:white;
+    text-decoration:none;
+    cursor: pointer;
+}
+a:hover{
+    color:white;
+    opacity:0.5;
+    background: black;
+}
+
+
+
+#list-tab{
+    width:400px;
+    border-radius:20px;
+    text-align:center;
+}
+label{
+    c

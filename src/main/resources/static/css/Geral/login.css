@@ -1,0 +1,57 @@
+
+#emailLogin {
+	width: 300px;
+
+}
+
+#senhaLogin {
+	width: 300px;
+	
+}
+
+#conteinerLogin {
+	margin-left: 33%;
+
+}
+
+.btn btn-dark {
+	margin-top: 10px;
+}
+
+#botaocadastro {
+	margin-top: 10px;
+	margin-left: 33%;
+}
+
+.tela-login {
+	width: 100%;
+	height: 91.1vh;
+
+	background-image: url('/img/telaicon.png');
+	
+
+}
+
+#conteinerLogin .text-h1{
+
+	font-size: 3rem;
+	margin-bottom: 10rem;
+	line-height: 4rem;
+}
+
+
+.cadastro{
+	width: 100%;
+	height: 91.1vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+
+	/*background-color: red;*/
+}
+main{
+	background-image: url('/img/tela1.png');
+}
+

@@ -11,18 +11,13 @@
           href="../static/css/style.css" th:href="@{/css/style.css}" />
 	
 </head>
-<body  >
-
+<body >
+	<section id="body">
+		
 		<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
-		
-		<div >
-					
-					
-					<div style="margin-left:40%; ">
-						<h2>Bem vindo Sr.(a):  <span th:text="${session.usuarioLogado.nome}"></span></h2>
-					</div>
-		
-		
-		</div>
+	
+	
+	
+	</section>	
 </body>
 </html>
