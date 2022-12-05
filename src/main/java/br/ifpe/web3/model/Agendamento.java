@@ -26,10 +26,10 @@ public class Agendamento {
 	private boolean status;
 	@JoinColumn
 	@OneToOne( cascade = CascadeType.ALL)
-	private UsuarioCliente fk_cliente;
+	private UsuarioCliente cliente;
 	@JoinColumn
 	@OneToOne(cascade = CascadeType.ALL)
-	private UsuarioEmpresa fk_Empresa;
+	private UsuarioEmpresa empresa;
 	
 	public Integer getId() {
 		return id;
@@ -61,16 +61,16 @@ public class Agendamento {
 	public void setServico(String servico) {
 		this.servico = servico;
 	}
-	public UsuarioCliente getFk_cliente() {
-		return fk_cliente;
+	public UsuarioCliente getCliente() {
+		return cliente;
 	}
-	public void setFk_cliente(UsuarioCliente fk_cliente) {
-		this.fk_cliente = fk_cliente;
+	public void setCliente(UsuarioCliente cliente) {
+		this.cliente = cliente;
 	}
-	public UsuarioEmpresa getFk_Empresa() {
-		return fk_Empresa;
+	public UsuarioEmpresa getEmpresa() {
+		return empresa;
 	}
-	public void setFk_Empresa(UsuarioEmpresa fk_Empresa) {
-		this.fk_Empresa = fk_Empresa;
+	public void setEmpresa(UsuarioEmpresa empresa) {
+		this.empresa = empresa;
 	}
 }

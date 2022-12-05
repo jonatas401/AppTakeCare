@@ -3,6 +3,7 @@ package br.ifpe.web3.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -114,8 +115,9 @@ public class Controler {
 	}
 	
 	@GetMapping("/agendarCliente")
-	public String agendar() {
-		
+	public String agendarCliente(Agendamento agendamento, Model model) {
+		model.addAttribute("listaAgenda", agendaDao.findAll());
+		model.addAttribute("agendamento", agendamento);
 		return "cliente/agendarCliente";
 	}
 	
@@ -233,8 +235,9 @@ public class Controler {
 	
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
-		//List<Agendamento> listaAgenda = agendaDao.findAll();
-		model.addAttribute("listaAgenda", agendaDao.findAll());
+		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
+		model.addAttribute("cliente",cliente.getNome());
+		model.addAttribute("listaAgenda", agendaDao.findByEmpresaId(1));
 		model.addAttribute("agendamento", agendamento);
 		return "empresa/agendarEmpresa";
 	}
@@ -247,7 +250,7 @@ public class Controler {
 			return"empresa/agendarEmpresa";
 			
 		}
-		else if(agendamento.getFk_cliente().getNome() == "") {
+		else if(agendamento.getCliente().getNome() == "") {
 			System.out.println("nome vazio");
 			return"empresa/agendarEmpresa";
 		}
@@ -257,7 +260,7 @@ public class Controler {
 		}
 		else {
 			System.out.println("td certo");
-			System.out.println(agendamento.getFk_Empresa().getId());
+			System.out.println(agendamento.getEmpresa().getId());
 			agendaDao.save(agendamento);
 			
 		}

@@ -6,5 +6,6 @@ public interface ClienteDAO extends JpaRepository<UsuarioCliente, Integer> {
 
 	public UsuarioCliente findByEmailAndSenha(String email, String senha);
 	
+	
 
 }

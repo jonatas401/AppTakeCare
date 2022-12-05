@@ -3,7 +3,6 @@
 
     width:70%;
     margin-left:25%; 
-    margin-top:5%;
     background-color:#041e29;
     border:#34393d solid;
     border-radius:10px;
@@ -11,11 +10,7 @@
 #nomeLoja{
     color:white;
 }
-#portifolio{
-    height:300px;
-    margin-left:250px;	
 
-}
 #carouselExampleIndicators{
     width:500px;
     height:150px;
@@ -38,18 +33,34 @@
     color:white;
     
 }
-#agenda{
-    margin-top:20px;
-    width:400px;
-    height:150px;
-    display:none;
-    background-color:#555753;
-    
-    
+
+/******* agendamento********/
+#tabelaAgenda{
+	width:115vh;
+	min-height: 30vh;
+	background-color:rgb(25, 23, 23);
+	border-radius:20px;
+	margin-top:2%;
+	border:solid;
+	margin-left:-5%;
+	display:none;
+}
+
+#buttonAgenda{
+  
+    margin-top:10px;
+}
+#buttonAgenda{
+	
+	height:10vh;
+	background-color: #041e29;
+	border-radius:10px;
 }
 #agenda.h4{
     color:white;
 }
+
+/***** portifolio ********/
 #imagens{
     margin-top:30px;
     display:none;
@@ -59,6 +70,12 @@
     padding-bottom:5px;
     
 }
+#portifolio{
+    height:300px;
+    margin-left:250px;	
+
+}
+
 #dataAgendamento{
     
     margin-left:100px;
@@ -66,8 +83,4 @@
 .horaAgendamento{
     width:60px;
     
-}
-#buttonAgenda{
-    margin-left:70%;
-    margin-top:10px;
 }

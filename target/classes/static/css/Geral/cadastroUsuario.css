@@ -1,6 +1,59 @@
 #formCad{
-	background:  #283555;
+	background:  rgb(85, 87, 83);
 	width:50%;
 	border-radius: 20px;
 	
+}
+
+
+.cadastro {
+    width: 100%;
+    height: 91.1vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-beween;
+    padding: 0px 10%;
+    border: black solid;
+
+
+}
+
+
+
+#primeiro {
+    float: left;
+    width: 40%;
+    margin-top: 20px;
+
+}
+
+#segundo {
+    float: right;
+    width: 40%;
+    margin-top: 20px;
+
+}
+
+
+#formCad {
+    background: #283555;
+    width: 50%;
+    border-radius: 20px;
+
+}
+
+
+label {
+    color: white;
+}
+
+
+
+main {
+    background-image: url('/img/tela1.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+
+
 }

@@ -9,67 +9,112 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	
 	 <script type="text/javascript" th:src="@{/static/js/script.js}" ></script>
-	 
+	  
+ <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}" />
+	
 	 
     
-      <script th:inline="javascript">
+      
+   
+</head>
+<body >
+
+<script th:inline="javascript">
      	 function agendamento(){
       		document.getElementById("carouselExampleIndicators").style.display = "none"
-      		document.getElementById("agenda").style.display = "block"
+      		document.getElementById("tabelaAgenda").style.display = "block"
       		document.getElementById("informacoes").style.display = "block"
       		document.getElementById("imagens").style.display = "none"
       		
       		}
       		function portifolio(){
       		document.getElementById("carouselExampleIndicators").style.display = "none"
-      		document.getElementById("agenda").style.display = "none"
+      		document.getElementById("tabelaAgenda").style.display = "none"
       		
       		document.getElementById("imagens").style.display = "block"
       	
+      		}	
+      		 function agendar(){
+      		document.getElementById("formAgenda").style.display = "block"
       		
-      		}		
+      		}
+      			function agendarCancela(){
+      		document.getElementById("formAgenda").style.display = "none"
+      		
+      		}	
            
         </script>
-    
- <link rel="stylesheet" type="text/css" media="all" 
-          href="../static/css/style.css" th:href="@{/css/style.css}" />
-	
-</head>
-<body >
 
 	
 			<div th:replace="cliente/navBarCliente :: #navConta"></div>
 		
-	<section>
-			<div id="paginaLoja"  th:each="cont : ${loja}"  >
+	<section id="paginaLoja">
 			
-			<div id="portifolio"> 
-						<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
-						
-				<div  th:replace="portifolio :: #carouselExampleIndicators"></div>
+			<div   th:each="cont : ${loja}"  >
+			
+			
+				<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
+			<div id="portifolio"> 			
+				<div  th:replace="portifolio :: #carouselExampleIndicators">
+			</div>
 				
 				
 				<!-- ----------- parte de agendamento  ---------------- -->
 				
-					<section id="agenda">
+	<div id="tabelaAgenda">
 					
-						<form action="agendar" method="post">
-							<div style="margin-left:20px;">
-								<h4>Serviços</h4>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">Unha em Gel</a>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">Cilios</a>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">sobrancelhas</a>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">corte de cabelo</a>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">pedicure</a>
-								<a th:href="@{/agendamentos}" class="btn btn-dark">manicure</a>
-								
-								<button id="buttonAgenda" type="submit" class="btn btn-dark">Agendar</button>
-							</div>
-							
-						</form>
+			<div id="buttonAgenda">
+	   			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">agendar</button>
+	   		
+	   		</div>
+   		<div id="formAgenda">
+   			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
+   			
+   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
+   			<label>Cliente</label>
+   			<input id="inputAgenda" type="text" placeholder="Nome do cliente" th:field="*{cliente.nome}" >	
+   			<label>Contato</label>
+   			<input id="inputAgenda"  type="text"  placeholder="Numero">	
+   			<label>servico</label>
+   			<input id="inputAgenda"  type="text"  placeholder="Servico">	
+   			<label>Dia</label>
+   			<input id="inputAgenda"  type="date" >	
+   			<label>Hora</label>
+   			<input type="time" >	
+   			<button type="submit" class="btn btn-light">Salvar</button>
+   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+   			</form>
+   			
+   		</div>
+   		<table id="table"  class="table table-dark table-striped-columns">
+  				<tr>
+  					<th>Cliente</th>
+					<th>Contato</th>
+  					<th> Dia </th>
+  					<th> hora </th>
+					<th>Serviço</th>
+					<th>Status</th>
+					<th>Acões</th>
+  				</tr>
+  				<tr th:each="cont : ${listaAgenda}">
+  					<td th:text="${cont.fk_cliente.nome}"> </td>
+					<th th:text="${cont.fk_cliente.numero}"></th>
+  					<td th:text="${cont.data}"> </td>
+  					<td th:text="${cont.hora}">  </td>
+					<th th:text="${cont.servico}"></th>
+					<td th:if="${cont.status == false}"> Pendente </td>
+					<td th:if="${cont.status == true}"> Confirmado </td>
+					<th>
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamento(codigo=${cont.id})}">Apagar</button> 
+					</th>
+					
+  				</tr>
+
+				
+  			</table>
 					 
-					</section>
-					 		<!-- ----------- parte de portifolio  ---------------- -->
+	</div>
+				<!-- ----------- parte de portifolio  ---------------- -->
 					 <div id="imagens">
 						<div style="margin-left:20px; ">
 								<div class="container text-center">
@@ -115,19 +160,14 @@
 			
 			
 			
-				
-						
 			<div class="row" id="left">
 				
 			
-			<div id="nomeLoja" >
-	  			
-	  			<h5 th:text="${cont.nomeEmpresa}"></h5>	
-		 	</div>
-		 		
-			
-							
-							
+				<div id="nomeLoja" >
+		  			
+		  			<h5 th:text="${cont.nomeEmpresa}"></h5>	
+			 	</div>
+		 									
 				<div id="listaServ">
 						<div >
 						<a class="linkAgendamentos btn btn-secondary"  onclick="portifolio()">Portifólio</a>

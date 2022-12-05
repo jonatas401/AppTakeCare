@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 @import url('./Geral/geral.css');
 @import url('./Geral/navBar.css');
 @import url('./Geral/index.css');
@@ -18,6 +17,4 @@
 @import url('./Cliente/listaEstabelecimento.css');
 @import url('./Cliente/agendamento.css');
 @import url('./Cliente/navBarCliente.css');
-
-
 

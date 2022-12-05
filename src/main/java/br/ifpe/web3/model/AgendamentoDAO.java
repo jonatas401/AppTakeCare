@@ -5,6 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AgendamentoDAO extends JpaRepository<Agendamento, Integer> {
-
-		//public List<Agendamento>  findByfk_Empresa(Integer id);
+		
+		public List<Agendamento>  findByEmpresaId(Integer id);
 }
