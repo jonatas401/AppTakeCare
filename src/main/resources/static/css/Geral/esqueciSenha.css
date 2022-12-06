@@ -1,0 +1,20 @@
+body {
+
+    background-image: url('/img/tela1.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+
+}
+
+.esqueci-senhaSection {
+
+    margin-top: 10%;
+}
+
+#esqueciSenha {
+    margin-left: 25%;
+    margin-top: 20%;
+
+
+}

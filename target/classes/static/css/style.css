@@ -1,12 +1,27 @@
 @charset "UTF-8";
 
+
 @import url('./Geral/geral.css');
+
+
+
 @import url('./Geral/navBar.css');
+
 @import url('./Geral/index.css');
+
 @import url('./Geral/dadosUsuarios.css');
+
 @import url('./Geral/opcaoCadastro.css');
+
 @import url('./Geral/login.css');
+
 @import url('./Geral/cadastroUsuario.css');
+
+
+
+@import url('./Geral/esqueciSenha.css');
+
+
 
 @import url('./Empresa/portifolio.css');
 @import url('./Empresa/agendamento.css');
