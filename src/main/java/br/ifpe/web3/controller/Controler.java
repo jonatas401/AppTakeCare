@@ -3,9 +3,9 @@ package br.ifpe.web3.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import br.ifpe.web3.exceptions.LoginExceptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.ifpe.web3.model.UsuarioCliente;
-import br.ifpe.web3.model.UsuarioEmpresa;
+import br.ifpe.web3.exceptions.LoginExceptions;
+import br.ifpe.web3.model.Agendamento;
+import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.UsuarioCliente;
+import br.ifpe.web3.model.UsuarioEmpresa;
 
 @Controller
 public class Controler {
@@ -26,6 +29,8 @@ public class Controler {
 	private EmpresaDAO empresaDao;
 	@Autowired
 	private ClienteDAO clienteDao;
+	@Autowired
+	private AgendamentoDAO agendaDao;
 	
 	//*******Rotas de acesso geral***********
 	
@@ -110,8 +115,9 @@ public class Controler {
 	}
 	
 	@GetMapping("/agendarCliente")
-	public String agendar() {
-		
+	public String agendarCliente(Agendamento agendamento, Model model) {
+		model.addAttribute("listaAgenda", agendaDao.findAll());
+		model.addAttribute("agendamento", agendamento);
 		return "cliente/agendarCliente";
 	}
 	
@@ -203,17 +209,8 @@ public class Controler {
 		return "empresa/addPortifolio";
 	}
 	
-	@GetMapping("/agendamentosEmpresa")
-	public String agendamentosEmpresa() {
-		
-		return "empresa/agendamentosEmpresa";
-	}
 	
-	@GetMapping("/agendarEmpresa")
-	public String agendarEmpresa() {
-		
-		return "empresa/agendarEmpresa";
-	}
+	
 	
 	@GetMapping("/configuracaoEmpresa")
 	public String configuracaoEmpresa() {
@@ -236,19 +233,59 @@ public class Controler {
 		return "redirect:empresa/dadosEmpresa";
 	}
 	
+	@GetMapping("/agendarEmpresa")
+	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
+		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
+		model.addAttribute("cliente",cliente.getNome());
+		model.addAttribute("listaAgenda", agendaDao.findByEmpresaId(1));
+		model.addAttribute("agendamento", agendamento);
+		return "empresa/agendarEmpresa";
+	}
+	
+	@PostMapping("/fazerAgendamento")
+	public String fazerAgendamento(Agendamento agendamento, Model model, HttpSession session) {
+		
+		if(agendamento == null) {
+			System.out.println("nulo");
+			return"empresa/agendarEmpresa";
+			
+		}
+		else if(agendamento.getCliente().getNome() == "") {
+			System.out.println("nome vazio");
+			return"empresa/agendarEmpresa";
+		}
+		else if(agendamento.getServico() == "") {
+			System.out.println("servico vazio");
+			return"empresa/agendarEmpresa";
+		}
+		else {
+			System.out.println("td certo");
+			System.out.println(agendamento.getEmpresa().getId());
+			agendaDao.save(agendamento);
+			
+		}
+		return"redirect:agendarEmpresa";
+	}
+	@GetMapping("/removerAgendamento")
+	public String removerAgendamento(Integer codigo,Model model) {
+		agendaDao.deleteById(codigo);
+		return"redirect:agendarEmpresa";
+	}
+	@GetMapping("/confirmarAgendamento")
+	public String confirmarAgendamento(Integer codigo,Model model) {
+		System.out.println(codigo);
+		Agendamento agenda = agendaDao.findById(codigo).orElse(null);
+		agenda.setStatus(true);
+		agendaDao.save(agenda);
+		return"redirect:agendarEmpresa";
+	}
+	
 	@GetMapping("/removerloginEmpresa")
 	public String removerEmpresa(Integer Id,Model model) {
 		clienteDao.deleteById(Id);
 		return "/login";
 	}
-	
-	//********** Rotas para ***********
-	
-	
-	
-	
 
-	
 	
 	
 }

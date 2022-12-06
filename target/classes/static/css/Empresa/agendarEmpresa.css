@@ -1,0 +1,45 @@
+.agenda{
+	width:150vh;
+	min-height: 50vh;
+	background-color:rgb(25, 23, 23);
+	border:solid;
+	border-radius:20px;
+	margin-left:25%;
+	margin-top:5%;
+}
+#calendario{
+	width:149vh;
+	height:10vh;
+	background-color: #041e29;
+	border-radius:10px;
+}
+#inputAgenda{
+	width:120px;
+}
+table#table{
+    width:100%;
+  	margin-left: 0px;
+  	margin-top:2px;
+  	
+}
+table tr{
+	text-align: center;
+	}
+button#confimar{
+	margin-right: 2px;
+}
+#formAgenda{
+	display:none;
+	background-color: rgb(46, 52, 54);
+}
+#cancela{
+	width:50px;
+	align-items:center;
+}
+a#acoes{
+	color:black;
+	
+}
+a#acoes:hover{
+	background-color: rgb(238, 238, 238);
+}

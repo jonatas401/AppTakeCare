@@ -19,6 +19,7 @@ public class UsuarioEmpresa {
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
 	private byte[] fotoPerfil;
+	//private UsuarioCliente[] fk_cliente;
 	
 	
 	

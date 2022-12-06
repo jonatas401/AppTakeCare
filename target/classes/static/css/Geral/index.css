@@ -1,0 +1,46 @@
+
+.home {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-beween;
+	padding: 0px 10%;
+	border: black solid;
+
+	background-image: linear-gradient(to bottom, #283547, black);
+
+}
+
+
+.home-text {
+	max-width: 37rem;
+}
+
+.home-text .text-h4 {
+	font-size: 1.5rem;
+	color: #A3AAAF;
+	margin-bottom: 1rem;
+
+
+}
+
+
+.home-text .text-h1 {
+	font-size: 4rem;
+	color: #A3AAAF;
+	margin-bottom: 1rem;
+	line-height: 4rem;
+}
+
+.home-text p {
+	margin-bottom: 4rem;
+	color: #A3AAAF;
+
+}
+
+
+.home-img img {
+	width: 100%;
+
+}

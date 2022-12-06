@@ -1,6 +1,19 @@
 #listaEstabelecimento{
-    width:100%;
-    margin-top:10px;
-     background-color:gray;
-     border:black solid;
+   width:30%;
+	height: 40%;
+	margin-left: 30%;
+	margin-top: 10%;
+	background-color:#041e29;
+	border-radius:20px;
+	border: gray;
 }
+#nomesEstabelecimentos{
+	margin-left:20px;
+	width:20%;
+	
+}
+#list-tab {
+	width: 300px;
+	border-radius: 20px;
+	text-align: center;
+	}

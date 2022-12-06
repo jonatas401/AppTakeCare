@@ -10,57 +10,89 @@
 	
       <link rel="stylesheet" type="text/css" media="all" 
           th:href="@{/css/style.css}" />     
+          
+          
+          
+      <script th:inline="javascript">
+     	 function agendar(){
+      		document.getElementById("formAgenda").style.display = "block"
+      		
+      		}
+      	function agendarCancela(){
+      		document.getElementById("formAgenda").style.display = "none"
+      		
+      		}
+      		
+           
+        </script>
 	
 </head>
 <body>
 	
+	
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
-
+	
 		
-<section class="margin homeAgenda">
-    <ul>
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">UNHA EM GEL</span>
-        </a>
-      </li>
+	<section class="agenda">
+	   	<div id="calendario">
+	   		<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">agendar</button>
+	   		
+	   	</div>
+   		<div id="formAgenda">
+   			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
+   			<!-- id da empresa-->
+   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
+   			
+   			<label>Cliente</label>
+   			<select th:field="*{cliente.nome}"  id="inputAgenda" required>
+				<option th:value="''">selecione</option>
+				<option th:each="nomes :  ${cliente}"
+					th:text="${nomes}" th:value="${nomes}"></option>
 
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">CILIOS</span>
-        </a>
-      </li>
+			</select>
+			
+			<!--<input id="inputAgenda" th:object="${cliente}" type="text" placeholder="Nome do cliente"   th:text="${cliente}">	-->
+   			<label>Contato</label>
+   			<input id="inputAgenda"  type="text" th:field="*{cliente.numero}" placeholder="Numero">	
+   			<label>servico</label>
+   			<input id="inputAgenda"  type="text" th:field="*{servico}" placeholder="Servico">	
+   			<label>Dia</label>
+   			<input id="inputAgenda"  type="date" th:field="*{data}">	
+   			<label>Hora</label>
+   			<input type="time" th:field="*{hora}">	
+   			<button type="submit" class="btn btn-light">Salvar</button>
+   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+   			</form>
+   			
+   		</div>
+   		<table id="table"  class="table table-dark table-striped-columns">
+  				<tr>
+  					<th>Cliente</th>
+					<th>Contato</th>
+  					<th> Dia </th>
+  					<th> hora </th>
+					<th>Serviço</th>
+					<th>Status</th>
+					<th>Acões</th>
+  				</tr>
+  				<tr th:each="cont : ${listaAgenda}">
+  					<td th:text="${cont.cliente.nome}"> </td>
+					<th th:text="${cont.cliente.numero}"></th>
+  					<td th:text="${cont.data}"> </td>
+  					<td th:text="${cont.hora}">  </td>
+					<th th:text="${cont.servico}"></th>
+					<td th:if="${cont.status == false}"> Pendente </td>
+					<td th:if="${cont.status == true}"> Confirmado </td>
+					<th>
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamento(codigo=${cont.id})}">Apagar</button> 
+					<button id="confirmar" class="btn btn-light" > <a id="acoes" th:href="@{/confirmarAgendamento(codigo=${cont.id})}">Confirmar</button>
+					</th>
+					
+  				</tr>
 
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">SOBRANCELHAS</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">MASSAGEM</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">MANICURE</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="">
-          <div class="img"></div>
-          <span class="i-B20 black1">PEDICURE</span>
-        </a>
-      </li>
-    </ul>
-  </section>
+				
+  			</table>
+ 
+  	</section>
 </body>
 </html>
