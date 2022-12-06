@@ -1,10 +1,12 @@
 package br.ifpe.web3.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -13,15 +15,14 @@ public class ServicoLoja {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	private float valor;
-	private byte foto;
+	@Lob
+	private byte[] foto;
 	private int duracao;
-	
 	@JoinColumn
-	@OneToOne
-	private Servico fk_servico;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Servico fkservico;
 	@JoinColumn
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private UsuarioEmpresa fk_Empresa;
 	
 	public Integer getId() {
@@ -40,11 +41,11 @@ public class ServicoLoja {
 		this.valor = valor;
 	}
 
-	public byte getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
@@ -56,12 +57,12 @@ public class ServicoLoja {
 		this.duracao = duracao;
 	}
 
-	public Servico getFk_servico() {
-		return fk_servico;
+	public Servico getFkservico() {
+		return fkservico;
 	}
 
-	public void setFk_servico(Servico fk_servico) {
-		this.fk_servico = fk_servico;
+	public void setFkservico(Servico fkservico) {
+		this.fkservico = fkservico;
 	}
 
 	public UsuarioEmpresa getFk_estabelecimento() {

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+
 
 
 @Entity
@@ -15,9 +17,12 @@ public class UsuarioEmpresa {
 	private String numero;
 	private String email;
 	private String senha;
+	//@NotBlank(mensagem ="deve ser preenchido")
 	private String nomeEmpresa;
+	//@NotNull(mensagem = "tipo deve ser selecionado")
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
+	@Lob
 	private byte[] fotoPerfil;
 	//private UsuarioCliente[] fk_cliente;
 	

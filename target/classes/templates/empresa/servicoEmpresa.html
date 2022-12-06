@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Agendamentos</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	
+      <link rel="stylesheet" type="text/css" media="all" 
+          th:href="@{/css/style.css}" />     
+          
+          
+          
+      <script th:inline="javascript">
+     	 function agendar(){
+      		document.getElementById("formAgenda").style.display = "block"
+      		
+      		}
+      	function agendarCancela(){
+      		document.getElementById("formAgenda").style.display = "none"
+      		
+      		}
+      		
+           
+        </script>
+	
+</head>
+<body>
+	
+	
+	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
+	
+		
+	<section class="agenda">
+	   	<div id="calendario">
+	   		<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Criar Serviço</button>
+	   		
+	   	</div>
+   		<div id="formAgenda">
+   			<form action="/servicoEmpresa" th:object="${servico}" method="post">
+   			<!-- id da empresa-->
+   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
+   				
+			<!--<input id="inputAgenda" th:object="${cliente}" type="text" placeholder="Nome do cliente"   th:text="${cliente}">	-->
+   				
+   			<label>servico</label>
+   			<input id="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico">	
+   			<label>Valor</label>
+   			<input id="inputAgenda" th:field="*{valor}"  type="text" >	
+            <label>duração</label>
+   			<input id="inputAgenda"  type="number" th:field="*{duracao}" >
+            <label>Imagem ilustrativa</label>
+   			<input id="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
+   	
+   				
+   			<button type="submit" class="btn btn-light">Salvar</button>
+   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+   			</form>
+   			
+   		</div>
+   		<table id="table"  class="table table-dark table-striped-columns">
+  				<tr>
+  					
+					<th>Serviço</th>
+					<th>valor</th>
+					<th>duração</th>
+                    <th>imagem</th>
+					<th>acões</th>
+  				</tr>
+  				<tr th:each="cont : ${listaServicos}">
+  					<td th:text="${cont.fkservico.descricao}"> </td>
+					<th th:text="${cont.valor}"></th>
+  					<td th:text="${cont.duracao}"> </td>
+  					<td th:text="${cont.foto}"> </td> 
+					<td>
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServico(codigo=${cont.id})}">Apagar</button> 
+					</td>
+					
+					
+  				</tr>
+
+				
+  			</table>
+ 
+  	</section>
+</body>
+</html>

@@ -1,0 +1,6 @@
+2022-12-06 05:40:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "X'31303035312e706e67' (SERVICO_LOJA: ""FOTO"" TINYINT NOT NULL)"; SQL statement:
+insert into servico_loja (id, duracao, fk_empresa_id, fkservico_id, foto, valor) values (default, ?, ?, ?, ?, ?) [22018-214]
+2022-12-06 05:41:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "X'70686f746f2e706e67' (SERVICO_LOJA: ""FOTO"" TINYINT NOT NULL)"; SQL statement:
+insert into servico_loja (id, duracao, fk_empresa_id, fkservico_id, foto, valor) values (default, ?, ?, ?, ?, ?) [22018-214]

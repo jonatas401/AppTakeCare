@@ -15,6 +15,8 @@ import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.ServicoLoja;
+import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 
@@ -27,6 +29,8 @@ public class Controler {
 	private ClienteDAO clienteDao;
 	@Autowired
 	private AgendamentoDAO agendaDao;
+	@Autowired
+	private ServicoLojaDAO servicoDao;
 	
 	//*******Rotas de acesso geral***********
 	
@@ -204,7 +208,24 @@ public class Controler {
 		return "empresa/addPortifolio";
 	}
 	
-	
+	@GetMapping("/servicoEmpresa")
+	public String servicoEmpresa(ServicoLoja servico, Model model) throws LoginExceptions {
+		model.addAttribute("listaServicos", servicoDao.findAll());
+		model.addAttribute("servico", servico);
+		System.out.println(servicoDao.findAll());
+		return "empresa/servicoEmpresa";
+	}
+	@PostMapping("/servicoEmpresa")
+	public String Salvarservico(ServicoLoja servico, Model model) throws LoginExceptions {
+		
+		servicoDao.save(servico);
+		return "redirect:servicoEmpresa";
+	}
+	@GetMapping("/removerServico")
+	public String removerServico(ServicoLoja servico, Integer codigo) throws LoginExceptions {
+		servicoDao.deleteById(codigo);
+		return "redirect:servicoEmpresa";
+	}
 	
 	
 	@GetMapping("/configuracaoEmpresa")
