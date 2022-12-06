@@ -1,10 +1,6 @@
 package br.ifpe.web3.controller;
 
-
-
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,14 +176,13 @@ public class Controler {
 	
 	
 	
+
+
+
+
+
 	
-	
-	
-	
-	
-	
-	
-	//*******************Rotas de acesso a paginas de usuarios empresa*************************
+	//*******************Rotas de acesso a paginas de usuarios empresa*************************/
 	
 	@GetMapping("/contaUsuarioEmpresa")
 	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
@@ -230,14 +225,14 @@ public class Controler {
 		
 		empresaDao.save(empresa);	
 		session.setAttribute("usuarioLogado", empresa);
-		return "redirect:empresa/dadosEmpresa";
+		return "redirect:dadosEmpresa";
 	}
 	
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
 		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
 		model.addAttribute("cliente",cliente.getNome());
-		model.addAttribute("listaAgenda", agendaDao.findByEmpresaId(1));
+		model.addAttribute("listaAgenda", agendaDao.findAll());
 		model.addAttribute("agendamento", agendamento);
 		return "empresa/agendarEmpresa";
 	}
@@ -247,24 +242,25 @@ public class Controler {
 		
 		if(agendamento == null) {
 			System.out.println("nulo");
-			return"empresa/agendarEmpresa";
+			return"redirect:agendarEmpresa";
 			
 		}
 		else if(agendamento.getCliente().getNome() == "") {
 			System.out.println("nome vazio");
-			return"empresa/agendarEmpresa";
+			return"redirect:agendarEmpresa";
 		}
 		else if(agendamento.getServico() == "") {
 			System.out.println("servico vazio");
-			return"empresa/agendarEmpresa";
+			return"redirect:agendarEmpresa";
 		}
-		else {
+
 			System.out.println("td certo");
-			System.out.println(agendamento.getEmpresa().getId());
 			agendaDao.save(agendamento);
+		
+			return"redirect:agendarEmpresa";
+	
 			
-		}
-		return"redirect:agendarEmpresa";
+			
 	}
 	@GetMapping("/removerAgendamento")
 	public String removerAgendamento(Integer codigo,Model model) {

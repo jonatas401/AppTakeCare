@@ -39,7 +39,7 @@
 	   		
 	   	</div>
    		<div id="formAgenda">
-   			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
+   			<form action="/fazerAgendamento" th:object="${agendamento}" method="post">
    			<!-- id da empresa-->
    			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
    			
