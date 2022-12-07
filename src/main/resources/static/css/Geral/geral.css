@@ -21,4 +21,13 @@ a:hover{
     background: black;
 }
 
+/** imagem das telas de login e cadastro**/
+main {
+    width:100%;
+    background-image: url('/img/tela1.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
 
+
+}

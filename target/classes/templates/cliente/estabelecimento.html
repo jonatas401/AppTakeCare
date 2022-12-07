@@ -70,17 +70,17 @@
    		<div id="formAgenda">
    			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
    			
-   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
+   		
    			<label>Cliente</label>
-   			<input id="inputAgenda" type="text" placeholder="Nome do cliente" th:field="*{cliente.nome}" >	
+   			<input id="inputAgenda" type="text" placeholder="Nome do cliente" th:field="*{cliente.nome}">	
    			<label>Contato</label>
-   			<input id="inputAgenda"  type="text"  placeholder="Numero">	
+   			<input id="inputAgenda"  type="text"  placeholder="Numero" th:field="*{cliente.numero}">	
    			<label>servico</label>
-   			<input id="inputAgenda"  type="text"  placeholder="Servico">	
+   			<input id="inputAgenda"  type="text"  placeholder="Servico" th:field="*{servico.fkservico.descricao}">	
    			<label>Dia</label>
-   			<input id="inputAgenda"  type="date" >	
+   			<input id="inputAgenda"  type="date" th:field="*{data}">	
    			<label>Hora</label>
-   			<input type="time" >	
+   			<input type="time"  th:field="*{hora}">	
    			<button type="submit" class="btn btn-light">Salvar</button>
    			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
    			</form>
@@ -101,34 +101,21 @@
 					<th th:text="${cont.fk_cliente.numero}"></th>
   					<td th:text="${cont.data}"> </td>
   					<td th:text="${cont.hora}">  </td>
-					<th th:text="${cont.servico}"></th>
+					<th th:text="${cont.servico.fkservico.descricao}"></th>
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
 					<th>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamento(codigo=${cont.id})}">Apagar</button> 
 					</th>
 					
-<<<<<<< HEAD
-						<form action="agendar" method="post">
-							<div style="margin-left:20px;">
-								<h4>Serviços</h4>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">Unha em Gel</a>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">Cilios</a>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">sobrancelhas</a>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">corte de cabelo</a>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">pedicure</a>
-								<a th:href="@{/agendamentosCliente}" class="btn btn-dark">manicure</a>
-								
-								<button id="buttonAgenda" type="submit" class="btn btn-dark">Agendar</button>
-							</div>
-							
-						</form>
-=======
+
+						
+
   				</tr>
 
 				
   			</table>
->>>>>>> 537a6aef5521a776ceaa2756e55265ecfcf9d73a
+
 					 
 	</div>
 				<!-- ----------- parte de portifolio  ---------------- -->

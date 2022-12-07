@@ -22,7 +22,7 @@ public class ServicoLoja {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Servico fkservico;
 	@JoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	private UsuarioEmpresa fk_Empresa;
 	
 	public Integer getId() {
@@ -72,7 +72,6 @@ public class ServicoLoja {
 	public void setFk_estabelecimento(UsuarioEmpresa fk_Empresa) {
 		this.fk_Empresa = fk_Empresa;
 	}
-
 
 	
 

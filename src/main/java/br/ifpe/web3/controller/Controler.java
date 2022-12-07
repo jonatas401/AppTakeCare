@@ -30,7 +30,7 @@ public class Controler {
 	@Autowired
 	private AgendamentoDAO agendaDao;
 	@Autowired
-	private ServicoLojaDAO servicoDao;
+	private ServicoLojaDAO servicoLojaDao;
 	
 	//*******Rotas de acesso geral***********
 	
@@ -146,12 +146,12 @@ public class Controler {
 	
 	
 	@GetMapping("/estabelecimento")
-	public String loja(Integer id, Model model, HttpSession session ) {
+	public String loja(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
 		
 		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 		
 		model.addAttribute( "loja",empresa);
-	
+		model.addAttribute("agendamento", agendamento);
 		
 		return "cliente/estabelecimento";
 	}
@@ -210,20 +210,20 @@ public class Controler {
 	
 	@GetMapping("/servicoEmpresa")
 	public String servicoEmpresa(ServicoLoja servico, Model model) throws LoginExceptions {
-		model.addAttribute("listaServicos", servicoDao.findAll());
+		model.addAttribute("listaServicos", servicoLojaDao.findAll());
 		model.addAttribute("servico", servico);
-		System.out.println(servicoDao.findAll());
+		System.out.println(servicoLojaDao.findAll());
 		return "empresa/servicoEmpresa";
 	}
 	@PostMapping("/servicoEmpresa")
 	public String Salvarservico(ServicoLoja servico, Model model) throws LoginExceptions {
 		
-		servicoDao.save(servico);
+		servicoLojaDao.save(servico);
 		return "redirect:servicoEmpresa";
 	}
 	@GetMapping("/removerServico")
 	public String removerServico(ServicoLoja servico, Integer codigo) throws LoginExceptions {
-		servicoDao.deleteById(codigo);
+		servicoLojaDao.deleteById(codigo);
 		return "redirect:servicoEmpresa";
 	}
 	
@@ -252,10 +252,14 @@ public class Controler {
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
 		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
+		//ServicoLoja serv = (ServicoLoja) servicoLojaDao.findAll();
+		
 		model.addAttribute("cliente",cliente.getNome());
 		model.addAttribute("listaAgenda", agendaDao.findAll());
 		model.addAttribute("agendamento", agendamento);
-		return "empresa/agendarEmpresa";
+		//model.addAttribute("listaServico", servico.getFkservico().getDescricao());
+		
+		return "empresa/agendarEmpresa"; 
 	}
 	
 	@PostMapping("/fazerAgendamento")
@@ -270,18 +274,19 @@ public class Controler {
 			System.out.println("nome vazio");
 			return"redirect:agendarEmpresa";
 		}
-		else if(agendamento.getServico() == "") {
+		else if(agendamento.getServico().getFkservico().getDescricao() == "") {
 			System.out.println("servico vazio");
 			return"redirect:agendarEmpresa";
 		}
 
+			UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+			agendamento.getEmpresa().setId(chaveId.getId());
+			System.out.println(chaveId);
 			System.out.println("td certo");
 			agendaDao.save(agendamento);
 		
 			return"redirect:agendarEmpresa";
-	
-			
-			
+		
 	}
 	@GetMapping("/removerAgendamento")
 	public String removerAgendamento(Integer codigo,Model model) {
