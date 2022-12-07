@@ -41,7 +41,7 @@
    		<div id="formAgenda">
    			<form action="/fazerAgendamento" th:object="${agendamento}" method="post">
    			<!-- id da empresa-->
-   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
+   			
    			
    			<label>Cliente</label>
    			<select th:field="*{cliente.nome}"  id="inputAgenda" required>
@@ -54,8 +54,17 @@
 			<!--<input id="inputAgenda" th:object="${cliente}" type="text" placeholder="Nome do cliente"   th:text="${cliente}">	-->
    			<label>Contato</label>
    			<input id="inputAgenda"  type="text" th:field="*{cliente.numero}" placeholder="Numero">	
-   			<label>servico</label>
-   			<input id="inputAgenda"  type="text" th:field="*{servico}" placeholder="Servico">	
+   			
+			<label>servico</label>
+			
+   			<select th:field="*{servico.fkservico.descricao}"  id="inputAgenda" required>
+				<option th:value="''">selecione</option>
+				<option th:each="servico :  ${listaServico}"
+					th:text="${servico.fkservico.descricao}" th:value="${servico.fkservico.descricao}"></option>
+
+			</select>
+
+
    			<label>Dia</label>
    			<input id="inputAgenda"  type="date" th:field="*{data}">	
    			<label>Hora</label>

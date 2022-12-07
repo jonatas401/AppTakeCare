@@ -1,6 +1,8 @@
 package br.ifpe.web3.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class Controler {
 	@Autowired
 	private AgendamentoDAO agendaDao;
 	@Autowired
-	private ServicoLojaDAO servicoDao;
+	private ServicoLojaDAO servicoLojaDao;
 	
 	//*******Rotas de acesso geral***********
 	
@@ -146,12 +148,12 @@ public class Controler {
 	
 	
 	@GetMapping("/estabelecimento")
-	public String loja(Integer id, Model model, HttpSession session ) {
+	public String loja(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
 		
 		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 		
 		model.addAttribute( "loja",empresa);
-	
+		model.addAttribute("agendamento", agendamento);
 		
 		return "cliente/estabelecimento";
 	}
@@ -210,20 +212,22 @@ public class Controler {
 	
 	@GetMapping("/servicoEmpresa")
 	public String servicoEmpresa(ServicoLoja servico, Model model) throws LoginExceptions {
-		model.addAttribute("listaServicos", servicoDao.findAll());
+		model.addAttribute("listaServicos", servicoLojaDao.findAll());
 		model.addAttribute("servico", servico);
-		System.out.println(servicoDao.findAll());
+		System.out.println(servicoLojaDao.findAll());
 		return "empresa/servicoEmpresa";
 	}
 	@PostMapping("/servicoEmpresa")
-	public String Salvarservico(ServicoLoja servico, Model model) throws LoginExceptions {
-		
-		servicoDao.save(servico);
+	public String Salvarservico(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		servico.setFk_estabelecimento(chaveId);
+		servico.getFk_estabelecimento().setId(chaveId.getId());
+		servicoLojaDao.save(servico);
 		return "redirect:servicoEmpresa";
 	}
 	@GetMapping("/removerServico")
 	public String removerServico(ServicoLoja servico, Integer codigo) throws LoginExceptions {
-		servicoDao.deleteById(codigo);
+		servicoLojaDao.deleteById(codigo);
 		return "redirect:servicoEmpresa";
 	}
 	
@@ -252,10 +256,26 @@ public class Controler {
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
 		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
+		List<ServicoLoja>servico = servicoLojaDao.findAll();
+		ServicoLoja listaServico = null;
+		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		agendamento.setEmpresa(chaveId);
+		agendamento.getEmpresa().setId(chaveId.getId());
+		for(ServicoLoja lista: servico) {
+			if(lista.getFk_estabelecimento().getId().equals(chaveId.getId())){
+				listaServico = lista;
+			} 
+		}
+		
+		
+		//ServicoLoja serv = (ServicoLoja) servicoLojaDao.findAll();
+		
 		model.addAttribute("cliente",cliente.getNome());
 		model.addAttribute("listaAgenda", agendaDao.findAll());
 		model.addAttribute("agendamento", agendamento);
-		return "empresa/agendarEmpresa";
+		model.addAttribute("listaServico", servico);
+		
+		return "empresa/agendarEmpresa"; 
 	}
 	
 	@PostMapping("/fazerAgendamento")
@@ -270,18 +290,25 @@ public class Controler {
 			System.out.println("nome vazio");
 			return"redirect:agendarEmpresa";
 		}
-		else if(agendamento.getServico() == "") {
+		else if(agendamento.getServico().getFkservico().getDescricao() == "") {
 			System.out.println("servico vazio");
 			return"redirect:agendarEmpresa";
 		}
 
+			UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+			System.out.println(chaveId);
+			agendamento.setEmpresa(chaveId);
+			agendamento.getEmpresa().setId(chaveId.getId());
+			System.out.println(agendamento.getServico().getFkservico().getDescricao());
+			//Optional<ServicoLoja> loja =servicoLojaDao.findById(agendamento.getServico().getFkservico().getId());
+			//loja.get().setFkservico(loja.get().getFkservico());
+			//System.out.println(loja.get().getId());
+			//agendamento.getServico().setId(loja.get().getId());
 			System.out.println("td certo");
 			agendaDao.save(agendamento);
 		
 			return"redirect:agendarEmpresa";
-	
-			
-			
+		
 	}
 	@GetMapping("/removerAgendamento")
 	public String removerAgendamento(Integer codigo,Model model) {

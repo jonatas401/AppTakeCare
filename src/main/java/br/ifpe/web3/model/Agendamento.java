@@ -19,16 +19,18 @@ public class Agendamento {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String servico;
+	@JoinColumn
+	@OneToOne
+	private ServicoLoja servico;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate data;
 	private LocalTime hora;
 	private boolean status;
 	@JoinColumn
-	@OneToOne( cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private UsuarioCliente cliente;
 	@JoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private UsuarioEmpresa empresa;
 	
 	public Integer getId() {
@@ -55,10 +57,10 @@ public class Agendamento {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public String getServico() {
+	public ServicoLoja getServico() {
 		return servico;
 	}
-	public void setServico(String servico) {
+	public void setServico(ServicoLoja servico) {
 		this.servico = servico;
 	}
 	public UsuarioCliente getCliente() {

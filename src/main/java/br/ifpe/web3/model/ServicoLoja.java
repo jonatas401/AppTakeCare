@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class ServicoLoja {
@@ -19,10 +21,10 @@ public class ServicoLoja {
 	private byte[] foto;
 	private int duracao;
 	@JoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne (cascade = CascadeType.ALL)
 	private Servico fkservico;
 	@JoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private UsuarioEmpresa fk_Empresa;
 	
 	public Integer getId() {
@@ -72,7 +74,6 @@ public class ServicoLoja {
 	public void setFk_estabelecimento(UsuarioEmpresa fk_Empresa) {
 		this.fk_Empresa = fk_Empresa;
 	}
-
 
 	
 
