@@ -25,7 +25,7 @@ public class ServicoLoja {
 	private Servico fkservico;
 	@JoinColumn
 	@ManyToOne
-	private UsuarioEmpresa fk_Empresa;
+	private UsuarioEmpresa empresa;
 	
 	public Integer getId() {
 		return id;
@@ -67,12 +67,12 @@ public class ServicoLoja {
 		this.fkservico = fkservico;
 	}
 
-	public UsuarioEmpresa getFk_estabelecimento() {
-		return fk_Empresa;
+	public UsuarioEmpresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setFk_estabelecimento(UsuarioEmpresa fk_Empresa) {
-		this.fk_Empresa = fk_Empresa;
+	public void setEmpresa(UsuarioEmpresa empresa) {
+		this.empresa = empresa;
 	}
 
 	

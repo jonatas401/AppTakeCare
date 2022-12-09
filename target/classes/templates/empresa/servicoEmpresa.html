@@ -40,17 +40,13 @@
 	   	</div>
    		<div id="formAgenda">
    			<form action="/servicoEmpresa" th:object="${servico}" method="post">
-   			<!-- id da empresa-->
-   			<input type="hidden" name="id"  th:value="${session.usuarioLogado.id}" >
-   				
-			<!--<input id="inputAgenda" th:object="${cliente}" type="text" placeholder="Nome do cliente"   th:text="${cliente}">	-->
    				
    			<label>servico</label>
-   			<input id="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico">	
+   			<input id="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico" required>	
    			<label>Valor</label>
-   			<input id="inputAgenda" th:field="*{valor}"  type="text" >	
+   			<input id="inputAgenda" th:field="*{valor}"  type="text" required>	
             <label>duração</label>
-   			<input id="inputAgenda"  type="number" th:field="*{duracao}" >
+   			<input id="inputAgenda"  type="number" th:field="*{duracao}" required>
             <label>Imagem ilustrativa</label>
    			<input id="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
    	
@@ -71,8 +67,8 @@
   				</tr>
   				<tr th:each="cont : ${listaServicos}">
   					<td th:text="${cont.fkservico.descricao}"> </td>
-					<th th:text="${cont.valor}"></th>
-  					<td th:text="${cont.duracao}"> </td>
+					<td th:text="${cont.valor}"></td>
+  					<td th:text="${cont.duracao} + ' min'"></td>
   					<td th:text="${cont.foto}"> </td> 
 					<td>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServico(codigo=${cont.id})}">Apagar</button> 

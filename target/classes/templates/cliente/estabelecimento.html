@@ -70,13 +70,15 @@
    		<div id="formAgenda">
    			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
    			
-   		
-   			<label>Cliente</label>
-   			<input id="inputAgenda" type="text" placeholder="Nome do cliente" th:field="*{cliente.nome}">	
-   			<label>Contato</label>
-   			<input id="inputAgenda"  type="text"  placeholder="Numero" th:field="*{cliente.numero}">	
+   			<input name="id" th:value="${cont.id}" type="hidden">
+   			<input th:field="*{cliente.nome}" type="hidden">
    			<label>servico</label>
-   			<input id="inputAgenda"  type="text"  placeholder="Servico" th:field="*{servico.fkservico.descricao}">	
+   			<select th:field="*{servico.id}"  id="inputAgenda" required>
+				<option th:value="''">selecione</option>
+				<option th:each="servico :  ${listaServico}"
+					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>
+
+			</select>
    			<label>Dia</label>
    			<input id="inputAgenda"  type="date" th:field="*{data}">	
    			<label>Hora</label>
@@ -96,16 +98,16 @@
 					<th>Status</th>
 					<th>Acões</th>
   				</tr>
-  				<tr th:each="cont : ${listaAgenda}">
-  					<td th:text="${cont.fk_cliente.nome}"> </td>
-					<th th:text="${cont.fk_cliente.numero}"></th>
+  				<tr th:each="cont : ${listaAgendamento}">
+  					<td th:text="${cont.cliente.nome}"> </td>
+					<th th:text="${cont.cliente.numero}"></th>
   					<td th:text="${cont.data}"> </td>
   					<td th:text="${cont.hora}">  </td>
 					<th th:text="${cont.servico.fkservico.descricao}"></th>
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
 					<th>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamento(codigo=${cont.id})}">Apagar</button> 
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoCliente(codigo=${cont.id})}">cancelar agendamento</button> 
 					</th>
 					
 

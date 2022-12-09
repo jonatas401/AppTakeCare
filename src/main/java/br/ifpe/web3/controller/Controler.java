@@ -17,6 +17,7 @@ import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.Servico;
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -111,8 +112,13 @@ public class Controler {
 	}
 	
 	@GetMapping("/agendamentosCliente")
-	public String agendamentos() {
-		
+	public String agendamentos(HttpSession session, Model model) {
+		UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosCliente(chave.getId());
+		for(Agendamento a : listaAgendamento) {
+			System.out.println(a.getId());
+		}
+		model.addAttribute("listaAgendamento", listaAgendamento);
 		return "cliente/agendamentosCliente";
 	}
 	
@@ -149,11 +155,16 @@ public class Controler {
 	
 	@GetMapping("/estabelecimento")
 	public String loja(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
-		
 		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
+		agendamento.setEmpresa(empresa);
+				
+		List<ServicoLoja> lista = servicoLojaDao.listaServico(empresa.getId());
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
 		
+		model.addAttribute("listaAgendamento", listaAgendamento);	
 		model.addAttribute( "loja",empresa);
 		model.addAttribute("agendamento", agendamento);
+		model.addAttribute("listaServico", lista);
 		
 		return "cliente/estabelecimento";
 	}
@@ -170,7 +181,11 @@ public class Controler {
 		clienteDao.deleteById(Id);
 		return "/";
 	}
-	
+	@GetMapping("/removerAgendamentoCliente")
+	public String removerAgendamentoCliente(Integer codigo,Model model) {
+		agendaDao.deleteById(codigo);
+		return"redirect:agendamentosCliente";
+	}
 
 	@GetMapping("/editarUsuarioCliente")
 	public String editarCliente(Integer Id, Model model) {
@@ -211,17 +226,20 @@ public class Controler {
 	}
 	
 	@GetMapping("/servicoEmpresa")
-	public String servicoEmpresa(ServicoLoja servico, Model model) throws LoginExceptions {
-		model.addAttribute("listaServicos", servicoLojaDao.findAll());
+	public String servicoEmpresa(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
+		
+		model.addAttribute("listaServicos", lista);
 		model.addAttribute("servico", servico);
-		System.out.println(servicoLojaDao.findAll());
+		
 		return "empresa/servicoEmpresa";
 	}
 	@PostMapping("/servicoEmpresa")
 	public String Salvarservico(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-		servico.setFk_estabelecimento(chaveId);
-		servico.getFk_estabelecimento().setId(chaveId.getId());
+		servico.setEmpresa(chaveId);
+		servico.getEmpresa().setId(chaveId.getId());
 		servicoLojaDao.save(servico);
 		return "redirect:servicoEmpresa";
 	}
@@ -255,62 +273,60 @@ public class Controler {
 	
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
-		UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
-		List<ServicoLoja>servico = servicoLojaDao.findAll();
-		ServicoLoja listaServico = null;
+		//UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(chaveId.getId());
+		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(chaveId.getId());
 		agendamento.setEmpresa(chaveId);
 		agendamento.getEmpresa().setId(chaveId.getId());
-		for(ServicoLoja lista: servico) {
-			if(lista.getFk_estabelecimento().getId().equals(chaveId.getId())){
-				listaServico = lista;
-			} 
-		}
 		
-		
-		//ServicoLoja serv = (ServicoLoja) servicoLojaDao.findAll();
-		
-		model.addAttribute("cliente",cliente.getNome());
-		model.addAttribute("listaAgenda", agendaDao.findAll());
 		model.addAttribute("agendamento", agendamento);
-		model.addAttribute("listaServico", servico);
+		model.addAttribute("listaServico", listaServico);
+		model.addAttribute("listaAgendamento", listaAgendamento);
 		
 		return "empresa/agendarEmpresa"; 
 	}
 	
 	@PostMapping("/fazerAgendamento")
-	public String fazerAgendamento(Agendamento agendamento, Model model, HttpSession session) {
+	public String fazerAgendamento(Agendamento agendamento, Integer id, Model model, HttpSession session) {
 		
 		if(agendamento == null) {
 			System.out.println("nulo");
 			return"redirect:agendarEmpresa";
 			
 		}
+		
+		else if(session.getAttribute("tipo").equals("Empresa")) {
+			UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+			agendamento.setEmpresa(chave);
+			agendaDao.save(agendamento);
+			
+		}
+		
+		else if(session.getAttribute("tipo").equals("Cliente")) {
+			UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
+			System.out.println(empresa.getId());
+			UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
+			System.out.println(chave.getNome());
+			agendamento.setEmpresa(empresa);
+			agendamento.getEmpresa().setId(empresa.getId());
+			agendamento.setCliente(chave);
+			agendamento.getCliente().setId(chave.getId());
+			agendaDao.save(agendamento);
+			return"redirect:agendamentosCliente";
+			
+		}
 		else if(agendamento.getCliente().getNome() == "") {
 			System.out.println("nome vazio");
 			return"redirect:agendarEmpresa";
 		}
-		else if(agendamento.getServico().getFkservico().getDescricao() == "") {
-			System.out.println("servico vazio");
-			return"redirect:agendarEmpresa";
-		}
-
-			UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-			System.out.println(chaveId);
-			agendamento.setEmpresa(chaveId);
-			agendamento.getEmpresa().setId(chaveId.getId());
-			System.out.println(agendamento.getServico().getFkservico().getDescricao());
-			//Optional<ServicoLoja> loja =servicoLojaDao.findById(agendamento.getServico().getFkservico().getId());
-			//loja.get().setFkservico(loja.get().getFkservico());
-			//System.out.println(loja.get().getId());
-			//agendamento.getServico().setId(loja.get().getId());
-			System.out.println("td certo");
-			agendaDao.save(agendamento);
 		
+			
+			System.out.println("confirmado!");				
 			return"redirect:agendarEmpresa";
 		
 	}
-	@GetMapping("/removerAgendamento")
+	@GetMapping("/removerAgendamentoEmpresa")
 	public String removerAgendamento(Integer codigo,Model model) {
 		agendaDao.deleteById(codigo);
 		return"redirect:agendarEmpresa";

@@ -21,6 +21,12 @@ a:hover {
     opacity: 0.5;
     background: black;
 }
+table th{
+	border-radius:5px;
+}
+table td{
+	border-radius:5px;
+}
 
 /** imagem das telas de login e cadastro**/
 main {

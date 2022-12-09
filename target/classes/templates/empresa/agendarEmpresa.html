@@ -44,23 +44,22 @@
    			
    			
    			<label>Cliente</label>
-   			<select th:field="*{cliente.nome}"  id="inputAgenda" required>
+   			<select th:field="*{cliente.id}"  id="inputAgenda" required>
 				<option th:value="''">selecione</option>
-				<option th:each="nomes :  ${cliente}"
-					th:text="${nomes}" th:value="${nomes}"></option>
+				<option th:each="clientes :  ${listaAgendamento}"
+					th:text="${clientes.cliente.nome}" th:value="${clientes.cliente.id}"></option>
 
 			</select>
 			
-			<!--<input id="inputAgenda" th:object="${cliente}" type="text" placeholder="Nome do cliente"   th:text="${cliente}">	-->
    			<label>Contato</label>
-   			<input id="inputAgenda"  type="text" th:field="*{cliente.numero}" placeholder="Numero">	
+   			<input id="inputAgenda"  type="text" th:field="*{cliente.numero}" placeholder="Numero" required>	
    			
 			<label>servico</label>
 			
-   			<select th:field="*{servico.fkservico.descricao}"  id="inputAgenda" required>
+   			<select th:field="*{servico.id}"  id="inputAgenda" required>
 				<option th:value="''">selecione</option>
 				<option th:each="servico :  ${listaServico}"
-					th:text="${servico.fkservico.descricao}" th:value="${servico.fkservico.descricao}"></option>
+					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>
 
 			</select>
 
@@ -74,9 +73,9 @@
    			</form>
    			
    		</div>
-   		<table id="table"  class="table table-dark table-striped-columns">
-  				<tr>
-  					<th>Cliente</th>
+   		<table  id="table"  class="table table-dark table-striped-columns">
+  				<tr >
+  					<th >Cliente</th>
 					<th>Contato</th>
   					<th> Dia </th>
   					<th> hora </th>
@@ -84,18 +83,18 @@
 					<th>Status</th>
 					<th>Acões</th>
   				</tr>
-  				<tr th:each="cont : ${listaAgenda}">
+  				<tr th:each="cont : ${listaAgendamento}">
   					<td th:text="${cont.cliente.nome}"> </td>
-					<th th:text="${cont.cliente.numero}"></th>
+					<td th:text="${cont.cliente.numero}"></td>
   					<td th:text="${cont.data}"> </td>
   					<td th:text="${cont.hora}">  </td>
-					<th th:text="${cont.servico}"></th>
+					<td th:text="${cont.servico.fkservico.descricao}"></td>
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
-					<th>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamento(codigo=${cont.id})}">Apagar</button> 
+					<td>
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}">Apagar</button> 
 					<button id="confirmar" class="btn btn-light" > <a id="acoes" th:href="@{/confirmarAgendamento(codigo=${cont.id})}">Confirmar</button>
-					</th>
+					</td>
 					
   				</tr>
 
