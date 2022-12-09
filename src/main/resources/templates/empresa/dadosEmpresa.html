@@ -24,12 +24,19 @@
 				
 		<div id="conteinerDados" class="container col-sm-12 col-md-6 col-md-offset-2" >
 			
-			<h4 id="meusDados">Meus dados:</h4>
 			
+			<div class="col">
+		     	 <img th:src="@{/img/perfil.jpeg}"  style="width: 70px; margin-top:10px;" class="p-3 border bg-light">
+		    </div>
 			
-			<div id='primeiro'>
+			<div id='primeiroDados'>
 						<div class="form-group">
 							<label for="nome">Nome</label> <input type="text"   th:value="${session.usuarioLogado.nome}"
+								class="form-control" id="nome" placeholder="Nome" disabled>
+						</div>
+						
+						<div class="form-group">
+							<label for="nome">Nome Empresa</label> <input type="text"   th:value="${session.usuarioLogado.nomeEmpresa}"
 								class="form-control" id="nome" placeholder="Nome" disabled>
 						</div>
 						
@@ -48,7 +55,7 @@
 				
 				</div>
 			
-			<div id="segundo" >
+			<div id="segundoDados" >
 			
 					<div class="form-group">
 						<label for="cep">Cep</label> <input type="text" th:value="${session.usuarioLogado.endereco.cep}"

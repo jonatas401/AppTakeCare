@@ -10,13 +10,22 @@
     padding: 5px;
 
 }
+#liLogo{
+	 padding: 0px;
+}
 .nav-link{
     padding:15px;
 }
 #navDados{
     margin-left:15px;
 }
-
+a#linkLogo:hover{
+	opacity:1;
+	background:0 ;
+}
+#imagemLogo{
+	width:150px;
+}
 a{
     color:white;
     text-decoration:none;
@@ -27,6 +36,7 @@ a:hover{
     opacity:0.5;
     background: black;
 }
+
 
 
 

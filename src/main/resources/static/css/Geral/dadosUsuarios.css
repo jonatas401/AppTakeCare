@@ -13,21 +13,22 @@
 		margin-left: 30%;
 		height: 75vh;
 		border-radius: 20px;
+		margin-top: 30px;
 
 
 	}
 
-	#primeiro {
+	#primeiroDados {
 		float: left;
 		width: 40%;
 		margin-top: 20px;
 
 	}
 
-	#segundo {
+	#segundoDados {
 		float: right;
 		width: 40%;
-		margin-top: 20px;
+		margin-top: -10%;
 
 	}
 
