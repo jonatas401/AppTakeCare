@@ -1,11 +1,12 @@
-section.homeAgenda{
-  margin-left:20%;
-}
-span.i-B20{
-  color:white;
+section.homeAgenda {
+  margin-left: 20%;
 }
 
-input#fotoPortifolio{
+span.i-B20 {
+  color: white;
+}
+
+input#fotoPortifolio {
   width: 100%;
   height: 100%;
 }
@@ -15,7 +16,7 @@ input#fotoPortifolio{
   flex-wrap: wrap;
   gap: 40px;
   text-align: center;
-  margin-left:20px;
+  margin-left: 20px;
   margin-top: 10%;
 }
 
@@ -26,7 +27,7 @@ input#fotoPortifolio{
   list-style: none;
 }
 
-.homeAgenda  div.img {
+.homeAgenda div.img {
   width: 30%;
   height: 50px;
   min-height: 20px;
@@ -38,7 +39,31 @@ input#fotoPortifolio{
   display: block;
   margin-top: 10px;
 }
-.homeAgenda#table{
-	margin-top: 30px;
+
+.homeAgenda#table {
+  margin-top: 30px;
 }
 
+
+
+
+
+
+#listaportifolio {
+
+
+  width: 50%;
+  height: 50%;
+
+  margin-left: 40%;
+
+  margin-top: 10%;
+  margin-bottom: 10%;
+
+  background-image: linear-gradient(to bottom right, #283547, black);
+
+  border-radius: 5%;
+
+
+
+}

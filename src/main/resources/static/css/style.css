@@ -12,11 +12,14 @@
 
 
 
+
 @import url('./Empresa/portifolio.css');
 @import url('./Empresa/agendamento.css');
 @import url('./Empresa/navBarEmpresa.css');
 @import url('./Empresa/agendarEmpresa.css');
 @import url('./Empresa/cadastroEmpresa.css');
+
+
 
 @import url('./Cliente/estabelecimento.css');
 @import url('./Cliente/listaEstabelecimento.css');

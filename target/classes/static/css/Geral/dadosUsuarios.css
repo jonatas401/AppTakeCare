@@ -1,37 +1,36 @@
-	
-	#meusDados{
-		margin-top:20px;
-		color:white;
-		padding:10px;
-		width:10rem;
-		background-color:black;
-		border-radius:20px;
-	}
-	
-	#conteinerDados{
-			background: #041e29;
-			width:40%;
-			margin-left:30%; 
-			height: 75vh;
-			border-radius:20px;
-		
-			
+	#meusDados {
+		margin-top: 20px;
+		color: white;
+		padding: 10px;
+		width: 10rem;
+		background-color: black;
+		border-radius: 20px;
 	}
 
-	#primeiro{
-		float:left;
-		width:40%;
-		margin-top:20px;
-		
-	}
-	
-	#segundo{
-		float:right;
-		width:40%;
-		margin-top:20px;
-		
-	}
-	#button{
-		float:rigth;
+	#conteinerDados {
+		background-image: linear-gradient(to bottom right, #283547, black);
+		width: 40%;
+		margin-left: 30%;
+		height: 75vh;
+		border-radius: 20px;
+
+
 	}
 
+	#primeiro {
+		float: left;
+		width: 40%;
+		margin-top: 20px;
+
+	}
+
+	#segundo {
+		float: right;
+		width: 40%;
+		margin-top: 20px;
+
+	}
+
+	#button {
+		float: rigth;
+	}

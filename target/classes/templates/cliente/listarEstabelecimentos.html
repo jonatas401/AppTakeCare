@@ -1,40 +1,52 @@
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Estabelecimentos</title>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	
- <link rel="stylesheet" type="text/css" media="all" 
-          href="../static/css/style.css" th:href="@{/css/style.css}" />
-	
+<head>
+	<meta charset="UTF-8">
+	<title>Estabelecimentos</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
+
 </head>
+
+
+
 <body>
-	
-		<div th:replace="cliente/navBarCliente :: #navConta"></div>
-	
-	
-		
-			<div  id="listaEstabelecimento"  >
-			
-					<h3 style="margin-left:80px; width:20%; color:white">Estabelecimentos</h3>		
-		
-				  <div id="nomesEstabelecimentos"  class="col-4">
-					  
-					  <div  th:each="cont : ${listarLojas}"   class="list-group" id="list-tab" role="tablist">
-					    	 <a  class="list-group-item"  th:href="@{/estabelecimento(id=${cont.Id})}" role="tab" th:text="${cont.nomeEmpresa}"></a>
-					   </div>
-			    
-			 	 </div>
-		
-					
-				
+
+
+	<div th:replace="cliente/navBarCliente :: #navConta"></div>
+
+
+
+	<div id="listaEstabelecimento">
+
+		<h3 id="h3ListaEstabelecimento">Estabelecimentos</h3>
+
+		<div id="nomesEstabelecimentos" class="col-4">
+
+			<div th:each="cont : ${listarLojas}" class="list-group" id="list-tab" role="tablist">
+
+
+				<a id="nomesEstabelecimento" class="list-group-item" th:href="@{/estabelecimento(id=${cont.Id})}"
+					role="tab" th:text="${cont.nomeEmpresa}"></a>
+
+
+			</div>
 
 		</div>
-		
-	
+
+
+
+
+	</div>
+
+
 </body>
+
 </html>
