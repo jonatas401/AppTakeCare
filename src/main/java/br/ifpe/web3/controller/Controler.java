@@ -1,25 +1,14 @@
 package br.ifpe.web3.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.ifpe.web3.exceptions.LoginExceptions;
-import br.ifpe.web3.model.Agendamento;
-import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
-import br.ifpe.web3.model.Servico;
-import br.ifpe.web3.model.ServicoLoja;
-import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 

@@ -22,6 +22,23 @@
       		document.getElementById("formAgenda").style.display = "none"
       		
       		}
+      	function editarAgendamento(){
+			  	document.getElementById("formAgenda").style.display = "block"
+      			let nome = document.getElementById("nome")
+      			let numero = document.getElementById("numero")
+      			let data = document.getElementById("data")
+      			let hora = document.getElementById("hora")
+      			let servico = document.getElementById("servico")
+      			console.log(data);
+				  console.log(numero);
+      			
+      			document.getElementById("setNome").innerHTML = nome.innerHTML;
+      			document.getElementById("setNumero").innerHTML = numero.innerHTML;
+      			document.getElementById("setServico").innerHTML = servico.innerHTML;
+      			document.getElementById("setData").innerHTML= data.innerHTML;
+      			document.getElementById("setHora").innerHTML = hora.innerHTML;
+      			
+      		}
       		
            
         </script>
@@ -44,20 +61,20 @@
    			
    			
    			<label>Cliente</label>
-   			<select th:field="*{cliente.id}"  id="inputAgenda" required>
-				<option th:value="''">selecione</option>
+   			<select th:field="*{cliente.id}"  class="inputAgenda" required>
+				<option id="setNome" th:value="''">selecione</option>
 				<option th:each="clientes :  ${listaAgendamento}"
 					th:text="${clientes.cliente.nome}" th:value="${clientes.cliente.id}"></option>
 
 			</select>
 			
    			<label>Contato</label>
-   			<input id="inputAgenda"  type="text" th:field="*{cliente.numero}" placeholder="Numero" required>	
+   			<input class="inputAgenda" id="setNumero"   type="text" th:field="*{cliente.numero}" placeholder="Numero" required>	
    			
 			<label>servico</label>
 			
    			<select th:field="*{servico.id}"  id="inputAgenda" required>
-				<option th:value="''">selecione</option>
+				<option id="setServico" th:value="''">selecione</option>
 				<option th:each="servico :  ${listaServico}"
 					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>
 
@@ -65,9 +82,9 @@
 
 
    			<label>Dia</label>
-   			<input id="inputAgenda"  type="date" th:field="*{data}">	
+   			<input class="inputAgenda" id="setData"  type="date" th:field="*{data}">	
    			<label>Hora</label>
-   			<input type="time" th:field="*{hora}">	
+   			<input type="time" id="setHora" th:field="*{hora}">	
    			<button type="submit" class="btn btn-light">Salvar</button>
    			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
    			</form>
@@ -84,16 +101,17 @@
 					<th>Acões</th>
   				</tr>
   				<tr th:each="cont : ${listaAgendamento}">
-  					<td th:text="${cont.cliente.nome}"> </td>
-					<td th:text="${cont.cliente.numero}"></td>
-  					<td th:text="${cont.data}"> </td>
-  					<td th:text="${cont.hora}">  </td>
-					<td th:text="${cont.servico.fkservico.descricao}"></td>
+  					<td id="nome" th:text="${cont.cliente.nome}"> </td>
+					<td id="numero" th:text="${cont.cliente.numero}"></td>
+  					<td id="data" th:text="${cont.data}"> </td>
+  					<td id="hora" th:text="${cont.hora}">  </td>
+					<td id="servico" th:text="${cont.servico.fkservico.descricao}"></td>
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
 					<td>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}">Apagar</button> 
-					<button id="confirmar" class="btn btn-light" > <a id="acoes" th:href="@{/confirmarAgendamento(codigo=${cont.id})}">Confirmar</button>
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}">Cancelar</a></button> 
+					<button id="confirmar" class="btn btn-light" > <a id="acoes" th:href="@{/confirmarAgendamento(codigo=${cont.id})}">Confirmar</a></button>
+					<button id="confirmar" class="btn btn-light" onclick="editarAgendamento()">editar</button>
 					</td>
 					
   				</tr>

@@ -15,6 +15,10 @@ import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.Profissional;
+import br.ifpe.web3.model.ProfissionalDAO;
+import br.ifpe.web3.model.ProfissionalServico;
+import br.ifpe.web3.model.ProfissionalServicoDAO;
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -31,7 +35,12 @@ public class ControllerEmpresa {
 	private AgendamentoDAO agendaDao;
 	@Autowired
 	private ServicoLojaDAO servicoLojaDao;
-
+	@Autowired
+	private ProfissionalServicoDAO profissionalServicoDao;
+	@Autowired
+	private ProfissionalDAO profissionalDao;
+	
+	
 	
 	@GetMapping("/contaUsuarioEmpresa")
 	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
@@ -71,6 +80,39 @@ public class ControllerEmpresa {
 		servicoLojaDao.save(servico);
 		return "redirect:servicoEmpresa";
 	}
+	
+	@GetMapping("/profissional")
+	public String profissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
+		List<Profissional> listaProfissional =  profissionalDao.listaProfissional(chaveId.getId());
+		
+		model.addAttribute("listaServicos", lista);
+		model.addAttribute("profissional", profissional);
+		model.addAttribute("listaProfissional",listaProfissional);
+		
+
+		return "empresa/profissional";
+	}
+	
+	@PostMapping("/profissional")
+	public String salvarProfissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+		
+		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		profissional.setEmpresa(chave);
+		profissionalDao.save(profissional);
+		
+		
+		
+		return "redirect:profissional";
+	}
+	
+	@GetMapping("/removerProfissional")
+	public String removerProfissional(Profissional profissional, Integer codigo) throws LoginExceptions {
+		profissionalDao.deleteById(codigo);		
+		return "redirect:profissional";
+	}
+	
 	@GetMapping("/removerServico")
 	public String removerServico(ServicoLoja servico, Integer codigo) throws LoginExceptions {
 		servicoLojaDao.deleteById(codigo);
@@ -101,6 +143,7 @@ public class ControllerEmpresa {
 	
 	@GetMapping("/agendarEmpresa")
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
+		
 		//UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(chaveId.getId());
@@ -154,11 +197,13 @@ public class ControllerEmpresa {
 			return"redirect:agendarEmpresa";
 		
 	}
+	
 	@GetMapping("/removerAgendamentoEmpresa")
 	public String removerAgendamento(Integer codigo,Model model) {
 		agendaDao.deleteById(codigo);
 		return"redirect:agendarEmpresa";
 	}
+	
 	@GetMapping("/confirmarAgendamento")
 	public String confirmarAgendamento(Integer codigo,Model model) {
 		System.out.println(codigo);

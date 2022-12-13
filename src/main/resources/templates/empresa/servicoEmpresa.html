@@ -42,13 +42,13 @@
    			<form action="/servicoEmpresa" th:object="${servico}" method="post">
    				
    			<label>servico</label>
-   			<input id="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico" required>	
+   			<input class="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico" required>	
    			<label>Valor</label>
-   			<input id="inputAgenda" th:field="*{valor}"  type="text" required>	
+   			<input class="inputAgenda" th:field="*{valor}"  type="text" required>	
             <label>duração</label>
-   			<input id="inputAgenda"  type="number" th:field="*{duracao}" required>
+   			<input class="inputAgenda"  type="number" th:field="*{duracao}" required>
             <label>Imagem ilustrativa</label>
-   			<input id="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
+   			<input class="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
    	
    				
    			<button type="submit" class="btn btn-light">Salvar</button>
@@ -69,7 +69,7 @@
   					<td th:text="${cont.fkservico.descricao}"> </td>
 					<td th:text="${cont.valor}"></td>
   					<td th:text="${cont.duracao} + ' min'"></td>
-  					<td th:text="${cont.foto}"> </td> 
+  					<td ><img th:src="${cont.foto}"> </td> 
 					<td>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServico(codigo=${cont.id})}">Apagar</button> 
 					</td>
