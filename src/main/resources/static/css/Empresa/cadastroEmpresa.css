@@ -54,3 +54,11 @@ main {
 
 
 }
+
+.col img {
+
+    width: 70px;
+    margin-top: 10px;
+    border-radius: 50%;
+
+}
