@@ -28,20 +28,27 @@
       		
       		}
       		function portifolio(){
-      		document.getElementById("carouselExampleIndicators").style.display = "none"
-      		document.getElementById("tabelaAgenda").style.display = "none"
-      		document.getElementById("informacoes").style.display = "none"
-      		document.getElementById("imagens").style.display = "block"
+		      		document.getElementById("carouselExampleIndicators").style.display = "none"
+		      		document.getElementById("tabelaAgenda").style.display = "none"
+		      		document.getElementById("informacoes").style.display = "none"
+		      		document.getElementById("imagens").style.display = "block"
       	
       		}	
-      		 function agendar(){
-      		document.getElementById("formAgenda").style.display = "block"
+      		function agendar(){
+      				document.getElementById("formAgenda").style.display = "block"
       		
       		}
-      			function agendarCancela(){
-      		document.getElementById("formAgenda").style.display = "none"
+      		function agendarCancela(){
+      				document.getElementById("formAgenda").style.display = "none"
       		
-      		}	
+      		}
+      		function trazerServicos(src){
+				//alert("ok")
+				// window.location.href = 'estabelecimento('+1+')';
+				       
+			}	
+			
+
            
         </script>
 
@@ -49,6 +56,7 @@
 			<div th:replace="cliente/navBarCliente :: #navConta"></div>
 		
 	<section id="paginaLoja">
+	
 			
 			<div   th:each="cont : ${loja}"  >
 			
@@ -72,13 +80,32 @@
    			
    			<input name="id" th:value="${cont.id}" type="hidden">
    			<input th:field="*{cliente.nome}" type="hidden">
-   			<label>servico</label>
+   			
+  
+   			<select th:field="*{profissional}"  id="inputAgenda" required>
+				<option th:value="''">selecione</option>
+				<option id="prof" th:each="profissional :  ${profissionalServico}" 
+					
+					th:text="${profissional.profissional.nome}" 
+					th:value="${profissional.profissional.nome}">
+					
+				</option>
+				
+			</select>
+   		
+			<label>profissional</label>
+   			
+   			
    			<select th:field="*{servico.id}"  id="inputAgenda" required>
 				<option th:value="''">selecione</option>
-				<option th:each="servico :  ${listaServico}"
-					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>
+				<option th:each="servico :  ${profissionalServico}"
+					th:text="${servico.servico.fkservico.descricao}"
+					 th:value="${servico.servico.id}">
+					</option>
 
 			</select>
+			<label>servico</label><br>
+			
    			<label>Dia</label>
    			<input id="inputAgenda"  type="date" th:field="*{data}">	
    			<label>Hora</label>

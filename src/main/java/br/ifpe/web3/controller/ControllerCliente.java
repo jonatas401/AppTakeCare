@@ -15,6 +15,8 @@ import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.ProfissionalServico;
+import br.ifpe.web3.model.ProfissionalServicoDAO;
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -31,6 +33,8 @@ public class ControllerCliente {
 	private AgendamentoDAO agendaDao;
 	@Autowired
 	private ServicoLojaDAO servicoLojaDao;
+	@Autowired
+	private ProfissionalServicoDAO profissionalServicoDao;
 	
 	
 	@GetMapping("/contaUsuarioCliente")
@@ -68,14 +72,22 @@ public class ControllerCliente {
 		
 		return "cliente/configuracaoCliente";
 	}
-	
+	@PostMapping("pesquisaEstabelecimento")
+	public String pesquisaEstabelecimento(String pesquisa, Model model) {
+		
+		model.addAttribute("listarLojas", new UsuarioEmpresa());
+		List<UsuarioEmpresa >nomeEmpresas = empresaDao.findByNomeEmpresaContaining(pesquisa);
+		model.addAttribute("listarLojas", nomeEmpresas);
+		
+		return "cliente/listarEstabelecimentos";
+	}
 
 	@GetMapping("/listEstabelecimentos")
-	public String listLojas(UsuarioEmpresa empresa, Model model, HttpSession session)  {
+	public String listEstabelecimentos(UsuarioEmpresa empresa, Model model, HttpSession session, Integer id)  {
 		/* validar sessao*/
 		
 		if(session.getAttribute("tipo").equals("Empresa")) {
-			return "redirect:/empresa/contaUsuarioEmpresa";
+			return "redirect:contaUsuarioEmpresa";
 		}
 		
 		/* listar estabelecimentos*/
@@ -88,17 +100,22 @@ public class ControllerCliente {
 	
 	
 	@GetMapping("/estabelecimento")
-	public String loja(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
+	public String estabelecimento(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
 		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 		agendamento.setEmpresa(empresa);
 				
-		List<ServicoLoja> lista = servicoLojaDao.listaServico(empresa.getId());
+		//List<ServicoLoja> lista = servicoLojaDao.listaServico(empresa.getId());
 		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
+		List<ProfissionalServico> profissional = profissionalServicoDao.listaProfissional(empresa.getId());
+		for(ProfissionalServico prof : profissional) {
+			System.out.println(prof.getProfissional().getNome());
+		}
 		
 		model.addAttribute("listaAgendamento", listaAgendamento);	
 		model.addAttribute( "loja",empresa);
 		model.addAttribute("agendamento", agendamento);
-		model.addAttribute("listaServico", lista);
+		model.addAttribute("profissionalServico", profissional);
+		
 		
 		return "cliente/estabelecimento";
 	}

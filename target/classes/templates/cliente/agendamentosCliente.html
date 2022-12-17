@@ -23,6 +23,7 @@
 		<table id="tableList"  class="table table-dark table-striped-columns">
   				<tr>
   					<th>Estabelecimento</th>
+  					<th>profissional</th>
 					<th>Contato</th>
   					<th> Dia </th>
   					<th> hora </th>
@@ -32,6 +33,7 @@
   				</tr>
   				<tr th:each="cont : ${listaAgendamento}">
   					<td th:text="${cont.empresa.nomeEmpresa}"> </td>
+  					<th th:text="${cont.profissional}"></th>
 					<th th:text="${cont.empresa.numero}"></th>
   					<td th:text="${cont.data}"> </td>
   					<td th:text="${cont.hora}">  </td>

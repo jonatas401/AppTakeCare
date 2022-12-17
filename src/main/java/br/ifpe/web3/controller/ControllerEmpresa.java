@@ -15,7 +15,6 @@ import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
-import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ProfissionalServico;
 import br.ifpe.web3.model.ProfissionalServicoDAO;
@@ -82,13 +81,13 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/profissional")
-	public String profissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+	public String profissional(ProfissionalServico profissionalServico, Model model, HttpSession session) throws LoginExceptions {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
-		List<Profissional> listaProfissional =  profissionalDao.listaProfissional(chaveId.getId());
+		List<ProfissionalServico> listaProfissional =  profissionalServicoDao.listaProfissional(chaveId.getId());
 		
 		model.addAttribute("listaServicos", lista);
-		model.addAttribute("profissional", profissional);
+		model.addAttribute("profissionalServico", profissionalServico);
 		model.addAttribute("listaProfissional",listaProfissional);
 		
 
@@ -96,11 +95,12 @@ public class ControllerEmpresa {
 	}
 	
 	@PostMapping("/profissional")
-	public String salvarProfissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+	public String salvarProfissional(ProfissionalServico profissionalServico, Model model, HttpSession session) throws LoginExceptions {
+		System.out.println(profissionalServico.getServico().getId());
 		
 		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-		profissional.setEmpresa(chave);
-		profissionalDao.save(profissional);
+		profissionalServico.getProfissional().setEmpresa(chave);
+		profissionalServicoDao.save(profissionalServico);
 		
 		
 		
@@ -108,8 +108,8 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/removerProfissional")
-	public String removerProfissional(Profissional profissional, Integer codigo) throws LoginExceptions {
-		profissionalDao.deleteById(codigo);		
+	public String removerProfissional(ProfissionalServico profissionalServico, Integer codigo) throws LoginExceptions {
+		profissionalServicoDao.deleteById(codigo);		
 		return "redirect:profissional";
 	}
 	

@@ -24,6 +24,7 @@
       		
       		}
       		
+
            
         </script>
 	
@@ -40,25 +41,21 @@
 	   		
 	   	</div>
    		<div id="formAgenda">
-   			<form action="/profissional" th:object="${profissional}" method="post">
+   			<form action="/profissional" th:object="${profissionalServico}" method="post">
    			
    			<label>Nome</label>
-   			<input class="inputAgenda" th:field="*{nome}"  type="text" required>	
+   			<input class="inputAgenda" th:field="*{profissional.nome}"  type="text" required>	
    			
    			<label>contato</label>
-   			<input class="inputAgenda"  type="text" th:field="*{numero}" required>
+   			<input class="inputAgenda"  type="text" th:field="*{profissional.numero}" required>
    				
    			<label>servico</label>
-   			<select th:field="*{profissionalServico.servico}"  id="inputAgenda" required multiple>
+   			<select th:field="*{servico.id}"  id="inputAgenda" required >
 				<option id="setServico" th:value="''">selecione</option>
-				<option  th:each="servico :  ${listaServicos}"
+				<option th:each="servico :  ${listaServicos}"
 					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>	
-					
-					
-
 			</select>
 
-			
 			
 			   				
    			<button type="submit" class="btn btn-light">Salvar</button>
@@ -77,10 +74,11 @@
 
   				</tr>
   				<tr th:each="cont : ${listaProfissional}">
-  					<td th:text="${cont.nome}"> </td>
-					<td th:text="${cont.numero}"></td>
-  					<td th:text="${cont.profissionalServico.servico.fkservico.descricao}"> </td>
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td> 
+  					<td th:text="${cont.profissional.nome}"> </td>
+					<td th:text="${cont.profissional.numero}"></td>
+  					<td th:text="${cont.servico.fkservico.descricao}" > </td>
+  					
+  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
 					<td>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerProfissional(codigo=${cont.id})}">Apagar</button> 
 					</td>

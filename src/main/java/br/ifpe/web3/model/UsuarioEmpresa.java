@@ -1,5 +1,12 @@
 package br.ifpe.web3.model;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Blob;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +30,8 @@ public class UsuarioEmpresa {
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
 	@Lob
-	private byte[] fotoPerfil;
+	@Column(columnDefinition="mediumblob")
+	private Blob fotoPerfil;
 	//private UsuarioCliente[] fk_cliente;
 	
 	
@@ -81,10 +89,12 @@ public class UsuarioEmpresa {
 		this.tipoEmpresa = tipoEmpresa;
 	}
 	
-	public byte[] getFotoPortifolio() {
+	public Blob getFotoPortifolio() {
 		return fotoPerfil;
 	}
-	public void setFotoPortifolio(byte[] fotoPerfil) {
+	public void setFotoPortifolio(Blob fotoPerfil) {
+		
+		
 		this.fotoPerfil = fotoPerfil;
 	}
 	
