@@ -50,15 +50,18 @@ input#fotoPortifolio {
 
 
 #listaportifolio {
-
+  /*
 
   width: 50%;
   height: 50%;
+*/
 
-  margin-left: 40%;
+  margin-left: 25%;
+  margin-right: 10%;
 
   margin-top: 10%;
   margin-bottom: 10%;
+
 
   background-image: linear-gradient(to bottom right, #283547, black);
 
@@ -66,4 +69,30 @@ input#fotoPortifolio {
 
 
 
+}
+
+.row .card {
+
+
+
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  border-radius: 10%;
+  box-shadow: 5px 5px 20px rgb(190, 189, 189);
+}
+
+.row img {
+
+  border-radius: 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  box-shadow: 6px 5px 15px black;
+}
+
+.row p {
+
+  text-align: center;
 }
