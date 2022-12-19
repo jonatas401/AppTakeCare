@@ -219,7 +219,10 @@ public class ControllerEmpresa {
 		return "/login";
 	}
 
-	
+	@GetMapping("/planos")
+	public String contaUsuario() {	
+		return "empresa/planos";
+	}
 	
 
 
