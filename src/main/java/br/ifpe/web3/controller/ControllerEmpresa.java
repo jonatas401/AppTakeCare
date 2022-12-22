@@ -19,6 +19,7 @@ import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ProfissionalServico;
 import br.ifpe.web3.model.ProfissionalServicoDAO;
+
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -42,10 +43,6 @@ public class ControllerEmpresa {
 	
 	
 	
-	@GetMapping("/contaUsuarioEmpresa")
-	public String contaUsuario(UsuarioEmpresa empresa, Model model) {	
-		return "empresa/contaUsuarioEmpresa";
-	}
 	
 	@GetMapping("/dadosEmpresa")
 	public String dadosEmpresa() throws LoginExceptions {
@@ -55,7 +52,7 @@ public class ControllerEmpresa {
 	}
 	
 	
-	@GetMapping("/portifolio")
+	@GetMapping("/portifolioEmpresa")
 	public String portifolio() throws LoginExceptions {
 	
 		System.out.println();
@@ -81,12 +78,14 @@ public class ControllerEmpresa {
 		return "redirect:servicoEmpresa";
 	}
 	
-	@GetMapping("/profissional")
+	@GetMapping("/profissionalEmpresa")
 	public String profissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
 		List<Profissional> listaProfissional =  profissionalDao.listaProfissional(chaveId.getId());
 		
+		
+		//model.addAttribute("servico", servico);
 		model.addAttribute("listaServicos", lista);
 		model.addAttribute("profissional", profissional);
 		model.addAttribute("listaProfissional",listaProfissional);
@@ -95,25 +94,35 @@ public class ControllerEmpresa {
 		return "empresa/profissional";
 	}
 	
-	@PostMapping("/profissional")
-	public String salvarProfissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+	@PostMapping("/profissionalEmpresa")
+	public String salvarProfissional(Profissional profissional,List<ServicoLoja> servicoLoja, Model model, HttpSession session) throws LoginExceptions {
 		
-		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		System.out.println(profissional.getId());	
+		
+		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");	
 		profissional.setEmpresa(chave);
 		profissionalDao.save(profissional);
 		
+		for(ServicoLoja servico : servicoLoja) {
+		System.out.println(servico.getId());
+		ProfissionalServico profissionalServico = new ProfissionalServico();
+		profissionalServico.setProfissional(profissional);
+		
+		profissionalServico.setServico(servico);
+		profissionalServicoDao.save(profissionalServico);
+		}
 		
 		
 		return "redirect:profissional";
 	}
 	
-	@GetMapping("/removerProfissional")
-	public String removerProfissional(Profissional profissional, Integer codigo) throws LoginExceptions {
+	@GetMapping("/removerProfissionalEmpresa")
+	public String removerProfissional(ProfissionalServico profissionalServico, Integer codigo) throws LoginExceptions {
 		profissionalDao.deleteById(codigo);		
 		return "redirect:profissional";
 	}
 	
-	@GetMapping("/removerServico")
+	@GetMapping("/removerServicoEmpresa")
 	public String removerServico(ServicoLoja servico, Integer codigo) throws LoginExceptions {
 		servicoLojaDao.deleteById(codigo);
 		return "redirect:servicoEmpresa";
@@ -180,9 +189,7 @@ public class ControllerEmpresa {
 			UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
 			System.out.println(chave.getNome());
 			agendamento.setEmpresa(empresa);
-			agendamento.getEmpresa().setId(empresa.getId());
 			agendamento.setCliente(chave);
-			agendamento.getCliente().setId(chave.getId());
 			agendaDao.save(agendamento);
 			return"redirect:agendamentosCliente";
 			
@@ -204,7 +211,7 @@ public class ControllerEmpresa {
 		return"redirect:agendarEmpresa";
 	}
 	
-	@GetMapping("/confirmarAgendamento")
+	@GetMapping("/confirmarAgendamentoEmpresa")
 	public String confirmarAgendamento(Integer codigo,Model model) {
 		System.out.println(codigo);
 		Agendamento agenda = agendaDao.findById(codigo).orElse(null);

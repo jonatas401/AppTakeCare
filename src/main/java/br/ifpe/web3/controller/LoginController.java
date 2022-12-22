@@ -5,14 +5,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
-import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
+import br.ifpe.web3.model.UsuarioEmpresa;
 
 @Controller
 public class LoginController {
@@ -27,7 +28,7 @@ public class LoginController {
 	
 	
 	@RequestMapping("/efetuarLogin")
-	public String EfetuarLogin( String email, String senha, HttpSession session) throws LoginExceptions {	
+	public String EfetuarLogin( String email, String senha, HttpSession session, Model model) throws LoginExceptions {	
 		
 	try {
 		 UsuarioCliente  usuarioCliente = clienteDao.findByEmailAndSenha(email, senha);
@@ -46,13 +47,14 @@ public class LoginController {
 		
 		          session.setAttribute("usuarioLogado", usuarioEmpresa);
 		          session.setAttribute("tipo", "Empresa");
-		          return "redirect:agendarEmpresa";
+		        
+		          return "redirect:/agendarEmpresa";
 		      } 
 		 else if(usuarioCliente != null) {
 				
 				 session.setAttribute("usuarioLogado", usuarioCliente);
 				 session.setAttribute("tipo", "Cliente");
-				 return "redirect:listEstabelecimentos";
+				 return "redirect:/listarEstabelecimentosCliente";
 		      }
 		 
 		 
@@ -60,14 +62,15 @@ public class LoginController {
 			 
 		 }catch( LoginExceptions e ) {
 			System.out.println(e);
-			return "redirect:/login";
+		
+			return "login";
 			
 			
 			
 		 }
 	 
-	
-		return "redirect:/login";
+		model.addAttribute("msg", "acesso negado");
+		return "login";
 	}
 	
 

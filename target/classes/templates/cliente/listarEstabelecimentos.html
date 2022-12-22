@@ -25,7 +25,13 @@
 
 
 	<div id="listaEstabelecimento">
-
+	
+		<div id="busca">
+			<form action="/pesquisaEstabelecimentoCliente" method="post">
+			<label>Nome:</label> <input  class="form-control" name="pesquisa" id="pesquisa"/>
+			 <button class="btn btn-light"> pesquisar</button>
+			</form>
+		</div>
 		<h3 id="h3ListaEstabelecimento">Estabelecimentos</h3>
 
 		<div id="nomesEstabelecimentos" class="col-4">
@@ -33,7 +39,7 @@
 			<div th:each="cont : ${listarLojas}" class="list-group" id="list-tab" role="tablist">
 
 
-				<a id="nomesEstabelecimento" class="list-group-item" th:href="@{/estabelecimento(id=${cont.Id})}"
+				<a id="nomesEstabelecimento" class="list-group-item" th:href="@{/estabelecimentoCliente(id=${cont.Id})}"
 					role="tab" th:text="${cont.nomeEmpresa}"></a>
 
 

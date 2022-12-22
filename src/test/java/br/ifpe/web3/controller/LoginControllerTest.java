@@ -16,7 +16,7 @@ public class LoginControllerTest {
 			LoginController login = new LoginController();
 			
 			try {
-				login.EfetuarLogin(email, senha, null);
+				login.EfetuarLogin(email, senha, null,null);
 				Assertions.fail("deveria acontecer uma exceção");
 				
 			}catch(LoginExceptions e) {

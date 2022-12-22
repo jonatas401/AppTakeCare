@@ -1,10 +1,15 @@
 package br.ifpe.web3.model;
 
+import java.sql.Blob;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -17,13 +22,14 @@ public class UsuarioEmpresa {
 	private String numero;
 	private String email;
 	private String senha;
-	//@NotBlank(mensagem ="deve ser preenchido")
+	@NotBlank(message ="deve ser preenchido")
 	private String nomeEmpresa;
-	//@NotNull(mensagem = "tipo deve ser selecionado")
+	@NotNull(message = "tipo deve ser selecionado")
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
 	@Lob
-	private byte[] fotoPerfil;
+	@Column(columnDefinition="mediumblob")
+	private Blob fotoPerfil;
 	//private UsuarioCliente[] fk_cliente;
 	
 	
@@ -81,10 +87,12 @@ public class UsuarioEmpresa {
 		this.tipoEmpresa = tipoEmpresa;
 	}
 	
-	public byte[] getFotoPortifolio() {
+	public Blob getFotoPortifolio() {
 		return fotoPerfil;
 	}
-	public void setFotoPortifolio(byte[] fotoPerfil) {
+	public void setFotoPortifolio(Blob fotoPerfil) {
+		
+		
 		this.fotoPerfil = fotoPerfil;
 	}
 	

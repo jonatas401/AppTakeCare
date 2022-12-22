@@ -36,14 +36,17 @@
 }
 
 /******* agendamento********/
+#table .acoes{
+	background:red;
+}
 #tabelaAgenda{
-	width:115vh;
+	width:120vh;
 	min-height: 30vh;
 	background-color:rgb(25, 23, 23);
 	border-radius:20px;
 	margin-top:2%;
 	border:solid;
-	margin-left:-5%;
+	margin-left:-8%;
 	display:none;
 }
 

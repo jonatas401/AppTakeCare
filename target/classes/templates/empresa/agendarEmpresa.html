@@ -56,7 +56,7 @@
 	   		
 	   	</div>
    		<div id="formAgenda">
-   			<form action="/fazerAgendamento" th:object="${agendamento}" method="post">
+   			<form action="/fazerAgendamentoEmpresa" th:object="${agendamento}" method="post">
    			<!-- id da empresa-->
    			
    			
@@ -109,9 +109,9 @@
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
 					<td>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}">Cancelar</a></button> 
-					<button id="confirmar" class="btn btn-light" > <a id="acoes" th:href="@{/confirmarAgendamento(codigo=${cont.id})}">Confirmar</a></button>
-					<button id="confirmar" class="btn btn-light" onclick="editarAgendamento()">editar</button>
+					<button class="btn acoes btn-light" ><a  th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}">Cancelar</a></button> 
+					<button id="confirmar" class="btn  btn-light" > <a id="acoes"  th:href="@{/confirmarAgendamentoEmpresa(codigo=${cont.id})}">Confirmar</a></button>
+					<button id="confirmar" class="btn  btn-light" onclick="editarAgendamento()">editar</button>
 					</td>
 					
   				</tr>

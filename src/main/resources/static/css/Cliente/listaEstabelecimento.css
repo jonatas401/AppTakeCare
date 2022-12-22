@@ -1,5 +1,5 @@
 #listaEstabelecimento {
-	width: 30%;
+	width: 50%;
 	margin-left: 30%;
 	margin-top: 5%;
 	margin-bottom:5px;
@@ -36,3 +36,27 @@
 	margin-top: 20px;
 
 }
+
+#busca{
+	width:200px;
+	margin-left: 5%;
+
+}
+
+#busca button{
+	margin-top:-70px;
+	margin-left: 220px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

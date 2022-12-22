@@ -34,6 +34,7 @@ public class Agendamento {
 	@JoinColumn
 	@OneToOne
 	private UsuarioEmpresa empresa;
+	private String profissional;
 	
 	public Integer getId() {
 		return id;
@@ -77,4 +78,11 @@ public class Agendamento {
 	public void setEmpresa(UsuarioEmpresa empresa) {
 		this.empresa = empresa;
 	}
+	public String getProfissional() {
+		return profissional;
+	}
+	public void setProfissional(String profissional) {
+		this.profissional = profissional;
+	}
+	
 }

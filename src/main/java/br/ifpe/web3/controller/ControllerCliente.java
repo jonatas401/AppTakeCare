@@ -15,6 +15,8 @@ import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.Profissional;
+import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -31,12 +33,9 @@ public class ControllerCliente {
 	private AgendamentoDAO agendaDao;
 	@Autowired
 	private ServicoLojaDAO servicoLojaDao;
+	@Autowired
+	private ProfissionalDAO profissionalDao;
 	
-	
-	@GetMapping("/contaUsuarioCliente")
-	public String contaUsuario(UsuarioCliente cliente, Model model) {	
-		return "cliente/contaUsuarioCliente";
-	}
 	
 	@GetMapping("/dadosCliente")
 	public String meusDados() throws LoginExceptions {
@@ -63,20 +62,24 @@ public class ControllerCliente {
 		return "cliente/agendarCliente";
 	}
 	
+	
 	@GetMapping("/configuracaoCliente")
 	public String configuracao() {
 		
 		return "cliente/configuracaoCliente";
 	}
-	
-
-	@GetMapping("/listEstabelecimentos")
-	public String listLojas(UsuarioEmpresa empresa, Model model, HttpSession session)  {
-		/* validar sessao*/
+	@PostMapping("pesquisaEstabelecimentoCliente")
+	public String pesquisaEstabelecimento(String pesquisa, Model model) {
 		
-		if(session.getAttribute("tipo").equals("Empresa")) {
-			return "redirect:/empresa/contaUsuarioEmpresa";
-		}
+		model.addAttribute("listarLojas", new UsuarioEmpresa());
+		List<UsuarioEmpresa >nomeEmpresas = empresaDao.findByNomeEmpresaContaining(pesquisa);
+		model.addAttribute("listarLojas", nomeEmpresas);
+		
+		return "cliente/listarEstabelecimentos";
+	}
+
+	@GetMapping("/listarEstabelecimentosCliente")
+	public String listEstabelecimentos(UsuarioEmpresa empresa, Model model, HttpSession session, Integer id)  {
 		
 		/* listar estabelecimentos*/
 	List <UsuarioEmpresa> nomeEmpresa = empresaDao.findAll();
@@ -87,18 +90,21 @@ public class ControllerCliente {
 	}
 	
 	
-	@GetMapping("/estabelecimento")
-	public String loja(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
+	@GetMapping("/estabelecimentoCliente")
+	public String estabelecimento(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
 		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 		agendamento.setEmpresa(empresa);
 				
-		List<ServicoLoja> lista = servicoLojaDao.listaServico(empresa.getId());
+		List<ServicoLoja> servico = servicoLojaDao.listaServico(empresa.getId());
 		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
+		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
+	
 		
 		model.addAttribute("listaAgendamento", listaAgendamento);	
 		model.addAttribute( "loja",empresa);
 		model.addAttribute("agendamento", agendamento);
-		model.addAttribute("listaServico", lista);
+		model.addAttribute("profissionalServico", profissional);
+		model.addAttribute("Servico", servico);
 		
 		return "cliente/estabelecimento";
 	}
@@ -118,6 +124,7 @@ public class ControllerCliente {
 	@GetMapping("/removerAgendamentoCliente")
 	public String removerAgendamentoCliente(Integer codigo,Model model) {
 		agendaDao.deleteById(codigo);
+		System.out.println("removido!");
 		return"redirect:agendamentosCliente";
 	}
 

@@ -1,6 +1,5 @@
 package br.ifpe.web3.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +16,7 @@ public class Profissional {
 	private Integer id;
 	private String nome;
 	private String numero;
-	private String cpf;
-	@JoinColumn
-	@ManyToOne (cascade = CascadeType.ALL)
-	private ProfissionalServico profissionalServico;
+	private String cpf;	
 	@JoinColumn
 	@ManyToOne
 	private UsuarioEmpresa empresa;
@@ -59,12 +55,7 @@ public class Profissional {
 	public void setEmpresa(UsuarioEmpresa empresa) {
 		this.empresa = empresa;
 	}
-	public ProfissionalServico getProfissionalServico() {
-		return profissionalServico;
-	}
-	public void setProfissionalServico(ProfissionalServico profissionalServico) {
-		this.profissionalServico = profissionalServico;
-	}
+	
 
 	
 }
