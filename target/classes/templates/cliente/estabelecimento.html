@@ -84,9 +84,15 @@
    			<select th:field="*{profissional}"  id="inputAgenda" required>
 				<option th:value="''">selecione</option>
 				<option id="prof" th:each="profissional :  ${profissionalServico}" 
+<<<<<<< HEAD
 					onclick="trazerServicos('${profissional.id}')"
 					th:text="${profissional.nome}" 
 					th:value="${profissional.nome}">
+=======
+					
+					th:text="${profissional.profissional.nome}" 
+					th:value="${profissional.profissional.nome}">
+>>>>>>> branch 'second' of git@github.com:jonatas401/AppTakeCare.git
 					
 				</option>
 				
@@ -97,9 +103,15 @@
    			
    			<select th:field="*{servico.id}"  id="inputAgenda" required>
 				<option th:value="''">selecione</option>
+<<<<<<< HEAD
 				<option th:each="servico :  ${Servico}"
 					th:text="${servico.fkservico.descricao}"
 					 th:value="${servico.id}">
+=======
+				<option th:each="servico :  ${profissionalServico}"
+					th:text="${servico.servico.fkservico.descricao}"
+					 th:value="${servico.servico.id}">
+>>>>>>> branch 'second' of git@github.com:jonatas401/AppTakeCare.git
 					</option>
 
 			</select>

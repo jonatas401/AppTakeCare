@@ -1,3 +1,0 @@
-2022-12-15 03:55:57 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]PLANOS_MENSAIS"; expected "PREPARE"; SQL statement:
-PLANOS_MENSAIS [42001-214]

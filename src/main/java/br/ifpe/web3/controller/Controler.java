@@ -59,12 +59,14 @@ public class Controler {
 	
 	@PostMapping("/salvarUsuarioCliente")
 	public String salvarUsuarioCliente(UsuarioCliente cliente, Endereco endereco) {
+		System.out.println("cliente salvo!");
 		clienteDao.save(cliente);	
 		return "redirect:/login";
 	}
 	
 	@PostMapping("/salvarUsuarioEmpresa")
 	public String salvarCadastroEmpresa(UsuarioEmpresa empresa) {
+		System.out.println("empresa salvo!");
 			empresaDao.save(empresa);	
 		return "redirect:/login";
 	}

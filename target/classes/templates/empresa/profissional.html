@@ -24,6 +24,7 @@
       		
       		}
       		
+
            
         </script>
 	
@@ -40,7 +41,8 @@
 	   		
 	   	</div>
    		<div id="formAgenda">
-   			<form action="/profissionalEmpresa" th:object="${profissional}" method="post">
+
+   			<form action="/salvarProfissionalEmpresa" th:object="${profissional}" method="post">
    			
    			<label>Nome</label>
    			<input class="inputAgenda" th:field="*{nome}"  type="text" required>	
@@ -49,6 +51,7 @@
    			<input class="inputAgenda"  type="text" th:field="*{numero}" required>
    				
    			<label>servico</label>
+
    			<select name="servicoLoja"  id="inputAgenda" required >
 				<option id="setServico" th:value="''">selecione</option>
 				<option th:each="servico :  ${listaServicos}"
@@ -73,11 +76,11 @@
 
   				</tr>
   				<tr th:each="cont : ${listaProfissional}">
+
   					<td th:text="${cont.nome}"> </td>
 					<td th:text="${cont.numero}"></td>
-  					
-  					
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td> 
+  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
+
 					<td>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}">Apagar</button> 
 					</td>

@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ProfissionalServicoDAO extends JpaRepository<ProfissionalServico, Integer> {
 	
-	
+	@Query("SELECT p from ProfissionalServico p where p.profissional.empresa.id like :id ")
+	public List<ProfissionalServico> listaProfissional(Integer id);
 }

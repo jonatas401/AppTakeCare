@@ -19,7 +19,6 @@ import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ProfissionalServico;
 import br.ifpe.web3.model.ProfissionalServicoDAO;
-
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -80,42 +79,45 @@ public class ControllerEmpresa {
 	
 	@GetMapping("/profissionalEmpresa")
 	public String profissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
+
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
-		List<Profissional> listaProfissional =  profissionalDao.listaProfissional(chaveId.getId());
+		List<ProfissionalServico> listaProfissional =  profissionalServicoDao.listaProfissional(chaveId.getId());
 		
 		
 		//model.addAttribute("servico", servico);
 		model.addAttribute("listaServicos", lista);
-		model.addAttribute("profissional", profissional);
+		model.addAttribute("profissionalServico", lista);
 		model.addAttribute("listaProfissional",listaProfissional);
 		
 
 		return "empresa/profissional";
 	}
 	
-	@PostMapping("/profissionalEmpresa")
-	public String salvarProfissional(Profissional profissional,List<ServicoLoja> servicoLoja, Model model, HttpSession session) throws LoginExceptions {
-		
+	@PostMapping("/salvarProfissionalEmpresa")
+	public String salvarProfissional(Profissional profissional,ServicoLoja servicoLoja, Model model, HttpSession session) throws LoginExceptions {	
+
 		System.out.println(profissional.getId());	
 		
 		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");	
 		profissional.setEmpresa(chave);
 		profissionalDao.save(profissional);
+
 		
-		for(ServicoLoja servico : servicoLoja) {
-		System.out.println(servico.getId());
-		ProfissionalServico profissionalServico = new ProfissionalServico();
-		profissionalServico.setProfissional(profissional);
+//		for(ServicoLoja servico : servicoLoja) {
+//		System.out.println(servico.getId());
+//		ProfissionalServico profissionalServico = new ProfissionalServico();
+//		profissionalServico.setProfissional(profissional);
+//		
+//		profissionalServico.setServico(servico);
+//		profissionalServicoDao.save(profissionalServico);
+//		}
 		
-		profissionalServico.setServico(servico);
-		profissionalServicoDao.save(profissionalServico);
-		}
 		
-		
-		return "redirect:profissional";
+		return "redirect:/profissionalEmpresa";
 	}
 	
+
 	@GetMapping("/removerProfissionalEmpresa")
 	public String removerProfissional(ProfissionalServico profissionalServico, Integer codigo) throws LoginExceptions {
 		profissionalDao.deleteById(codigo);		
@@ -226,7 +228,10 @@ public class ControllerEmpresa {
 		return "/login";
 	}
 
-	
+	@GetMapping("/planosEmpresa")
+	public String contaUsuario() {	
+		return "empresa/planos";
+	}
 	
 
 
