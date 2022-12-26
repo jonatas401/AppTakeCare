@@ -48,7 +48,7 @@
 				
 					
 					<div class="form-group">
-						<label for="fotoPortifolio">foto</label> <input type="file" th:field="*{fotoPortifolio}"
+						<label for="fotoPerfil">foto</label> <input type="file" th:field="*{fotoPortifolio}"
 							class="form-control">
 					</div>
 					
@@ -104,10 +104,10 @@
 					
 					
 					<div id="button">
-						<button style="margin-top: 15px;" type="submit" class="btn btn-light">Salvar</button>
+						<button style="margin-top: 15px;" type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="30px"></button>
 						
 						
-							<a   class="btn btn-light" style=" margin-left:20px; margin-top:17px;"  th:href="@{/dadosEmpresa}">Voltar</a>
+							<a   class="btn btn-light" style=" margin-left:20px; margin-top:17px;"  th:href="@{/dadosEmpresa}"><img th:src="@{/img/logout.svg}" width="30px"></a>
 					</div>
 				
 			</div>

@@ -12,14 +12,16 @@
 	height:10vh;
 	background-color: #041e29;
 	border-radius:10px;
+	
+	
 }
 .inputAgenda{
-	width:120px;
+	width:115px;
 }
 table#table{
     width:100%;
   	margin-left: 0px;
-  	margin-top:2px;
+  	margin-top:10px;
   	
 }
 table tr{
@@ -32,9 +34,13 @@ button#confimar{
 	display:none;
 	background-color: rgb(46, 52, 54);
 }
+#agendarCliente{
+	display:none;
+	background-color: rgb(46, 52, 54);
+}
 #cancela{
-	width:50px;
-	align-items:center;
+	width:40px;
+	
 }
 a#acoes{
 	color:black;

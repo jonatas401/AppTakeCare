@@ -42,7 +42,7 @@ public class FiltroUsuario implements Filter {
 		
 		if(session != null && session.getAttribute("usuarioLogado") != null ) {
 			System.out.println("URL " + path);
-	
+			System.out.println("fora");
 			
 			if(path.contains("Cliente")  && session.getAttribute("tipo").equals("Cliente")) {
 				chain.doFilter(request, response);
@@ -50,7 +50,8 @@ public class FiltroUsuario implements Filter {
 				return;
 			}
 			if(path.contains("Empresa") && session.getAttribute("tipo").equals("Empresa")) {
-				chain.doFilter(request, response);
+				System.out.println("empresa");
+				chain.doFilter(req, res);
 				System.out.println("empresa");
 				return;
 			}

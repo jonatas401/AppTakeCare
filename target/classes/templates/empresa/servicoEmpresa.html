@@ -51,8 +51,8 @@
    			<input class="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
    	
    				
-   			<button type="submit" class="btn btn-light">Salvar</button>
-   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+   			<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+   			<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
    			</form>
    			
    		</div>
@@ -71,7 +71,7 @@
   					<td th:text="${cont.duracao} + ' min'"></td>
   					<td ><img th:src="${cont.foto}"> </td> 
 					<td>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServicoEmpresa(codigo=${cont.id})}">Apagar</button> 
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServicoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></button> 
 					</td>
 					
 					

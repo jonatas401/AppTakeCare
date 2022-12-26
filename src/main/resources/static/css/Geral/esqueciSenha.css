@@ -1,11 +1,12 @@
-body {
-
+body{
+    background: linear-gradient(to bottom, #283547, black);
+    width:100%;
     background-image: url('/img/tela1.png');
     background-repeat: no-repeat;
     background-position: top left;
     background-size: cover;
-
 }
+
 
 .esqueci-senhaSection {
 

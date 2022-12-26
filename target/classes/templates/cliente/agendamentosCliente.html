@@ -41,7 +41,7 @@
 					<td th:if="${cont.status == false}"> Pendente </td>
 					<td th:if="${cont.status == true}"> Confirmado </td>
 					<th>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoCliente(codigo=${cont.id})}">cancelar agendamento</button> 
+					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerAgendamentoCliente(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></button> 
 					</th>
   				</tr>
 				

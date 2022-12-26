@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
+import br.ifpe.web3.model.CadastroCliente;
+import br.ifpe.web3.model.CadastroClienteDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Profissional;
@@ -36,10 +38,11 @@ public class ControllerEmpresa {
 	@Autowired
 	private ServicoLojaDAO servicoLojaDao;
 	@Autowired
+	private ProfissionalDAO profissionalDao;
+	@Autowired
 	private ProfissionalServicoDAO profissionalServicoDao;
 	@Autowired
-	private ProfissionalDAO profissionalDao;
-	
+	private CadastroClienteDAO cadastroClienteDao;
 	
 	
 	
@@ -82,7 +85,7 @@ public class ControllerEmpresa {
 
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
-		List<ProfissionalServico> listaProfissional =  profissionalServicoDao.listaProfissional(chaveId.getId());
+		List<Profissional> listaProfissional =  profissionalDao.listaProfissional(chaveId.getId());
 		
 		
 		//model.addAttribute("servico", servico);
@@ -91,37 +94,61 @@ public class ControllerEmpresa {
 		model.addAttribute("listaProfissional",listaProfissional);
 		
 
-		return "empresa/profissional";
+		return "empresa/profissionalEmpresa";
 	}
 	
 	@PostMapping("/salvarProfissionalEmpresa")
 	public String salvarProfissional(Profissional profissional,ServicoLoja servicoLoja, Model model, HttpSession session) throws LoginExceptions {	
 
 		System.out.println(profissional.getId());	
-		
-		UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");	
-		profissional.setEmpresa(chave);
+		System.out.println(servicoLoja);
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");	
+		profissional.setEmpresa(empresa);
 		profissionalDao.save(profissional);
 
 		
-//		for(ServicoLoja servico : servicoLoja) {
+//		for(ServicoLoja servico : servicoLoja ) {
 //		System.out.println(servico.getId());
 //		ProfissionalServico profissionalServico = new ProfissionalServico();
 //		profissionalServico.setProfissional(profissional);
-//		
 //		profissionalServico.setServico(servico);
 //		profissionalServicoDao.save(profissionalServico);
 //		}
 		
 		
+		
 		return "redirect:/profissionalEmpresa";
 	}
+	@GetMapping("/cadastrarPessoasEmpresa")
+	public String cadastrarPessoasEmpresa(CadastroCliente cadastro, Model model , HttpSession session)  {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		model.addAttribute("cadastro", cadastro);
+		model.addAttribute("cadastroCliente", cadastroClienteDao.listaClientesCadastrados(empresa.getId()));
+		
+		return "empresa/cadastrarPessoasEmpresa";
+	}
+	@PostMapping("/salvarCadastroPessoasEmpresa")
+	public String salvarCadastroPessoas(CadastroCliente cadastro, Model model , HttpSession session)  {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		cadastro.setEmpresa(empresa);
+		cadastroClienteDao.save(cadastro);
+		
+		return "redirect:cadastrarPessoasEmpresa";
+	}
+	
+	@GetMapping("/removerCadastroPessoaEmpresa")
+	public String removercadastroCliente(Integer id) {
+		cadastroClienteDao.deleteById(id);
+		return"redirect:cadastrarPessoasEmpresa";
+	}
+	
+	
 	
 
 	@GetMapping("/removerProfissionalEmpresa")
 	public String removerProfissional(ProfissionalServico profissionalServico, Integer codigo) throws LoginExceptions {
 		profissionalDao.deleteById(codigo);		
-		return "redirect:profissional";
+		return "redirect:profissionalEmpresa";
 	}
 	
 	@GetMapping("/removerServicoEmpresa")
@@ -156,15 +183,16 @@ public class ControllerEmpresa {
 	public String agendarEmpresa(Agendamento agendamento, Model model, HttpSession session) {
 		
 		//UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
-		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(chaveId.getId());
-		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(chaveId.getId());
-		agendamento.setEmpresa(chaveId);
-		agendamento.getEmpresa().setId(chaveId.getId());
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
+		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(empresa.getId());
+		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
 		
+		model.addAttribute("cadastroCliente", cadastroClienteDao.listaClientesCadastrados(empresa.getId()));
 		model.addAttribute("agendamento", agendamento);
 		model.addAttribute("listaServico", listaServico);
 		model.addAttribute("listaAgendamento", listaAgendamento);
+		model.addAttribute("profissionalServico", profissional);
 		
 		return "empresa/agendarEmpresa"; 
 	}
@@ -177,8 +205,13 @@ public class ControllerEmpresa {
 			return"redirect:agendarEmpresa";
 			
 		}
+		 
 		
 		else if(session.getAttribute("tipo").equals("Empresa")) {
+			if(agendamento.getCliente() != null && agendamento.getCliente().getNome() == "") {
+				System.out.println("nome vazio");
+				return"redirect:agendarEmpresa";
+			}
 			UsuarioEmpresa chave =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 			agendamento.setEmpresa(chave);
 			agendaDao.save(agendamento);
@@ -186,6 +219,10 @@ public class ControllerEmpresa {
 		}
 		
 		else if(session.getAttribute("tipo").equals("Cliente")) {
+			if(agendamento.getProfissional() == "") {
+				System.out.println("nome vazio");
+				return"redirect:estabelecimentoCliente?id=" + id;
+			}
 			UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
 			System.out.println(empresa.getId());
 			UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
@@ -196,10 +233,7 @@ public class ControllerEmpresa {
 			return"redirect:agendamentosCliente";
 			
 		}
-		else if(agendamento.getCliente().getNome() == "") {
-			System.out.println("nome vazio");
-			return"redirect:agendarEmpresa";
-		}
+		
 		
 			
 			System.out.println("confirmado!");				

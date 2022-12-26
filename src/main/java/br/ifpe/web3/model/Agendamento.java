@@ -35,6 +35,9 @@ public class Agendamento {
 	@OneToOne
 	private UsuarioEmpresa empresa;
 	private String profissional;
+	@JoinColumn
+	@OneToOne
+	private CadastroCliente cadastroCliente;
 	
 	public Integer getId() {
 		return id;
@@ -84,5 +87,12 @@ public class Agendamento {
 	public void setProfissional(String profissional) {
 		this.profissional = profissional;
 	}
+	public CadastroCliente getCadastroCliente() {
+		return cadastroCliente;
+	}
+	public void setCadastroCliente(CadastroCliente cadastroCliente) {
+		this.cadastroCliente = cadastroCliente;
+	}
+	
 	
 }

@@ -24,12 +24,11 @@ public class UsuarioEmpresa {
 	private String senha;
 	@NotBlank(message ="deve ser preenchido")
 	private String nomeEmpresa;
-	@NotNull(message = "tipo deve ser selecionado")
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
 	@Lob
 	@Column(columnDefinition="mediumblob")
-	private Blob fotoPerfil;
+	private byte[] fotoPerfil;
 	//private UsuarioCliente[] fk_cliente;
 	
 	
@@ -87,12 +86,10 @@ public class UsuarioEmpresa {
 		this.tipoEmpresa = tipoEmpresa;
 	}
 	
-	public Blob getFotoPortifolio() {
+	public byte[] getFotoPortifolio() {
 		return fotoPerfil;
 	}
-	public void setFotoPortifolio(Blob fotoPerfil) {
-		
-		
+	public void setFotoPortifolio(byte[] fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
 	

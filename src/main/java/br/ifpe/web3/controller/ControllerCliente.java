@@ -17,7 +17,6 @@ import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ProfissionalDAO;
-import br.ifpe.web3.model.ProfissionalServicoDAO;
 import br.ifpe.web3.model.ServicoLoja;
 import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
@@ -35,7 +34,6 @@ public class ControllerCliente {
 	@Autowired
 	private ServicoLojaDAO servicoLojaDao;
 	@Autowired
-
 	private ProfissionalDAO profissionalDao;
 
 
@@ -52,7 +50,7 @@ public class ControllerCliente {
 	@GetMapping("/agendamentosCliente")
 	public String agendamentos(HttpSession session, Model model) {
 		UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
-		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosCliente(chave.getId());
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentos(chave.getId());
 		for(Agendamento a : listaAgendamento) {
 			System.out.println(a.getId());
 		}
@@ -76,8 +74,6 @@ public class ControllerCliente {
 
 	@PostMapping("pesquisaEstabelecimentoCliente")
 	public String pesquisaEstabelecimento(String pesquisa, Model model) {
-
-	
 		
 		model.addAttribute("listarLojas", new UsuarioEmpresa());
 		List<UsuarioEmpresa >nomeEmpresas = empresaDao.findByNomeEmpresaContaining(pesquisa);
@@ -99,18 +95,14 @@ public class ControllerCliente {
 	@GetMapping("/estabelecimentoCliente")
 
 	public String estabelecimento(Agendamento agendamento, Integer id, Model model, HttpSession session ) {
-		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);
-		agendamento.setEmpresa(empresa);
-				
+		UsuarioEmpresa empresa =  empresaDao.findById(id).orElse(null);	
+		UsuarioCliente cliente = (UsuarioCliente) session.getAttribute("usuarioLogado");
 
 		List<ServicoLoja> servico = servicoLojaDao.listaServico(empresa.getId());
 
-
-		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
+		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosCliente(cliente.getId(), empresa.getId());
 
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
-
-
 		
 		model.addAttribute("listaAgendamento", listaAgendamento);	
 		model.addAttribute( "loja",empresa);
@@ -119,9 +111,6 @@ public class ControllerCliente {
 
 		model.addAttribute("Servico", servico);
 
-		
-
-		
 		return "cliente/estabelecimento";
 	}
 
