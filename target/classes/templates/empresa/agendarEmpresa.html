@@ -78,7 +78,7 @@
 				<label>servico</label>
 
 				<select th:field="*{servico.id}" id="inputAgenda" required>
-					<option id="setServico" th:value="''">selecione</option>
+					<option id="setServico" th:value="''">Selecione</option>
 					<option th:each="servico :  ${listaServico}" th:text="${servico.fkservico.descricao}"
 						th:value="${servico.id}"></option>
 
@@ -99,10 +99,10 @@
 				<th>Cliente</th>
 				<th>Contato</th>
 				<th> Dia </th>
-				<th> hora </th>
+				<th> Hora </th>
 				<th>Serviço</th>
 				<th>Status</th>
-				<th>Acões</th>
+				<th>Ações</th>
 			</tr>
 			<tr th:each="cont : ${listaAgendamento}">
 				<td id="nome" th:text="${cont.cliente.nome}"> </td>
