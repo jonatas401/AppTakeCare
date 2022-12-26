@@ -73,6 +73,10 @@ input#fotoPortifolio {
 }
 
 .row img {
+
+  width: 260px;
+  height: 200px;
+
   border-radius: 5%;
   margin-top: 10px;
   margin-bottom: 10px;
