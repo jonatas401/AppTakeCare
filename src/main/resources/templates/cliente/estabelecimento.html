@@ -47,8 +47,6 @@
 				       
 			}	
 			
-
-           
         </script>
 
 	
@@ -61,8 +59,36 @@
 			
 			
 				<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
-			<div id="portifolio"> 			
-				<div  th:replace="portifolio :: #carouselExampleIndicators">
+			<div id="portifolio" > 	
+									
+				  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true" >
+				    <div class="carousel-indicators">
+				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+				        aria-current="true" aria-label="Slide 1"></button>
+				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"class="active"
+				         aria-current="true" aria-label="Slide 1"></button>
+				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+				        aria-current="true" aria-label="Slide 1"></button>
+				    </div>
+				    <div class="carousel-inner" th:each="servico : ${Servico}">
+				      <div class="carousel-item active">
+				        <img th:src="|/imagem/${servico.id}|" width="500px" height="250px">
+				      </div>
+				      
+				    </div>
+				    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+				      data-bs-slide="prev">
+				      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				      <span class="visually-hidden">Previous</span>
+				    </button>
+				    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+				      data-bs-slide="next">
+				      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				      <span class="visually-hidden">Next</span>
+				    </button>
+				  </div>
+
+			
 			</div>
 				
 				
@@ -144,46 +170,11 @@
 								<div class="container text-center">
 								  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 								    
-								    <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
+								    <div class="col" th:each="servico : ${Servico}">
+								      	<img th:src="|/imagem/${servico.id}|" width="100px">
 								    </div>
 								    
-								    <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								     <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								     <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								    <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div><br>
-								    
-								     <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								    <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								     <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								     <div class="col" style="margin-left:-20px; ">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
-								    <div class="col">
-								      	<img th:src="@{/img/rosto.jpeg}" width="100px">
-								    </div>
-								    
+								  
 								    
 								  </div>
 								</div>
@@ -191,7 +182,7 @@
 						</div>
 					 </div>
 				
-			</div>
+		
 			
 			
 			
@@ -224,18 +215,31 @@
 				
 			</div>
 			
+	
+			
 			<section id="informacoes">
-				
-					<h6 th:text="${cont.nomeEmpresa}"></h6>
-					<strong>Contato - </strong><span th:text="${cont.numero}"></span><br>
-					<strong>Endereço - </strong><span th:text="${cont.endereco.rua}"></span><br>-
-					<span th:text="${cont.endereco.bairro}"></span><br>
-					<strong>Cep - </strong><span th:text="${cont.endereco.cep}"></span>
-					<h6>horario de funcionamento</h6>
 					
-				
-				
+					<table>
+						<tr>
+						
+						<td>Estabelecimento</td>
+						<td>Contato</td>
+						<td> Rua</td>
+						<td>Bairro</td>
+						<td>CEP</td>
+						</tr>
+					
+						<tr>
+						<td th:text="${cont.nomeEmpresa}"></td>
+						<td th:text="${cont.numero}"> </td>
+						<td th:text="${cont.endereco.rua}"></td>
+						<td th:text="${cont.endereco.bairro}"></td>
+						<td th:text="${cont.endereco.cep}"></td>
+						</tr>
+					</table>
+					
 			</section>
+			
 
 		</div>
 	</section>

@@ -39,7 +39,7 @@
 	   		
 	   	</div>
    		<div id="formAgenda">
-   			<form action="/servicoEmpresa" th:object="${servico}" method="post">
+   			<form action="/servicoEmpresa" th:object="${servico}" method="post" enctype="multipart/form-data">
    				
    			<label>servico</label>
    			<input class="inputAgenda"  type="text" th:field="*{fkservico.descricao}"  placeholder=" Nome Servico" required>	
@@ -48,7 +48,7 @@
             <label>duração</label>
    			<input class="inputAgenda"  type="number" th:field="*{duracao}" required>
             <label>Imagem ilustrativa</label>
-   			<input class="inputAgenda"  type="file" th:field="*{foto}" placeholder="adicionar" >
+   			<input class="inputAgenda"  type="file" name="fileImage" >
    	
    				
    			<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
@@ -69,7 +69,7 @@
   					<td th:text="${cont.fkservico.descricao}"> </td>
 					<td th:text="${cont.valor}"></td>
   					<td th:text="${cont.duracao} + ' min'"></td>
-  					<td ><img th:src="${cont.foto}"> </td> 
+  					<td ><img id="imagemServico"  th:src="|imagem/${cont.id}|"> </td> 
 					<td>
 					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServicoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></button> 
 					</td>

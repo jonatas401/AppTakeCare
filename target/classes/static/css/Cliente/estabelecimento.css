@@ -3,6 +3,7 @@
 #paginaLoja{
 	margin-top:5%;
     width:70%;
+    min-height: 60%;
     margin-left:25%; 
     background-color:#041e29;
     border:#34393d solid;
@@ -10,6 +11,7 @@
 }
 #nomeLoja{
     color:white;
+    margin-top: 10%;
 }
 
 #carouselExampleIndicators{
@@ -20,33 +22,38 @@
 #left{
         width:200px;
         margin-left:20px;
-        margin-top:-250px;
+     	position:absolute;
+     	top:10%;
         
 }
 #listaServ{
     width:500px;
-    padding-top:50px;
+  
 }
 
 #informacoes{
-    width:200px;
-    margin-left:50%;
+  	margin-top:10%;
+    margin-left:30%;
     color:white;
+    display: flex;
     
 }
+#informacoes table tr td{
+	border:solid;
+	
+}
+
 
 /******* agendamento********/
-#table .acoes{
-	background:red;
-}
+
 #tabelaAgenda{
 	width:120vh;
 	min-height: 30vh;
 	background-color:rgb(25, 23, 23);
 	border-radius:20px;
-	margin-top:2%;
+	margin-top:-30%;
 	border:solid;
-	margin-left:-8%;
+	margin-left:20%;
 	display:none;
 }
 
@@ -62,18 +69,21 @@
 }
 
 /***** portifolio ********/
+
 #imagens{
-   
+   	margin-left:25%;
+   	margin-top:-30%;
     display:none;
     width:700px;
     background-color:#555753;
     border-radius:10px;
-    padding-bottom:5px;
+    padding-bottom:10px;
     
 }
 #portifolio{
     height:300px;
-    margin-left:250px;	
+    margin-left:250px;
+    
 
 }
 

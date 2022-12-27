@@ -80,7 +80,7 @@
 					<option id="setNome" th:value="''">selecione</option>
 					<option th:each="clientes :  ${listaAgendamento}"
 						 th:if="${clientes.cliente != null}"
-						value="${clientes.cliente.id}"><span  th:text="${clientes.cliente.nome}"></span></option>
+						th:value="${clientes.cliente.id}"><span  th:text="${clientes.cliente.nome}"></span></option>
 
 				</select>
 			
@@ -126,9 +126,9 @@
 				<label>Cliente</label>
 				<select th:field="*{cadastroCliente.id}" class="inputAgenda"  required>
 					<option  th:value="''">selecione</option>
-					<option  th:each="cliente :  ${cadastroCliente}"
-							th:text="${cliente.nome}"
-							th:value="${cliente.id}"></option>
+					<option  th:each="cadastroCliente :  ${cadastroCliente}"
+							th:text="${cadastroCliente.nome}"
+							th:value="${cadastroCliente.id}"></option>
 				</select>
 				
 				

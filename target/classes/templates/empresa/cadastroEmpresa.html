@@ -96,8 +96,8 @@
 
 							<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" required>
 								<option th:value="''">selecione</option>
-								<option th:each="empresa :  ${T(br.ifpe.web3.model.TipoEmpresa).values()}"
-									th:text="${empresa}" th:value="${empresa}"></option>
+								<option th:each="empresa :  ${tipoEmpresa}"
+									th:text="${empresa.nome}" th:value="${empresa.id}"></option>
 
 							</select>
 						</div>

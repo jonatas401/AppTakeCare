@@ -113,6 +113,8 @@ public class ControllerCliente {
 
 		return "cliente/estabelecimento";
 	}
+	
+	
 
 	@PostMapping("/UsuarioClienteEditado")
 	public String UsuarioClienteEditado(UsuarioCliente cliente, HttpSession session) {

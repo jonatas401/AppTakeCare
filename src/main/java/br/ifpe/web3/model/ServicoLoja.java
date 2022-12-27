@@ -10,8 +10,11 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Proxy;
+
 
 @Entity
+@Proxy(lazy = false)
 public class ServicoLoja {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY )

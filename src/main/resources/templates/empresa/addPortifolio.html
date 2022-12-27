@@ -26,92 +26,17 @@
 
 
 
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem;" th:each="cont : ${servicoLoja}">
 
-        <img src="https://cdn.pixabay.com/photo/2018/02/18/11/05/the-hand-3161974_960_720.jpg" class="card-img-top"
-          alt="...">
-
-        <div class="img"><input id="fotoPortifolio" type="file"></div>
-
+         <img  class="card-img-top"  alt="imagem"  th:src="|imagem/${cont.id}|">
         <div class="card-body">
 
-          <p class="card-text">UNHAS EM GEL</p>
-
-        </div>
-
-
-
-      </div>
-
-
-
-      <div class="card" style="width: 18rem;">
-
-        <img src="https://cdn.pixabay.com/photo/2017/10/12/02/31/eyes-2843286_960_720.jpg" class="card-img-top"
-          alt="...">
-
-        <div class="img"><input id="fotoPortifolio" type="file"></div>
-
-        <div class="card-body">
-
-          <p class="card-text">CILIOS</p>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="card" style="width: 18rem;">
-
-        <img src="https://cdn.pixabay.com/photo/2020/08/22/18/44/eye-5509192_960_720.jpg" class="card-img-top"
-          alt="...">
-
-        <div class="img"><input id="fotoPortifolio" type="file"></div>
-
-        <div class="card-body">
-
-          <p class="card-text">SOBRANCELHAS</p>
-
-        </div>
-
-      </div>
-
-
-
-
-      <div class="card" style="width: 18rem;">
-
-        <img src="https://cdn.pixabay.com/photo/2017/09/06/20/35/woman-2722936_960_720.jpg" class="card-img-top"
-          alt="...">
-
-        <div class="img"><input id="fotoPortifolio" type="file"></div>
-
-        <div class="card-body">
-
-          <p class="card-text">MASSAGEM</p>
+        <span>Serviço: </span>   <span class="card-text" th:text="${cont.fkservico.descricao}"></span><br>
+         <span>Vlaor: </span>  <span class="card-text" th:text="${cont.valor}"></span><br>
+         <span>Duração: </span> <span  th:text="${cont.duracao} + ' min'"></span>
 
         </div>
       </div>
-
-
-      <div class="card" style="width: 18rem;">
-
-        <img src="https://cdn.pixabay.com/photo/2016/11/19/06/27/green-1838142_960_720.jpg" class="card-img-top"
-          alt="...">
-
-        <div class="img"><input id="fotoPortifolio" type="file"></div>
-
-        <div class="card-body">
-
-          <p class="card-text">MANICURE</p>
-
-        </div>
-      </div>
-
-    </div>
-
-    <button type="x" class="btn btn-light">Adicionar</button>
 
   </div>
   

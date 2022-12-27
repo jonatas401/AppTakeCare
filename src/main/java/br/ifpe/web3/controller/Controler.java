@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.TipoEmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 
@@ -19,6 +20,8 @@ public class Controler {
 	private EmpresaDAO empresaDao;
 	@Autowired
 	private ClienteDAO clienteDao;
+	@Autowired
+	private TipoEmpresaDAO tipoEmpresaDao;
 	
 	//*******Rotas de acesso geral***********
 	
@@ -42,6 +45,7 @@ public class Controler {
 	@GetMapping("/UsuarioEmpresa")
 	public String cadastroEmpresa(UsuarioEmpresa empresa, Model model) {
 		model.addAttribute("empresa", empresa);
+		model.addAttribute("tipoEmpresa", tipoEmpresaDao.findAll());
 		return "empresa/cadastroEmpresa";
 	}
 	

@@ -1,5 +1,6 @@
 package br.ifpe.web3.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
@@ -55,8 +60,9 @@ public class ControllerEmpresa {
 	
 	
 	@GetMapping("/portifolioEmpresa")
-	public String portifolio() throws LoginExceptions {
-	
+	public String portifolio(Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		model.addAttribute("servicoLoja",servicoLojaDao.listaServico(empresa.getId()));
 		System.out.println();
 		return "empresa/addPortifolio";
 	}
@@ -72,13 +78,29 @@ public class ControllerEmpresa {
 		return "empresa/servicoEmpresa";
 	}
 	@PostMapping("/servicoEmpresa")
-	public String Salvarservico(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
+	public String Salvarservico(ServicoLoja servico, Model model, HttpSession session, @RequestParam("fileImage") MultipartFile file) throws LoginExceptions {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		servico.setEmpresa(chaveId);
 		servico.getEmpresa().setId(chaveId.getId());
+		try {
+			servico.setFoto(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		servicoLojaDao.save(servico);
 		return "redirect:servicoEmpresa";
 	}
+	@GetMapping("/imagem/{idFoto}")
+	@ResponseBody
+	public byte[] exibirImagem(@PathVariable("idFoto") Integer idFoto) {
+		System.out.println(idFoto);
+		System.out.println("imagem");
+		ServicoLoja servicoLoja = servicoLojaDao.getOne(idFoto);
+		return servicoLoja.getFoto();
+	}
+	
+	
 	
 	@GetMapping("/profissionalEmpresa")
 	public String profissional(Profissional profissional, Model model, HttpSession session) throws LoginExceptions {
