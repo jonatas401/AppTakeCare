@@ -8,30 +8,39 @@
     padding-top: 300px;
     padding-left: 900px;
     position: fixed;
+    align-items: center;
 
 
 }
-
-#card1 {
+.card {
+    display: block;
+	margin-bottom: 20px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 11px 0 rgba(0, 0, 0, 0.12);
+	transition: box-shadow .25s;
+    height: 300px;
     position: relative;
-    bottom: 250px;
-    right: 390px;
+    right: 120px;
+    width: 200px;
+    margin: 500px;
+    align-items: center;
+    height: 200px;
+
+  }
+#cards{
+    position: relative;
+    right: 700px;
+    bottom: 200px;
+    height: 600px;
 }
 
-#card2 {
-    position: relative;
-    bottom: 250px;
-    right: 390px;
+.card-content a{
+    margin-left: 33px;
 }
-
-#card3 {
-    position: relative;
-    bottom: 690px;
-    right: 800px;
-}
-
-#card4 {
-    position: relative;
-    bottom: 690px;
-    right: 800px;
+.card-content h3 img{
+    height: 100px;
+    width: 100px;
+    border-radius: 30px;
 }
