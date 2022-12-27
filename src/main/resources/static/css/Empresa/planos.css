@@ -12,7 +12,7 @@
 
 
 }
-.card {
+.cartoes {
     display: block;
 	margin-bottom: 20px;
 	line-height: 1.42857143;
@@ -27,6 +27,7 @@
     margin: 500px;
     align-items: center;
     height: 200px;
+   
 
   }
 #cards{
