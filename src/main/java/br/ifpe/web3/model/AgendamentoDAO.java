@@ -17,4 +17,10 @@ public interface AgendamentoDAO extends JpaRepository<Agendamento, Integer> {
 		
 		@Query("SELECT a FROM Agendamento a where a.cliente.id like :id")
 		public List<Agendamento> listarAgendamentos(Integer id);
+		
+		@Query("SELECT a FROM UsuarioCliente a where a.empresa.id like :id")
+		public List<UsuarioCliente> listarAgendamentosClienteEmpresa(Integer id);
+
+		@Query("SELECT a FROM Agendamento a where a.cliente.id like :id")
+		public Agendamento buscaPorPessoa(Integer id);
 }

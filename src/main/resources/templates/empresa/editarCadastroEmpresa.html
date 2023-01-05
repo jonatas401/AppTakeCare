@@ -21,7 +21,7 @@
 		<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 		</section>
 	<div id="conteinerDados"  class="container col-sm-12 col-md-6 col-md-offset-2" >
-		<form action="/UsuarioEmpresaEditado" th:object="${empresa}"  method="post">
+		<form action="/UsuarioEmpresaEditado" th:object="${empresa}"  method="post" enctype="multipart/form-data">
 		
 		
 		<input type="hidden"  th:field="*{Id}">
@@ -48,8 +48,9 @@
 				
 					
 					<div class="form-group">
-						<label for="fotoPerfil">foto</label> <input type="file" th:field="*{fotoPortifolio}"
+						<label for="fotoPerfil">foto</label> <input type="file" name="fileImage" 
 							class="form-control">
+							<span style="color: white;">Tamanho Maximo 1MB</span>
 					</div>
 					
 					<div class="form-group">
@@ -57,15 +58,17 @@
 							class="form-control" id="Empresa" placeholder="Nome da Loja" required>
 					</div>
 					
-				<!-- 	<div class="form-group">
+				 	<div class="form-group">
 						<label for="TipoEmpresa"> Tipo da Empresa</label>
 						
-						<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" required>
-							<option th:value="''">selecione</option>
-							<option th:each="empresa :  ${T(br.ifpe.web3.model.TipoEmpresa).values()}"  th:text="${empresa}" th:value="${empresa}"></option>
+						<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" disabled>
+						
+							<option th:each="empresa :  ${tipo}" 
+							 th:text="${empresa.nome}" 
+							 th:value="${empresa.id}" checked></option>
 							
 						</select>
-					</div> -->
+					</div> 
 			
 			</div>
 			
@@ -107,7 +110,7 @@
 						<button style="margin-top: 15px;" type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="30px"></button>
 						
 						
-							<a   class="btn btn-light" style=" margin-left:20px; margin-top:17px;"  th:href="@{/dadosEmpresa}"><img th:src="@{/img/logout.svg}" width="30px"></a>
+						<a class="btn btn-light" style=" margin-left:20px; margin-top:17px;"  th:href="@{/dadosEmpresa}"><img th:src="@{/img/logout.svg}" width="30px"><span> sair</span></a>
 					</div>
 				
 			</div>

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -21,8 +23,16 @@ public class UsuarioCliente {
 	private String senha;
 	private Endereco endereco;
 	private byte[] fotoPerfil;
+	@JoinColumn
+	@ManyToOne
+	private UsuarioEmpresa empresa;
 	
-	
+	public UsuarioEmpresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(UsuarioEmpresa empresa) {
+		this.empresa = empresa;
+	}
 	
 	
 	public byte[] getFotoPerfil() {

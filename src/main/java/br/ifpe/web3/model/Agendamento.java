@@ -3,14 +3,12 @@ package br.ifpe.web3.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,7 +35,7 @@ public class Agendamento {
 	private String profissional;
 	@JoinColumn
 	@OneToOne
-	private CadastroCliente cadastroCliente;
+	
 	
 	public Integer getId() {
 		return id;
@@ -51,7 +49,7 @@ public class Agendamento {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public LocalTime getHora() {
+	public  LocalTime getHora() {
 		return hora;
 	}
 	public void setHora(LocalTime hora) {
@@ -87,12 +85,10 @@ public class Agendamento {
 	public void setProfissional(String profissional) {
 		this.profissional = profissional;
 	}
-	public CadastroCliente getCadastroCliente() {
-		return cadastroCliente;
-	}
-	public void setCadastroCliente(CadastroCliente cadastroCliente) {
-		this.cadastroCliente = cadastroCliente;
-	}
+	
+	
+	
+	
 	
 	
 }

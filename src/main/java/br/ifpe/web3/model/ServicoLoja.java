@@ -1,6 +1,7 @@
 package br.ifpe.web3.model;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,27 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.Proxy;
 
 
 @Entity
-@Proxy(lazy = false)
 public class ServicoLoja {
+	
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	private float valor;
-	@Lob
-	private byte[] foto;
 	private int duracao;
-	@JoinColumn
-	@OneToOne (cascade = CascadeType.ALL)
-	private Servico fkservico;
+	private String descricao;
 	@JoinColumn
 	@ManyToOne
 	private UsuarioEmpresa empresa;
+	@Lob
+	private byte[] foto;
 	
 	public Integer getId() {
 		return id;
@@ -62,12 +58,11 @@ public class ServicoLoja {
 		this.duracao = duracao;
 	}
 
-	public Servico getFkservico() {
-		return fkservico;
+	public String getDescricao() {
+		return descricao;
 	}
-
-	public void setFkservico(Servico fkservico) {
-		this.fkservico = fkservico;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public UsuarioEmpresa getEmpresa() {

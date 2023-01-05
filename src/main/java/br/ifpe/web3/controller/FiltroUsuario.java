@@ -19,7 +19,7 @@ public class FiltroUsuario implements Filter {
 	private String[] pathLiberados = {"/", "/cadastro", "/login", "/opcaoCadastro", "/esqueciSenha", "/efetuarLogin"
 									,"/UsuarioCliente" ,"/UsuarioEmpresa","/h2-console(.*)", "/css/(.*)", "/img/(.*)", "/logoff"
 									, "/fazerAgendamento", "/removerAgendamentoCliente", "/salvarUsuarioEmpresa"
-									, "/salvarUsuarioCliente", "/imagem/(.*)"};
+									, "/salvarUsuarioCliente", "/imagem/(.*)", "/fotoPerfil/(.*)"};
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -46,13 +46,10 @@ public class FiltroUsuario implements Filter {
 			
 			if(path.contains("Cliente")  && session.getAttribute("tipo").equals("Cliente")) {
 				chain.doFilter(request, response);
-				System.out.println("cliente");
 				return;
 			}
 			if(path.contains("Empresa") && session.getAttribute("tipo").equals("Empresa")) {
-				System.out.println("empresa");
 				chain.doFilter(req, res);
-				System.out.println("empresa");
 				return;
 			}
 			

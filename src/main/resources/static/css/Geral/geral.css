@@ -27,6 +27,11 @@ table td{
 	border-radius:5px;
 }
 
+/****** mensagem de respostas ******/
+#msg{
+	margin-left: 30%; 
+	margin-top:1%;
+}
 
 
 /** imagem das telas de login e cadastro**/

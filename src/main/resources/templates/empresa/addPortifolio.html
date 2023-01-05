@@ -31,8 +31,8 @@
          <img  class="card-img-top"  alt="imagem"  th:src="|imagem/${cont.id}|">
         <div class="card-body">
 
-        <span>Serviço: </span>   <span class="card-text" th:text="${cont.fkservico.descricao}"></span><br>
-         <span>Vlaor: </span>  <span class="card-text" th:text="${cont.valor}"></span><br>
+        <span>Serviço: </span>   <span class="card-text" th:text="${cont.descricao}"></span><br>
+         <span>Valor: </span>  <span class="card-text" th:text="${cont.valor}"></span><br>
          <span>Duração: </span> <span  th:text="${cont.duracao} + ' min'"></span>
 
         </div>

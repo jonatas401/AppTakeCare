@@ -14,19 +14,19 @@
 }
 .cartoes {
     display: block;
-	margin-bottom: 20px;
 	line-height: 1.42857143;
 	background-color: #fff;
 	border-radius: 2px;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 11px 0 rgba(0, 0, 0, 0.12);
 	transition: box-shadow .25s;
-    height: 300px;
     position: relative;
     right: 120px;
     width: 200px;
+    height:250px;
     margin: 500px;
+   	top:-15%;
     align-items: center;
-    height: 200px;
+ 
    
 
   }
@@ -34,7 +34,7 @@
     position: relative;
     right: 700px;
     bottom: 200px;
-    height: 600px;
+    height: 500px;
 }
 
 .card-content a{

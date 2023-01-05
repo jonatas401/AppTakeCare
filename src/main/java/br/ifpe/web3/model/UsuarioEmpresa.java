@@ -19,7 +19,9 @@ public class UsuarioEmpresa {
 	private Integer id;
 	private String nome;
 	private String numero;
+	@NotBlank(message ="deve ser preenchido")
 	private String email;
+	@NotBlank(message ="deve ser preenchido")
 	private String senha;
 	@NotBlank(message ="deve ser preenchido")
 	private String nomeEmpresa;
@@ -27,10 +29,13 @@ public class UsuarioEmpresa {
 	@OneToOne
 	private TipoEmpresa tipoEmpresa;
 	private Endereco endereco;
+	@JoinColumn
+	@OneToOne
+	private Planos plano;
 	@Lob
 	@Column(columnDefinition="mediumblob")
 	private byte[] fotoPerfil;
-	//private UsuarioCliente[] fk_cliente;
+	
 	
 	
 	
@@ -87,10 +92,16 @@ public class UsuarioEmpresa {
 		this.tipoEmpresa = tipoEmpresa;
 	}
 	
-	public byte[] getFotoPortifolio() {
+	public Planos getPlano() {
+		return plano;
+	}
+	public void setPlano(Planos plano) {
+		this.plano = plano;
+	}
+	public byte[] getFotoPerfil() {
 		return fotoPerfil;
 	}
-	public void setFotoPortifolio(byte[] fotoPerfil) {
+	public void setFotoPerfil(byte[] fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
 	

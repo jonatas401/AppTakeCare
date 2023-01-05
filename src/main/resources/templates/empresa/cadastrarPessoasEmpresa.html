@@ -36,7 +36,7 @@
 
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 
-
+	<h4 id="msg"  th:text="${msg}"></h4>
 	<section class="agenda">
 
 	   	<div id="calendario">
@@ -72,8 +72,8 @@
 				<td id="numero" th:text="${cont.numero}"></td>
 				<td>
 				<a id="acoes" utton class="btn btn-light"
-							th:href="@{/removerCadastroPessoaEmpresa(id=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></a>
-					<button id="confirmar" class="btn btn-light" onclick="editarAgendamento()"><img th:src="@{/img/edit.svg}" width="30px"></button>
+							th:href="@{/removerCadastroPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></a>
+				<a  class="btn btn-light" th:href="@{/editarPessoaEmpresa(id=${cont.id})}"><img th:src="@{/img/edit.svg}" width="30px"></a>
 				</td>
 			</tr>
 

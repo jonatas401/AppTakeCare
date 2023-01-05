@@ -9,6 +9,9 @@ public interface ProfissionalDAO extends JpaRepository<Profissional, Integer>{
 	@Query("SELECT p from Profissional p where p.empresa.id like :id ")
 	public List<Profissional> listaProfissional(Integer id);
 
+	@Query("SELECT p from Profissional p where p.numero like :numero and p.empresa.id like :id")
+	public Profissional pesquisaProfissional(String numero, Integer id);
+
 	
 
 }

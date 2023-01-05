@@ -16,11 +16,19 @@
           
       <script th:inline="javascript">
      	 function cadastrar(){
-      		document.getElementById("formAgenda").style.display = "block"
+      		document.getElementById("formProf").style.display = "block"
       		
       		}
-      	function Cancela(){
-      		document.getElementById("formAgenda").style.display = "none"
+      	function cadastrarServico(){
+      		document.getElementById("formProfServico").style.display = "block"
+      		
+      		}	
+      	function agendarCancela(){
+      		document.getElementById("formProf").style.display = "none"
+      		
+      		}
+      	function agendarCancelaServ(){
+      		document.getElementById("formProfServico").style.display = "none"
       		
       		}
       		
@@ -33,55 +41,106 @@
 	
 	
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
+			
+			<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="true">
+			  <div class="toast-header">
+				    <img src="..." class="rounded me-2" alt="...">
+				    <strong class="me-auto">Bootstrap</strong>
+				    <small>11 mins ago</small>
+				    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				  </div>
+				  <div class="toast-body">
+				   <h4 id="msg"  th:text="${msg}"></h4>
+			  </div>
+			</div>
 	
-		
+		<h4 id="msg"  th:text="${msg}"></h4>
 	<section class="agenda">
 	   	<div id="calendario">
 	   		<button onclick="cadastrar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar</button>
+	   		<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar Servico Ao Profissional</button>
 	   		
 	   	</div>
-   		<div id="formAgenda">
+   		<div id="formProf">
 
    			<form action="/salvarProfissionalEmpresa" th:object="${profissional}" method="post">
+
    			
    			<label>Nome</label>
    			<input class="inputAgenda" th:field="*{nome}"  type="text" required>	
    			
    			<label>contato</label>
    			<input class="inputAgenda"  type="text" th:field="*{numero}" required>
-   				
-   			<label>servico</label>
-
-   			<select name="servicoLoja"  id="inputAgenda" required >
-				<option id="setServico" th:value="''">selecione</option>
-				<option th:each="servico :  ${listaServicos}"
-					th:text="${servico.fkservico.descricao}" th:value="${servico.id}"></option>	
-			</select>
-
-			
+   			
 		<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
    		<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
    			</form>
    			
    		</div>
+   		
+   		<!-- ******************* alocar servico************************************* -->
+   		<div id="formProfServico">
+
+
+			<div id="buscaProf">
+	
+					<form action="/pesquisaProfissionalEmpresa" method="post">
+				
+			   			<label>contato</label>
+			   			<input class="inputAgenda"  type="text" name="numero" required>
+	   			
+						
+						 <button class="btn btn-light"> pesquisar</button>
+					</form>
+				
+				
+			</div>
+   			<form action="/salvarProfissionalServicoEmpresa"  method="post">
+   			<input type="hidden" name="profissional"  th:value="${profissional.id}"  >
+   			
+   			<label>Nome</label>
+   			<input class="inputAgenda" th:field="${profissional.nome}"  type="text" required disabled>	
+   			
+   			<label>servico</label>
+
+   			<select name="servicoLoja"  id="inputAgenda" required="required">
+				<option  th:value="''">selecione</option>
+				
+				<option  th:each="servico :  ${listaServicos}"
+					th:text="${servico.descricao}" 
+					th:value="${servico.id}"></option>
+				
+			</select>
+
+			
+		<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+   		<button id="cancela" onclick="agendarCancelaServ()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
+   			</form>
+   			
+   		</div>
+   		
+   		
    		<table id="table"  class="table table-dark table-striped-columns">
   				<tr>
   					
 					<th>Nome</th>
 					<th>Contato</th>
-				
+					<th>Servicos</th>
                     <th>Empresa</th>
                     <th>Ações</th>
 
   				</tr>
-  				<tr th:each="cont : ${listaProfissional}">
+  				<tr th:each="cont : ${listaProfissionalServico}">
 
-  					<td th:text="${cont.nome}"> </td>
-					<td th:text="${cont.numero}"></td>
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td> 
-
+  					<td th:text="${cont.profissional.nome}"> </td>
+					<td th:text="${cont.profissional.numero}"></td>
+					<td th:text="${cont.servico.descricao}">
+					</td>
+  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
+					
 					<td>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px"></button> 
+					<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
+					
 					</td>
 					
 					
