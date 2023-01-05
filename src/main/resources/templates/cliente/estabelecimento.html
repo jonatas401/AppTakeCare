@@ -1,247 +1,266 @@
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Lojas</title>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	
-	  
- <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}" />
-	
-	 
-    
-      
-   
+<head>
+	<meta charset="UTF-8">
+	<title>Lojas</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+
+
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+
+
+
+
+
 </head>
+
 <body>
 
-<script th:inline="javascript">
-     	 function agendamento(){
-      		document.getElementById("carouselExampleIndicators").style.display = "none"
-      		document.getElementById("tabelaAgenda").style.display = "block"
-      		document.getElementById("informacoes").style.display = "block"
-      		document.getElementById("imagens").style.display = "none"
-      		
-      		}
-      		function portifolio(){
-		      		document.getElementById("carouselExampleIndicators").style.display = "none"
-		      		document.getElementById("tabelaAgenda").style.display = "none"
-		      		document.getElementById("informacoes").style.display = "none"
-		      		document.getElementById("imagens").style.display = "block"
-      	
-      		}	
-      		function agendar(){
-      				document.getElementById("formAgenda").style.display = "block"
-      		
-      		}
-      		function agendarCancela(){
-      				document.getElementById("formAgenda").style.display = "none"
-      		
-      		}
-      		function trazerServicos(src){
-				//alert("ok")
-				// window.location.href = 'estabelecimento('+1+')';
-				       
-			}	
-			
-        </script>
+	<script th:inline="javascript">
+		function agendamento() {
+			document.getElementById("carouselExampleIndicators").style.display = "none"
+			document.getElementById("tabelaAgenda").style.display = "block"
+			document.getElementById("informacoes").style.display = "block"
+			document.getElementById("imagens").style.display = "none"
 
-	
-			<div th:replace="cliente/navBarCliente :: #navConta"></div>
-		
+		}
+		function portifolio() {
+			document.getElementById("carouselExampleIndicators").style.display = "none"
+			document.getElementById("tabelaAgenda").style.display = "none"
+			document.getElementById("informacoes").style.display = "none"
+			document.getElementById("imagens").style.display = "block"
+
+		}
+		function agendar() {
+			document.getElementById("formAgenda").style.display = "block"
+
+		}
+		function agendarCancela() {
+			document.getElementById("formAgenda").style.display = "none"
+
+		}
+		function trazerServicos(src) {
+			//alert("ok")
+			// window.location.href = 'estabelecimento('+1+')';
+
+		}
+
+	</script>
+
+
+	<div th:replace="cliente/navBarCliente :: #navConta"></div>
+
 	<section id="paginaLoja">
-	
-			
-			<div   th:each="cont : ${loja}"  >
-			
-			
-				<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
-			<div id="portifolio" > 	
-									
-				  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true" >
-				    <div class="carousel-indicators">
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-				        aria-current="true" aria-label="Slide 1"></button>
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"class="active"
-				         aria-current="true" aria-label="Slide 1"></button>
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-				        aria-current="true" aria-label="Slide 1"></button>
-				    </div>
-				    <div class="carousel-inner" th:each="servico : ${Servico}">
-				      <div class="carousel-item active">
-				        <img th:src="|/imagem/${servico.id}|" width="500px" height="250px">
-				      </div>
-				      
-				    </div>
-				    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-				      data-bs-slide="prev">
-				      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				      <span class="visually-hidden">Previous</span>
-				    </button>
-				    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-				      data-bs-slide="next">
-				      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				      <span class="visually-hidden">Next</span>
-				    </button>
-				  </div>
 
-			
-			</div>
-				
-				
-				<!-- ----------- parte de agendamento  ---------------- -->
-				
-	<div id="tabelaAgenda">
-					
-			<div id="buttonAgenda">
-	   			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">agendar</button>
-	   		
-	   		</div>
-   		<div id="formAgenda">
-   			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
-   			
-   			<input name="id" th:value="${cont.id}" type="hidden">
-   			<input th:field="*{cliente.nome}" type="hidden">
-   			
-  
-   			<select th:field="*{profissional}"  id="inputAgenda" required>
-				<option th:value="''">selecione</option>
-				<option id="prof" th:each="profissional :  ${profissionalServico}" 
-					onclick="trazerServicos('${profissional.id}')"
-					th:text="${profissional.nome}" 
-					th:value="${profissional.nome}">
-				</option>
-			</select>
-			<label>profissional</label>
-			
-			
-			
-   			<select th:field="*{servico.id}"  class="inputAgenda" required>
-				<option th:value="''">selecione</option>
-				<option th:each="servico :  ${Servico}"
-					th:text="${servico.descricao}"
-					 th:value="${servico.id}">
-					</option>
-			</select>
-			<label>servico</label><br>
-			
-			
-   			<label>Dia</label>
-   			<input id="inputAgenda"  type="date" th:field="*{data}">	
-   			<label>Hora</label>
-   			<input type="time"  th:field="*{hora}">	
-   			<button type="submit" class="btn btn-light">Salvar</button>
-   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
-   			</form>
-   			
-   		</div>
-   		<table id="table"  class="table table-dark table-striped-columns">
-  				<tr>
-  					<th>Empresa</th>
-  					<th>Profissional</th>
-					<th>Contato</th>
-  					<th> Dia </th>
-  					<th> hora </th>
-					<th>Serviço</th>
-					<th>Status</th>
-					
-  				</tr>
-  				<tr th:each="cont : ${listaAgendamento}">
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td>
-  					<td th:text="${cont.profissional}"> </td>
-					<th th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span></th>
-  					<td th:text="${cont.data}"> </td>
-  					<td th:text="${cont.hora}">  </td>
-					<th th:text="${cont.servico.descricao}"></th>
-					<td th:if="${cont.status == false}"> Pendente </td>
-					<td th:if="${cont.status == true}"> Confirmado </td>
-  				</tr>
-  			</table>
 
-					 
-	</div>
-				<!-- ----------- parte de portifolio  ---------------- -->
-					 <div id="imagens">
-					 	<h3 style="margin-left:200px; color:white; ">Portifólio</h3>
-						<div >
-								<div class="container text-center">
-								  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-								    
-								    <div class="col" th:each="servico : ${Servico}">
-								      	<img th:src="|/imagem/${servico.id}|" width="100px">
-								    </div>
-								    
-								  
-								    
-								  </div>
-								</div>
-																
+		<div th:each="cont : ${loja}">
+
+
+			<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
+			<div id="portifolio">
+
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+					</div>
+					<div class="carousel-inner" th:each="servico : ${Servico}">
+						<div class="carousel-item active">
+							<img th:src="|/imagem/${servico.id}|" width="500px" height="250px">
 						</div>
-					 </div>
-				
-		
-			
-			
-			
-			
+
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+
+
+			</div>
+
+
+			<!-- ----------- parte de agendamento  ---------------- -->
+
+			<div id="tabelaAgenda">
+
+				<div id="buttonAgenda">
+					<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;"
+						class="btn btn-light">agendar</button>
+
+				</div>
+				<div id="formAgenda">
+					<form action="fazerAgendamento" th:object="${agendamento}" method="post">
+
+						<input name="id" th:value="${cont.id}" type="hidden">
+						<input th:field="*{cliente.nome}" type="hidden">
+
+
+						<select th:field="*{profissional}" id="inputAgenda" required>
+							<option th:value="''">selecione</option>
+							<option id="prof" th:each="profissional :  ${profissionalServico}"
+								onclick="trazerServicos('${profissional.id}')" th:text="${profissional.nome}"
+								th:value="${profissional.nome}">
+							</option>
+						</select>
+						<label>profissional</label>
+
+
+
+						<select th:field="*{servico.id}" class="inputAgenda" required>
+							<option th:value="''">selecione</option>
+							<option th:each="servico :  ${Servico}" th:text="${servico.descricao}"
+								th:value="${servico.id}">
+							</option>
+						</select>
+						<label>servico</label><br>
+
+
+						<label>Dia</label>
+						<input id="inputAgenda" type="date" th:field="*{data}">
+						<label>Hora</label>
+						<input type="time" th:field="*{hora}">
+						<button type="submit" class="btn btn-light">Salvar</button>
+						<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+					</form>
+
+				</div>
+				<table id="table" class="table table-dark table-striped-columns">
+					<tr>
+						<th>Empresa</th>
+						<th>Profissional</th>
+						<th>Contato</th>
+						<th> Dia </th>
+						<th> hora </th>
+						<th>Serviço</th>
+						<th>Status</th>
+
+					</tr>
+					<tr th:each="cont : ${listaAgendamento}">
+						<td th:text="${cont.empresa.nomeEmpresa}"> </td>
+						<td th:text="${cont.profissional}"> </td>
+						<th th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span></th>
+						<td th:text="${cont.data}"> </td>
+						<td th:text="${cont.hora}"> </td>
+						<th th:text="${cont.servico.descricao}"></th>
+						<td th:if="${cont.status == false}"> Pendente </td>
+						<td th:if="${cont.status == true}"> Confirmado </td>
+					</tr>
+				</table>
+
+
+			</div>
+			<!-- ----------- parte de portifolio  ---------------- -->
+
+			<div id="imagens">
+
+				<h3 style="margin-left:200px; color:white; ">Portifólio</h3>
+
+
+
+
+				<div class="card" style="width: 18rem;" th:each="servico : ${Servico}">
+
+
+					<img th:src="|/imagem/${servico.id}|" width="100px">
+
+
+					<span>Serviço: </span> <span class="card-text" th:text="${servico.descricao}"></span> <br>
+					<span>Valor: </span> <span class="card-text" th:text="'R$ ' + ${servico.valor}"></span> <br>
+					<span>Duração: </span> <span th:text="${servico.duracao} + ' min'"></span> <br>
+
+
+
+
+
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
 			<div class="row" id="left">
-				
-			
-				<div id="nomeLoja" >
-		  			
-		  			<h5 ><a th:href="@{/estabelecimentoCliente(id=${cont.Id})}" th:text="${cont.nomeEmpresa}"></a></h5>	
-			 	</div>
-		 									
+
+
+				<div id="nomeLoja">
+
+					<h5><a th:href="@{/estabelecimentoCliente(id=${cont.Id})}" th:text="${cont.nomeEmpresa}"></a></h5>
+				</div>
+
 				<div id="listaServ">
-						<div >
-						<a class="linkAgendamentos btn btn-secondary"  onclick="portifolio()">Portifólio</a>
-						</div>
-						<div>
-						<a class="linkAgendamentos  btn btn-secondary " onclick="agendamento()">Agendar  </a>
-						</div>
-						<div>
-						<a class="linkAgendamentos  btn btn-secondary " onclick="beneficios()">Beneficios  </a>
-						</div>
+					<div>
+						<a class="linkAgendamentos btn btn-secondary" onclick="portifolio()">Portifólio</a>
+					</div>
+					<div>
+						<a class="linkAgendamentos  btn btn-secondary " onclick="agendamento()">Agendar </a>
+					</div>
+					<div>
+						<a class="linkAgendamentos  btn btn-secondary " onclick="beneficios()">Beneficios </a>
+					</div>
 				</div>
-				
+
 				<div style="margin-left:20px; margin-top:20px;">
-						<a th:href="@{/listarEstabelecimentosCliente}" class="btn btn-light">Voltar</a>
+					<a th:href="@{/listarEstabelecimentosCliente}" class="btn btn-light">Voltar</a>
 				</div>
-				
-		
-				
+
+
+
 			</div>
-			
-	
-			
+
+
+
 			<section id="informacoes">
-					
-					<table>
-						<tr>
-						
+
+				<table>
+					<tr>
+
 						<td>Estabelecimento</td>
 						<td>Contato</td>
 						<td> Rua</td>
 						<td>Bairro</td>
 						<td>CEP</td>
-						</tr>
-					
-						<tr>
+					</tr>
+
+					<tr>
 						<td th:text="${cont.nomeEmpresa}"></td>
 						<td th:text="${cont.numero}"> </td>
 						<td th:text="${cont.endereco.rua}"></td>
 						<td th:text="${cont.endereco.bairro}"></td>
 						<td th:text="${cont.endereco.cep}"></td>
-						</tr>
-					</table>
-					
+					</tr>
+				</table>
+
 			</section>
-			
+
 
 		</div>
 	</section>
 </body>
+
 </html>

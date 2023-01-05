@@ -50,16 +50,12 @@ input#fotoPortifolio {
 
 
 #listaportifolio {
-  /*
 
-  width: 50%;
-  height: 50%;
-*/
   height: 50%;
   margin-left: 25%;
   margin-right: 10%;
   margin-top: 2%;
- 
+
   background-image: linear-gradient(to bottom right, #283547, black);
   border-radius: 5%;
 }
