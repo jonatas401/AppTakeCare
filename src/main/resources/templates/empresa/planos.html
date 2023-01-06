@@ -50,8 +50,10 @@
                       </p>
                      <p class="" >
                      	 <span>$<span th:text=" ${listPlanos.valor}"> </span></span>
+                     	
                       </p>
-                      <a th:href="@{/salvarPlanoEmpresa(plano=${listPlanos.id})}" class="btn btn-primary">Assine já</a>
+                      <a th:if="${session.usuarioLogado.plano.id} == ${listPlanos.id}"  class="btn btn-primary">Seu Plano</a>
+                      <a th:if="${session.usuarioLogado.plano.id} != ${listPlanos.id}" th:href="@{/salvarPlanoEmpresa(codigo=${listPlanos.id})}" class="btn btn-primary">Assine já</a>
                     </div>
                   </div>
                 </div>

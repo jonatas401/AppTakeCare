@@ -63,6 +63,14 @@
 					<input type="hidden" th:field="*{Id}">
 
 					<div id='primeiro'>
+					
+					<select th:field="*{plano}" class="form-control" id="TipoEmpresa" style="display: none;">
+								<option th:each="pl :  ${planos}"
+									th:text="${pl.nome}"
+									th:value="${pl.id}"></option>
+
+							</select>
+					
 						<div class="form-group">
 							<label id="labelCadastro" for="nome">Nome</label> <input type="text" th:field="*{nome}"
 								class="form-control" id="nome" placeholder="Seu Nome" required>

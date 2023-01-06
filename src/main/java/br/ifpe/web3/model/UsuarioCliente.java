@@ -2,11 +2,13 @@ package br.ifpe.web3.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 
@@ -22,6 +24,8 @@ public class UsuarioCliente {
 	private String email;
 	private String senha;
 	private Endereco endereco;
+	@Lob
+	@Column(columnDefinition="mediumblob")
 	private byte[] fotoPerfil;
 	@JoinColumn
 	@ManyToOne

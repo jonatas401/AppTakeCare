@@ -1,6 +1,8 @@
 package br.ifpe.web3.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,8 @@ import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.Noticia;
+import br.ifpe.web3.model.NoticiaDAO;
 import br.ifpe.web3.model.Planos;
 import br.ifpe.web3.model.PlanosDAO;
 import br.ifpe.web3.model.Profissional;
@@ -52,6 +56,8 @@ public class ControllerEmpresa {
 	private PlanosDAO planosDao;
 	@Autowired
 	private TipoEmpresaDAO tipoEmpresaDao;
+	@Autowired
+	private NoticiaDAO noticiaDao;
 	
 	
 	
@@ -75,6 +81,53 @@ public class ControllerEmpresa {
 		System.out.println();
 		return "empresa/addPortifolio";
 	}
+	
+	@GetMapping("/noticiaEmpresa")
+	public String noticia(Noticia noticia,Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		List<Noticia> listaNoticia = noticiaDao.findByEmpresaId(empresa.getId());
+		model.addAttribute("listaNoticia",listaNoticia);
+		System.out.println();
+		return "empresa/noticiaEmpresa";
+	}
+	
+	@PostMapping("/salvarNoticiaEmpresa")
+	public String salvarNoticia(Noticia noticia,Model model, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		noticia.setData(LocalDate.now());
+		noticia.setHora(LocalTime.now());
+		noticia.setEmpresa(empresa);
+			
+		noticiaDao.save(noticia);
+		return "redirect:noticiaEmpresa";
+	}
+	
+	@GetMapping("/noticiaUrgenteEmpresa")
+	public String noticiaUrgente(Model model, Integer codigo,HttpSession session, RedirectAttributes ra) throws LoginExceptions {
+		Noticia noticia =  noticiaDao.findById(codigo).orElse(null);
+		noticia.setUrgente(true);
+		noticiaDao.save(noticia);	
+		ra.addFlashAttribute("msg", "Noticia Urgente Notificada!");
+		return "redirect:noticiaEmpresa";
+	}
+	
+	@GetMapping("/removerNoticiaEmpresa")
+	public String removerNoticia(Integer codigo,Model model, HttpSession session, RedirectAttributes ra) throws LoginExceptions {
+		
+		
+		noticiaDao.deleteById(codigo);	
+		ra.addFlashAttribute("msg", "Noticia removido com Sucesso!");
+		return "redirect:noticiaEmpresa";
+	}
+	
+	@GetMapping("/editarNoticiaEmpresa")
+	public String editarNoticia(Model model,Integer codigo, RedirectAttributes ra) throws LoginExceptions {
+		
+		model.addAttribute("noticia",noticiaDao.findById(codigo));
+		ra.addFlashAttribute("msg", "Noticia editada com Sucesso!");
+		return "redirect:noticiaEmpresa";
+	}
+	
 	
 	@GetMapping("/servicoEmpresa")
 	public String servicoEmpresa(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
@@ -210,8 +263,8 @@ public class ControllerEmpresa {
 //	}
 //	
 	
-	@GetMapping("/removerProfissionalEmpresa")
-	public String removerProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
+	@GetMapping("/removerProfissionalServicoEmpresa")
+	public String removerServicoProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
 	
 		
 		profissionalServicoDao.deleteById(codigo);	
@@ -219,6 +272,22 @@ public class ControllerEmpresa {
 		return "redirect:profissionalEmpresa";
 	}
 	
+	@GetMapping("/removerProfissionalEmpresa")
+	public String removerProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
+		ProfissionalServico listaServ = profissionalServicoDao.findByProfissionalId(codigo);
+		
+		if(listaServ == null) {
+			
+			profissionalDao.deleteById(codigo);	
+			ra.addFlashAttribute("msg", " profissional removido com Sucesso!");
+			return "redirect:profissionalEmpresa";
+		}
+		
+		
+		ra.addFlashAttribute("msg", "Verifique se o profissional não etá sendo usado!");
+		return "redirect:profissionalEmpresa";
+		
+	}
 	
 	@GetMapping("/cadastrarPessoasEmpresa")
 	public String cadastrarPessoasEmpresa(UsuarioCliente cadastro, Model model , HttpSession session)  {
@@ -353,6 +422,7 @@ public class ControllerEmpresa {
 	@GetMapping("/editarAgendamentoEmpresa")
 	public String editarAgendamento(Integer codigo,Model model , HttpSession session) {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		
 		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(empresa.getId());
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
 		System.out.println(codigo);
@@ -361,6 +431,7 @@ public class ControllerEmpresa {
 		model.addAttribute("listaServico", listaServico);
 		model.addAttribute("profissionalServico", profissional);
 		model.addAttribute("agendamento", agenda);
+		model.addAttribute("listaAgendamento", agenda);
 		
 		return"empresa/agendarEmpresa";
 	}
@@ -413,12 +484,14 @@ public class ControllerEmpresa {
 		return "empresa/planos";
 	}
 	
-	@GetMapping("/salvarPlanosEmpresa")
-	public String salvarPlanoEmpresa(Model model, Planos plano,HttpSession session) {
+	@GetMapping("/salvarPlanoEmpresa")
+	public String salvarPlanoEmpresa(Model model, Integer codigo,HttpSession session) {
+		Planos plano = planosDao.findById(codigo).orElse(null);
+		System.out.println(plano.getNome());
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		empresa.setPlano(plano);
 		empresaDao.save(empresa);
-		return "redirect:planos";
+		return "redirect:planosEmpresa";
 	}
 	
 	

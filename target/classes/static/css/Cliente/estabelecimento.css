@@ -1,9 +1,9 @@
 
 
 #paginaLoja{
-	margin-top:5%;
+	margin-top:2%;
     width:70%;
-    min-height: 60%;
+    min-height: 70%;
     margin-left:25%; 
     background-color:#041e29;
     border:#34393d solid;
@@ -11,12 +11,13 @@
 }
 #nomeLoja{
     color:white;
-    margin-top: 10%;
+    margin-top: 20%;
 }
 
 #carouselExampleIndicators{
     width:500px;
     height:250px;
+    margin-top:5%;
     
 }
 #left{
@@ -28,11 +29,15 @@
 }
 #listaServ{
     width:500px;
-  
+    margin-top: 30%;
+}
+
+#buttonServ{
+	margin-bottom: 2%;
 }
 
 #informacoes{
-  	margin-top:10%;
+  	margin-top:5%;
     margin-left:30%;
     color:white;
     display: flex;
@@ -41,6 +46,18 @@
 #informacoes table tr td{
 	border:solid;
 	
+}
+#tableNoticia{
+	width:70%;
+	margin-left:25%;
+	margin-top: 2%;
+	
+}
+#todasNoticias{
+	width:70%;
+	display: none;
+	margin-left:25%;
+	margin-top: -25%;
 }
 
 
@@ -56,6 +73,7 @@
 	margin-left:20%;
 	display:none;
 }
+
 
 
 #buttonAgenda{

@@ -1,5 +1,6 @@
 package br.ifpe.web3.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,13 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.AgendamentoDAO;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.model.Noticia;
+import br.ifpe.web3.model.NoticiaDAO;
 import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ServicoLoja;
@@ -35,7 +42,8 @@ public class ControllerCliente {
 	private ServicoLojaDAO servicoLojaDao;
 	@Autowired
 	private ProfissionalDAO profissionalDao;
-
+	@Autowired
+	private NoticiaDAO noticiaDao;
 
 
 	
@@ -99,16 +107,22 @@ public class ControllerCliente {
 		UsuarioCliente cliente = (UsuarioCliente) session.getAttribute("usuarioLogado");
 
 		List<ServicoLoja> servico = servicoLojaDao.listaServico(empresa.getId());
-
 		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosCliente(cliente.getId(), empresa.getId());
-
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
+		List<Noticia> listaNoticia = noticiaDao.findByEmpresaId(empresa.getId());
+		
+		
+		for(Noticia list : listaNoticia) {
+			if(list.isUrgente()) {
+				model.addAttribute("listaNoticia", list);
+			}
+		}
 		
 		model.addAttribute("listaAgendamento", listaAgendamento);	
 		model.addAttribute( "loja",empresa);
 		model.addAttribute("agendamento", agendamento);
 		model.addAttribute("profissionalServico", profissional);
-
+		model.addAttribute("todasNoticias",listaNoticia);
 		model.addAttribute("Servico", servico);
 
 		return "cliente/estabelecimento";
@@ -117,17 +131,34 @@ public class ControllerCliente {
 	
 
 	@PostMapping("/UsuarioClienteEditado")
-	public String UsuarioClienteEditado(UsuarioCliente cliente, HttpSession session) {
+	public String UsuarioClienteEditado(UsuarioCliente cliente,@RequestParam("fileImage") MultipartFile file, HttpSession session) {
+		try {
+			cliente.setFotoPerfil(file.getBytes());
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
 		clienteDao.save(cliente);	
 		session.setAttribute("usuarioLogado", cliente);
-			
 		return "cliente/dadosCliente";
 	}
+	
+	@GetMapping("/fotoPerfilCliente/{idFoto}")
+	@ResponseBody
+	public byte[] exibirFotoPerfilCliente(@PathVariable("idFoto") Integer idFoto) {
+		System.out.println(idFoto);
+		System.out.println("imagem");
+		UsuarioCliente cliente = clienteDao.findById(idFoto).orElse(null);
+		return cliente.getFotoPerfil();
+	}
+	
 	@GetMapping("/removerloginCliente")
 	public String removerCliente(Integer Id,Model model) {
 		clienteDao.deleteById(Id);
 		return "/";
 	}
+	
 	@GetMapping("/removerAgendamentoCliente")
 	public String removerAgendamentoCliente(Integer codigo,Model model) {
 		agendaDao.deleteById(codigo);

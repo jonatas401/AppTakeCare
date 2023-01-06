@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.Planos;
+import br.ifpe.web3.model.PlanosDAO;
 import br.ifpe.web3.model.TipoEmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
@@ -22,7 +24,8 @@ public class Controler {
 	private ClienteDAO clienteDao;
 	@Autowired
 	private TipoEmpresaDAO tipoEmpresaDao;
-	
+	@Autowired
+	private PlanosDAO planosDao;
 	//*******Rotas de acesso geral***********
 	
 	
@@ -44,6 +47,8 @@ public class Controler {
 	
 	@GetMapping("/UsuarioEmpresa")
 	public String cadastroEmpresa(UsuarioEmpresa empresa, Model model) {
+		
+		model.addAttribute("planos", planosDao.findAll());
 		model.addAttribute("empresa", empresa);
 		model.addAttribute("tipoEmpresa", tipoEmpresaDao.findAll());
 		return "empresa/cadastroEmpresa";
@@ -70,8 +75,8 @@ public class Controler {
 	
 	@PostMapping("/salvarUsuarioEmpresa")
 	public String salvarCadastroEmpresa(UsuarioEmpresa empresa) {
-		System.out.println("empresa salvo!");
 			empresaDao.save(empresa);	
+			System.out.println("empresa salvo!");
 		return "redirect:/login";
 	}
 	

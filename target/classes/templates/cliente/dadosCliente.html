@@ -27,8 +27,9 @@
 				
 			
 			<div class="col">
-		     	 <img th:src="@{/img/perfil.jpeg}"  style="width: 70px; margin-top:10px;" class="p-3 border bg-light">
-		    </div>
+				<img id="imagemPerfil"  th:src="|fotoPerfilCliente/${session.usuarioLogado.id}|">
+			</div>
+
 			
 			<div id='primeiroDados'>
 						<div class="form-group">

@@ -14,5 +14,6 @@ public interface ProfissionalServicoDAO extends JpaRepository<ProfissionalServic
 	@Query("SELECT p from ProfissionalServico p where p.servico.id = :id")
 	public List<ProfissionalServico> buscaPorServico(Integer id);
 	
+	public ProfissionalServico findByProfissionalId(Integer id);
 	
 }

@@ -24,13 +24,12 @@
 	
 
 	<div id="conteinerDados" class="container col-sm-12 col-md-6 col-md-offset-2" >
-		<form action="/UsuarioClienteEditado" th:object="${cliente}" method="post">
+		<form action="/UsuarioClienteEditado" th:object="${cliente}" method="post"  enctype="multipart/form-data">
 		
 		<input type="hidden" th:field="*{Id}">
 		
 		<div id='primeiro'>
 		
-					
 					
 					<div class="form-group">
 						<label for="nome">Nome</label> <input type="text"   th:field="*{nome}"
@@ -49,6 +48,13 @@
 					</div>
 					
 					<input type="hidden" th:field="*{senha}">
+					
+					
+					<div class="form-group">
+						<label for="fotoPerfil">foto de perfil</label> <input type="file" name="fileImage" 
+							class="form-control">
+							<span style="color: white;">Tamanho Maximo 1MB</span>
+					</div>
 					
 			
 			</div>

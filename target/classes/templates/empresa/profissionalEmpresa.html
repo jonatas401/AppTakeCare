@@ -31,6 +31,16 @@
       		document.getElementById("formProfServico").style.display = "none"
       		
       		}
+      	function listaProf(){
+      		document.getElementById("tableProf").style.display = "block"
+      		document.getElementById("tableServ").style.display = "none"
+      		
+      		}
+      	function listaServ(){
+      		document.getElementById("tableProf").style.display = "none"
+      		document.getElementById("tableServ").style.display = "block"
+      		
+      		}	
       		
 
            
@@ -54,11 +64,21 @@
 			  </div>
 			</div>
 	
-		<h4 id="msg"  th:text="${msg}"></h4>
+		
+		
+		 <h4 id="msg"  th:text="${msg}"></h4>
+		
+		
 	<section class="agenda">
 	   	<div id="calendario">
 	   		<button onclick="cadastrar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar</button>
-	   		<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar Servico Ao Profissional</button>
+	   		<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Alocar Servico Ao Profissional</button>
+	   		<select  style="margin-top: 5px; margin-left:5px;" class="btn btn-light">
+	   		<option onclick="listaServ()">Listar Serviços dos Profissionais</option>
+	   		<option onclick="listaProf()">Listar Profissionais</option>
+	   		
+	   		
+	   		</select>
 	   		
 	   	</div>
    		<div id="formProf">
@@ -83,27 +103,25 @@
 
 
 			<div id="buscaProf">
-	
-					<form action="/pesquisaProfissionalEmpresa" method="post">
-				
-			   			<label>contato</label>
-			   			<input class="inputAgenda"  type="text" name="numero" required>
-	   			
-						
-						 <button class="btn btn-light"> pesquisar</button>
-					</form>
-				
-				
 			</div>
+			
    			<form action="/salvarProfissionalServicoEmpresa"  method="post">
-   			<input type="hidden" name="profissional"  th:value="${profissional.id}"  >
+   			
    			
    			<label>Nome</label>
-   			<input class="inputAgenda" th:field="${profissional.nome}"  type="text" required disabled>	
+   			<select class="btn btn-light" name="profissional">
+		   		<option th:each="cont : ${listaProfissional}"
+			   			th:text="${cont.nome}"
+			   			th:value="${cont.id}">
+		   		</option>
+	   		</select>
+	   		
+	   		
+	   		</select>
    			
    			<label>servico</label>
 
-   			<select name="servicoLoja"  id="inputAgenda" required="required">
+   			<select name="servicoLoja" class="btn btn-light" id="inputAgenda" required="required">
 				<option  th:value="''">selecione</option>
 				
 				<option  th:each="servico :  ${listaServicos}"
@@ -119,36 +137,53 @@
    			
    		</div>
    		
-   		
-   		<table id="table"  class="table table-dark table-striped-columns">
+   		<div id="tableServ">
+	   		<table id="table"  class="table table-dark table-striped-columns">
+	  				<tr>
+	  					
+						<th>Nome</th>
+						<th>Contato</th>
+						<th>Servicos</th>
+	                    <th>Empresa</th>
+	                    <th>Ações</th>
+	
+	  				</tr>
+	  				<tr th:each="cont : ${listaProfissionalServico}">
+	
+	  					<td th:text="${cont.profissional.nome}"> </td>
+						<td th:text="${cont.profissional.numero}"></td>
+						<td th:text="${cont.servico.descricao}">
+						</td>
+	  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
+						
+						<td>
+						<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalServicoEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
+						</td>
+	  				</tr>
+	  			</table>
+   		</div>		
+  			<!--***************** Lista de profissionais***************-->
+  		<div id="tableProf">
+  			<table id="table"   class="table table-dark table-striped-columns">
   				<tr>
   					
 					<th>Nome</th>
 					<th>Contato</th>
-					<th>Servicos</th>
                     <th>Empresa</th>
                     <th>Ações</th>
 
   				</tr>
-  				<tr th:each="cont : ${listaProfissionalServico}">
+  				<tr th:each="cont : ${listaProfissional}">
 
-  					<td th:text="${cont.profissional.nome}"> </td>
-					<td th:text="${cont.profissional.numero}"></td>
-					<td th:text="${cont.servico.descricao}">
-					</td>
-  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
-					
+  					<td th:text="${cont.nome}"> </td>
+					<td th:text="${cont.numero}"></td>
+  					<td th:text="${cont.empresa.nomeEmpresa}"> </td> 
 					<td>
-					<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
-					
+						<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
 					</td>
-					
-					
   				</tr>
-
-				
   			</table>
- 
+  		</div>
   	</section>
 </body>
 </html>
