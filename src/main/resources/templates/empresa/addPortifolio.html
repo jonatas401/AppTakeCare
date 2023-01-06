@@ -16,31 +16,31 @@
 
 <body>
 
-<main>
-  <div th:replace="empresa/navBarEmpresa :: #navConta"></div>
+  <main>
+    <div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 
-  <div id="listaportifolio">
-
-
-    <div class="row">
+    <div id="listaportifolio">
 
 
+      <div class="row">
 
-      <div class="card" style="width: 18rem;" th:each="cont : ${servicoLoja}">
 
-         <img  class="card-img-top"  alt="imagem"  th:src="|imagem/${cont.id}|">
-        <div class="card-body">
 
-        <span>Serviço: </span>   <span class="card-text" th:text="${cont.descricao}"></span><br>
-         <span>Valor: </span>  <span class="card-text" th:text="${cont.valor}"></span><br>
-         <span>Duração: </span> <span  th:text="${cont.duracao} + ' min'"></span>
+        <div class="card" style="width: 18rem;" th:each="cont : ${servicoLoja}">
 
+          <img class="card-img-top" alt="imagem" th:src="|imagem/${cont.id}|">
+          <div class="card-body">
+
+            <span>Serviço: </span> <span class="card-text" th:text="${cont.descricao}"></span><br>
+            <span>Valor: </span> <span class="card-text" th:text="${cont.valor}"></span><br>
+            <span>Duração: </span> <span th:text="${cont.duracao} + ' min'"></span>
+
+          </div>
         </div>
+
       </div>
 
-  </div>
-  
-</main>
+  </main>
 </body>
 
 </html>

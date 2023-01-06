@@ -1,5 +1,3 @@
-
-
 #paginaLoja{
 	margin-top:2%;
     width:70%;
@@ -8,11 +6,16 @@
     background-color:#041e29;
     border:#34393d solid;
     border-radius:10px;
+
 }
+
 #nomeLoja{
     color:white;
     margin-top: 20%;
 }
+
+
+
 
 #carouselExampleIndicators{
     width:500px;
@@ -34,18 +37,31 @@
 
 #buttonServ{
 	margin-bottom: 2%;
+
 }
 
-#informacoes{
-  	margin-top:5%;
-    margin-left:30%;
-    color:white;
-    display: flex;
-    
+
+#left {
+    width: 200px;
+    margin-left: 20px;
+    position: absolute;
+    top: 10%;
+
+
 }
-#informacoes table tr td{
-	border:solid;
-	
+
+
+#informacoes {
+    margin-top: 5%;
+    margin-left: 30%;
+    color: white;
+    display: flex;
+
+}
+
+#informacoes table tr td {
+    border: solid;
+
 }
 #tableNoticia{
 	width:70%;
@@ -63,16 +79,17 @@
 
 /******* agendamento********/
 
-#tabelaAgenda{
-	width:120vh;
-	min-height: 30vh;
-	background-color:rgb(25, 23, 23);
-	border-radius:20px;
-	margin-top:-30%;
-	border:solid;
-	margin-left:20%;
-	display:none;
+#tabelaAgenda {
+    width: 120vh;
+    min-height: 30vh;
+    background-color: rgb(25, 23, 23);
+    border-radius: 20px;
+    margin-top: -30%;
+    border: solid;
+    margin-left: 20%;
+    display: none;
 }
+
 
 
 
@@ -81,35 +98,62 @@
 	height:10vh;
 	background-color: #041e29;
 	border-radius:10px;
+
 }
-#agenda.h4{
-    color:white;
+#agenda.h4 {
+    color: white;
 }
+
+
 
 /***** portifolio ********/
 
-#imagens{
-   	margin-left:25%;
-   	margin-top:-30%;
-    display:none;
-    width:700px;
-    background-color:#555753;
-    border-radius:10px;
-    padding-bottom:10px;
-    
-}
-#portifolio{
-    height:300px;
-    margin-left:250px;
-    
+
+#imagens {
+    margin-left: 25%;
+    margin-top: -30%;
+    display: none;
+    width: 700px;
+    background-color: #33364b;
+    border-radius: 10px;
+    padding-bottom: 10px;
+
 
 }
 
-#dataAgendamento{
-    
-    margin-left:100px;
+
+#imagens .card img {
+
+    border-top: 2%;
+    border-bottom: 5%;
+    margin-right: 5%;
+    border-radius: 10px;
+    box-shadow: 6px 5px 15px black;
+
 }
-.horaAgendamento{
-    width:60px;
-    
+
+#imagens .card {
+    margin-top: 5%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgb(190, 189, 189);
+
+
+}
+
+
+#portifolio {
+    height: 300px;
+    margin-left: 250px;
+
+
+}
+
+#dataAgendamento {
+
+    margin-left: 100px;
+}
+
+.horaAgendamento {
+    width: 60px;
+
 }
