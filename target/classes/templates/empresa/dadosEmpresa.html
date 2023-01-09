@@ -34,7 +34,7 @@
 
 
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
-				<h4 id="msg"  th:text="${msg}"></h4>
+	<h4 id="msg" th:text="${msg}"></h4>
 
 	<div>
 
@@ -42,7 +42,7 @@
 
 
 			<div class="col">
-				<img id="imagemPerfil"  th:src="|fotoPerfil/${session.usuarioLogado.id}|">
+				<img id="imagemPerfil" th:src="|fotoPerfil/${session.usuarioLogado.id}|">
 			</div>
 
 
@@ -112,7 +112,8 @@
 				</div>
 
 				<a class="btn btn-light" style=" margin-left:20px; margin-top:17px;"
-					th:href="@{'/editarUsuario' + ${session.tipo}(Id=${session.usuarioLogado.Id})}"><img th:src="@{/img/edit.svg}" width="30px"></a>
+					th:href="@{'/editarUsuario' + ${session.tipo}(Id=${session.usuarioLogado.Id})}">Editar<img
+						th:src="@{/img/edit.svg}" width="30px"></a>
 			</div>
 
 

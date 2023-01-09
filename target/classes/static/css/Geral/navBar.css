@@ -1,52 +1,80 @@
+#navConta {
+    width: 20%;
+
+    height: 100vh;
+
+    min-width: 150px;
+    min-height: 150px;
 
 
-#navConta{
-  width:20%;
-  min-width: 150px;
-  height:100vh;
-  
-   
 }
 
-.nav-item{
+
+#navbarempresa {
+
+    width: 20%;
+    height: 100vh;
+    overflow-y: auto;
+
+
+}
+
+
+
+.nav-item {
     width: 40vh;
     padding: 5px;
+}
 
+.nav-item a img {
+
+    background-color: white;
 }
-#liLogo{
-	 padding: 0px;
-	 margin-left: 4%;
+
+
+
+#liLogo {
+    padding: 0px;
+    margin-left: 4%;
 }
-.nav-link{
-    padding:15px;
+
+.nav-link {
+    padding: 15px;
 }
-#navDados{
-    margin-left:15px;
+
+#navDados {
+    margin-left: 15px;
 }
-a#linkLogo:hover{
-	opacity:1;
-	background:0 ;
+
+a#linkLogo:hover {
+    opacity: 1;
+    background: 0;
 }
-#imagemLogo{
-	width:25vh;
-	min-width: 20vh;
+
+#imagemLogo {
+    width: 25vh;
+    min-width: 20vh;
 }
-a{
-    color:white;
-    text-decoration:none;
+
+
+
+a {
+    color: white;
+    text-decoration: none;
     cursor: pointer;
 }
-a:hover{
-    color:white;
-    opacity:0.5;
+
+a:hover {
+    color: white;
+    opacity: 0.5;
     background: black;
 }
 
 
 
 
-#list-tab{
-    width:400px;
-    border-radius:20px;
-    text-align:center;
+#list-tab {
+    width: 400px;
+    border-radius: 20px;
+    text-align: center;
 }
