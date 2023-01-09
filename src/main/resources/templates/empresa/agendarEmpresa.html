@@ -63,9 +63,14 @@
 				<select th:field="*{cliente}" class="inputAgenda" required>
 					<option id="setNome" th:value="''">selecione</option>
 					<option th:each="clientes :  ${listaAgendamento}"
+							
 					 		th:text="${clientes.cliente.nome}"
 							th:value="${clientes.cliente.id}"></option>
-						
+							
+							
+					<option th:each="clientes :  ${listaClienteEmpresa}"
+					 		th:text="${clientes.nome}"
+							th:value="${clientes.id}"></option>
 					
 
 				</select>

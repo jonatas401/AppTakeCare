@@ -25,6 +25,19 @@ public class LoginControllerTest {
 			}
 			
 		}
+		
+		@Test
+		public void detelarLogin() {
+			ControllerEmpresa empresa = new ControllerEmpresa();
+			
+			try {
+				empresa.deletarEmpresa(6, null, null);
+			} catch (LoginExceptions e) {
+				
+			Assertions.assertEquals("agenda nula",e.getMessage() );	
+			}
+				
+		}
 
 	}
 

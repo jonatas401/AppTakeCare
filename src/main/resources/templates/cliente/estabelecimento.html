@@ -83,7 +83,7 @@
 				        aria-current="true" aria-label="Slide 1"></button>
 				    </div>
 				    <div class="carousel-inner" >
-				      <div class="carousel-item active" th:each="servico : ${Servico}">
+				      <div class="carousel-item active" th:each="servico : ${Servico}" >
 				        <img  th:src="|/imagem/${servico.id}|" width="500px" height="250px">
 				      </div>
 				      
@@ -204,23 +204,28 @@
 			<!-- ----------- parte de portifolio  ---------------- -->
 		
 			<div id="imagens">
-				<div id="port">
-					<h3 style="margin-left:200px; color:white; ">Portifólio</h3>
-	
-					<div class="card" style="width: 18rem;" th:each="servico : ${Servico}">
-						<img th:src="|/imagem/${servico.id}|" width="100px">
-						<span>Serviço: </span> <span class="card-text" th:text="${servico.descricao}"></span> <br>
-						<span>Valor: </span> <span class="card-text" th:text="'R$ ' + ${servico.valor}"></span> <br>
-						<span>Duração: </span> <span th:text="${servico.duracao} + ' min'"></span> <br>
-					</div>
+				
+				<div id="">
+					<div class="row">
+					
+						<h3 style="margin-left:200px; color:white; ">Portifólio</h3>
+		
+						<div class="card"  th:each="servico : ${Servico}">
+							<img th:src="|/imagem/${servico.id}|" width="100px">
+							<span>Serviço: </span> <span class="card-text" th:text="${servico.descricao}"></span> <br>
+							<span>Valor: </span> <span class="card-text" th:text="'R$ ' + ${servico.valor}"></span> <br>
+							<span>Duração: </span> <span th:text="${servico.duracao} + ' min'"></span> <br>
+						</div>
+					</div>	
+				</div>
+				
 			</div>
-		</div>
 
 
 
-			<div class="row" id="left">
+			<div class="row col" id="left">
 
-				<div id="nomeLoja" th:if="${cont.fotoPerfil == null}">
+				<div id="nomeLoja" th:if="${cont.fotoPerfil == null}" >
 		  			<h5 ><a th:href="@{/estabelecimentoCliente(id=${cont.id})}" th:text="${cont.nomeEmpresa}"></a></h5>	
 			 	</div>
 			 	

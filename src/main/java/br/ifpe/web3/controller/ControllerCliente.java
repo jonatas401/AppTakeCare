@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
@@ -171,6 +172,19 @@ public class ControllerCliente {
 		UsuarioCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
 		return "cliente/editarUsuarioCliente";
+	}
+	
+	@GetMapping("/deletarUsuarioCliente")
+	public String deletarCliente(Integer Id, Model model, RedirectAttributes ra) {
+		Agendamento agenda = agendaDao.buscaPorPessoa(Id);
+ 		if(agenda == null) {
+ 			clienteDao.deleteById(Id);
+ 			ra.addFlashAttribute("msg" , "Sua conta foi apagada com sucesso!");
+ 			return "redirect:login";
+		}
+		ra.addFlashAttribute("msg" , "verifique se você não tem nenhum agendamento!");
+		
+		return "redirect:dadosCliente";
 	}
 	
 	

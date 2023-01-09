@@ -114,7 +114,6 @@
     margin-top: -30%;
     display: none;
     width: 700px;
-    background-color: #33364b;
     border-radius: 10px;
     padding-bottom: 10px;
 
@@ -123,6 +122,8 @@
 
 
 #imagens .card img {
+	width: 150px;
+  	height: 150px;
 
     border-top: 2%;
     border-bottom: 5%;
@@ -133,10 +134,11 @@
 }
 
 #imagens .card {
+	width: 190px;
+  	height: 260px;
     margin-top: 5%;
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgb(190, 189, 189);
-
 
 }
 

@@ -1,10 +1,16 @@
 package br.ifpe.web3.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
@@ -74,8 +80,18 @@ public class Controler {
 	}
 	
 	@PostMapping("/salvarUsuarioEmpresa")
-	public String salvarCadastroEmpresa(UsuarioEmpresa empresa) {
-			empresaDao.save(empresa);	
+	public String salvarCadastroEmpresa(UsuarioEmpresa empresa,@RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) {
+		System.out.println(file.getSize());
+		
+		try {
+			
+			empresa.setFotoPerfil(file.getBytes());
+		} catch (IOException e) {
+			ra.addFlashAttribute("msg", "Selecione uma foto Com até 1Mb");
+			return "redirect:/UsuarioEmpresa";
+			
+		}	
+		empresaDao.save(empresa);	
 			System.out.println("empresa salvo!");
 		return "redirect:/login";
 	}

@@ -11,6 +11,19 @@
 	
  <link rel="stylesheet" type="text/css" media="all" 
           href="../static/css/style.css" th:href="@{/css/style.css}" />
+          
+          
+<script th:inline="javascript">
+     	function myFunction() {
+		  var txt;
+		  if (confirm("Você realmente deseja exluir sua conta ?")) {
+			   	document.getElementById("apagar").style.display = "block"
+			   	document.getElementById("solicitar").style.display = "none"
+		  } else {
+		    
+		  }
+		 }
+    </script> 		
 	
 	
 </head>
@@ -20,7 +33,7 @@
 	
 	
 
-	
+		<h4 id="msg"  th:text="${msg}"></h4>
 				
 		<div id="conteinerDados" class="container col-sm-12 col-md-6 col-md-offset-2" >
 				
@@ -48,6 +61,10 @@
 							<label for="email">Email</label> <input type="email" th:value="${session.usuarioLogado.Email}"
 								class="form-control" id="email" placeholder="Seu Email" disabled>
 						</div>
+						
+								
+					<a id="apagar" class="btn btn-danger" style=" margin-left:20px; margin-top:45px; display: none;" th:href="@{'/deletarUsuarioCliente'(Id=${session.usuarioLogado.Id})}">deletar conta</a>
+					<button id="solicitar"  class="btn btn-danger" onclick="myFunction()"  style=" margin-left:20px; margin-top:45px;">Exclusão de conta</button>
 						
 				
 				</div>
@@ -81,7 +98,8 @@
 							class="form-control" id="estado" placeholder="estado" disabled>
 					</div>
 								
-								<a  class="btn btn-light" style=" margin-left:20px; margin-top:17px;" th:href="@{'/editarUsuarioCliente'(Id=${session.usuarioLogado.Id})}">Editar</a>
+						<a  class="btn btn-light" style=" margin-left:20px; margin-top:17px;" th:href="@{'/editarUsuarioCliente'(Id=${session.usuarioLogado.Id})}">Editar</a>
+								
 					</div>
 		
 		

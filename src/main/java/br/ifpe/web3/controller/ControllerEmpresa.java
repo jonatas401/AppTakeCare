@@ -62,7 +62,7 @@ public class ControllerEmpresa {
 	
 	
 	@GetMapping("/dadosEmpresa")
-	public String dadosEmpresa() throws LoginExceptions {
+	public String dadosEmpresa() {
 		System.out.println();
 		return "empresa/dadosEmpresa";
 	}
@@ -75,7 +75,7 @@ public class ControllerEmpresa {
 	
 	
 	@GetMapping("/portifolioEmpresa")
-	public String portifolio(Model model, HttpSession session) throws LoginExceptions {
+	public String portifolio(Model model, HttpSession session) {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		model.addAttribute("servicoLoja",servicoLojaDao.listaServico(empresa.getId()));
 		System.out.println();
@@ -83,7 +83,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/noticiaEmpresa")
-	public String noticia(Noticia noticia,Model model, HttpSession session) throws LoginExceptions {
+	public String noticia(Noticia noticia,Model model, HttpSession session)  {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<Noticia> listaNoticia = noticiaDao.findByEmpresaId(empresa.getId());
 		model.addAttribute("listaNoticia",listaNoticia);
@@ -92,7 +92,7 @@ public class ControllerEmpresa {
 	}
 	
 	@PostMapping("/salvarNoticiaEmpresa")
-	public String salvarNoticia(Noticia noticia,Model model, HttpSession session) throws LoginExceptions {
+	public String salvarNoticia(Noticia noticia,Model model, HttpSession session)  {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		noticia.setData(LocalDate.now());
 		noticia.setHora(LocalTime.now());
@@ -103,7 +103,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/noticiaUrgenteEmpresa")
-	public String noticiaUrgente(Model model, Integer codigo,HttpSession session, RedirectAttributes ra) throws LoginExceptions {
+	public String noticiaUrgente(Model model, Integer codigo,HttpSession session, RedirectAttributes ra)  {
 		Noticia noticia =  noticiaDao.findById(codigo).orElse(null);
 		noticia.setUrgente(true);
 		noticiaDao.save(noticia);	
@@ -112,7 +112,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/removerNoticiaEmpresa")
-	public String removerNoticia(Integer codigo,Model model, HttpSession session, RedirectAttributes ra) throws LoginExceptions {
+	public String removerNoticia(Integer codigo,Model model, HttpSession session, RedirectAttributes ra) {
 		
 		
 		noticiaDao.deleteById(codigo);	
@@ -121,7 +121,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/editarNoticiaEmpresa")
-	public String editarNoticia(Model model,Integer codigo, RedirectAttributes ra) throws LoginExceptions {
+	public String editarNoticia(Model model,Integer codigo, RedirectAttributes ra)  {
 		
 		model.addAttribute("noticia",noticiaDao.findById(codigo));
 		ra.addFlashAttribute("msg", "Noticia editada com Sucesso!");
@@ -130,7 +130,7 @@ public class ControllerEmpresa {
 	
 	
 	@GetMapping("/servicoEmpresa")
-	public String servicoEmpresa(ServicoLoja servico, Model model, HttpSession session) throws LoginExceptions {
+	public String servicoEmpresa(ServicoLoja servico, Model model, HttpSession session) {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
 		
@@ -140,7 +140,7 @@ public class ControllerEmpresa {
 	}
 	
 	@PostMapping("/servicoEmpresa")
-	public String salvarServico(ServicoLoja servico, Model model, HttpSession session, @RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) throws LoginExceptions {
+	public String salvarServico(ServicoLoja servico, Model model, HttpSession session, @RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		servico.setEmpresa(chaveId);
 		servico.getEmpresa().setId(chaveId.getId());
@@ -156,7 +156,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/editarServicoEmpresa")
-	public String editarServicoEmpresa(Integer codigo, Model model, HttpSession session) throws LoginExceptions {
+	public String editarServicoEmpresa(Integer codigo, Model model, HttpSession session)  {
 		ServicoLoja servico = servicoLojaDao.findById(codigo).orElse(null);
 		
 		model.addAttribute("servico", servico);
@@ -165,7 +165,7 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/removerServicoEmpresa")
-	public String removerServico(ServicoLoja servico, Integer codigo, RedirectAttributes ra) throws LoginExceptions {
+	public String removerServico(ServicoLoja servico, Integer codigo, RedirectAttributes ra) {
 		List<ProfissionalServico> profissionalServico = profissionalServicoDao.buscaPorServico(codigo);
 		for(ProfissionalServico serv : profissionalServico) {
 			if(serv != null) {
@@ -274,10 +274,9 @@ public class ControllerEmpresa {
 	
 	@GetMapping("/removerProfissionalEmpresa")
 	public String removerProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
-		ProfissionalServico listaServ = profissionalServicoDao.findByProfissionalId(codigo);
+		List<ProfissionalServico> listaServ = profissionalServicoDao.findByProfissionalId(codigo);
 		
-		if(listaServ == null) {
-			
+		if(listaServ.isEmpty()) {
 			profissionalDao.deleteById(codigo);	
 			ra.addFlashAttribute("msg", " profissional removido com Sucesso!");
 			return "redirect:profissionalEmpresa";
@@ -345,7 +344,7 @@ public class ControllerEmpresa {
 		//UsuarioCliente cliente = clienteDao.findById(1).orElse(null); 
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		List<Agendamento> listaAgendamento = agendaDao.listarAgendamentosEmpresa(empresa.getId());
-		List<UsuarioCliente> listaClienteEmpresa = agendaDao.listarAgendamentosClienteEmpresa(empresa.getId());
+		List<UsuarioCliente> listaClienteEmpresa = clienteDao.listaClientesCadastrados(empresa.getId());
 		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(empresa.getId());
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
 		
@@ -450,8 +449,8 @@ public class ControllerEmpresa {
 		try {
 			empresa.setFotoPerfil(file.getBytes());
 		} catch (IOException e) {
-			
-			e.printStackTrace();
+			ra.addFlashAttribute("msg", "Selecione uma foto Com até 1Mb");
+			return "redirect:editarUsuarioEmpresa";
 		}
 		
 		empresaDao.save(empresa);	
@@ -460,12 +459,55 @@ public class ControllerEmpresa {
 		return "redirect:dadosEmpresa";
 	}
 	
+	@GetMapping("/deletarUsuarioEmpresa")
+	public String deletarEmpresa(Integer Id, Model model, RedirectAttributes ra) throws LoginExceptions {
+		List<Agendamento> agenda = agendaDao.listarAgendamentosEmpresa(Id);
+		List<ServicoLoja> servico = servicoLojaDao.listaServico(Id);	
+		List<UsuarioCliente> cliente = clienteDao.listaClientesCadastrados(Id);
+		List<Profissional> profissional = profissionalDao.listaProfissional(Id);
+		List<Noticia> noticia = noticiaDao.findByEmpresaId(Id);
+		
+		if(agenda.isEmpty() != true) {
+ 			System.out.println("contem agendamento");
+ 			ra.addFlashAttribute("msg" , "verifique se você não tem nenhum agendamento!");
+ 			return "redirect:dadosEmpresa";
+		}
+		
+		for(Profissional prof :profissional) {
+			System.out.println(prof.getNome());
+			List<ProfissionalServico> profServ = profissionalServicoDao.findByProfissionalId(prof.getId());
+			System.out.println("listar profissional");
+			System.out.println(profServ.isEmpty());
+				for(ProfissionalServico serv : profServ) {
+					System.out.println("listar servicoprofissional");
+					System.out.println(serv.getId());
+					ProfissionalServico se =  profissionalServicoDao.findById(serv.getId()).orElse(null);
+					System.out.println(se.getId());
+					profissionalServicoDao.deleteById(se.getId());
+				}
+		
+			
+			profissionalDao.deleteById(prof.getId());
+			
+		}
+		for(ServicoLoja serv: servico) {
+			servicoLojaDao.deleteById(serv.getId());
+		}
+		for(UsuarioCliente cli : cliente) {
+			clienteDao.deleteById(cli.getId());
+		}
+		for(Noticia not : noticia) {
+			noticiaDao.deleteById(not.getId());
+		}
+	 		
+		
+		empresaDao.deleteById(Id);
+		ra.addFlashAttribute("msg" , "Sua conta foi apagada com sucesso!");
+		return "redirect:login";
 	
-	@GetMapping("/removerloginEmpresa")
-	public String removerEmpresa(Integer Id,Model model) {
-		clienteDao.deleteById(Id);
-		return "/login";
 	}
+	
+
 	
 	@GetMapping("/fotoPerfil/{idFoto}")
 	@ResponseBody
@@ -494,9 +536,5 @@ public class ControllerEmpresa {
 		return "redirect:planosEmpresa";
 	}
 	
-	
-
-
-
 
 }

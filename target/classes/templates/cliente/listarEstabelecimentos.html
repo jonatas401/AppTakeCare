@@ -43,8 +43,11 @@
 			<div th:each="cont : ${listarLojas}" class="list-group" id="list-tab" role="tablist">
 
 
-				<a id="nomesEstabelecimento" class="list-group-item" th:href="@{/estabelecimentoCliente(id=${cont.Id})}"
-					role="tab" th:text="${cont.nomeEmpresa}"></a>
+		
+				<a id="nomesEstabelecimento" class="list-group-item" th:href="@{/estabelecimentoCliente(id=${cont.Id})}">
+					<img id="imagemPerfilLista"  th:src="|fotoPerfil/${cont.id}|"><br>
+					<span th:text="${cont.nomeEmpresa}"></span>
+					</a>
 
 
 			</div>

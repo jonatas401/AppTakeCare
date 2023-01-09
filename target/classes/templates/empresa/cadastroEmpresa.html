@@ -55,11 +55,13 @@
 
 	<main>
 		<section class="cadastro">
-
+		
 
 			<div id="formCad" Style="margin-left:25%; margin-top:5%;"
 				class="container col-sm-12 col-md-6 col-md-offset-2">
-				<form action="/salvarUsuarioEmpresa" th:object="${empresa}" method="post">
+				
+				<h4 id="msg"  th:text="${msg}"></h4>
+				<form action="/salvarUsuarioEmpresa" th:object="${empresa}" method="post" enctype="multipart/form-data">
 					<input type="hidden" th:field="*{Id}">
 
 					<div id='primeiro'>
@@ -109,6 +111,14 @@
 
 							</select>
 						</div>
+						
+						<div class="form-group">
+						<label for="fotoPerfil">Essa foto irá aparecer na listagem para os clientes</label> 
+						<input type="file" name="fileImage" 
+							class="form-control">
+							<span style="color: white;">Tamanho Maximo 1MB
+							</span>
+					</div>
 
 					</div>
 
