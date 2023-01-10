@@ -19,7 +19,9 @@ public class FiltroUsuario implements Filter {
 	private String[] pathLiberados = {"/", "/cadastro", "/login", "/opcaoCadastro", "/esqueciSenha", "/efetuarLogin"
 									,"/UsuarioCliente" ,"/UsuarioEmpresa","/h2-console(.*)", "/css/(.*)", "/img/(.*)", "/logoff"
 									, "/fazerAgendamento", "/removerAgendamentoCliente", "/salvarUsuarioEmpresa"
-									, "/salvarUsuarioCliente", "/imagem/(.*)", "/fotoPerfil/(.*)"};
+									, "/salvarUsuarioCliente", "/imagem/(.*)", "/fotoPerfil/(.*)", "/pinConfirmacao"
+									,"/confirmarCod","/alterarSenha"
+										};
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -34,6 +36,7 @@ public class FiltroUsuario implements Filter {
 		for(String livre : pathLiberados) {
 			if(path.matches(livre)) {
 				chain.doFilter(request, response);
+			
 				return;
 			}
 			

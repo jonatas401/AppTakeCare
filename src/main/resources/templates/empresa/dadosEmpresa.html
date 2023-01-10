@@ -19,11 +19,10 @@
      	function myFunction() {
 			  var txt;
 			  if (confirm("Você realmente deseja exluir sua conta ?")) {
-				  alert("antes de apagar a conta verifique se sua conta possui agendamento")
 				   	document.getElementById("apagar").style.display = "block"
 				   	document.getElementById("solicitar").style.display = "none"
 			  } else {
-			    
+			 	 window.location.assign("http://localhost:8080/dadosEmpresa")
 			   }
 		 }
     </script> 		

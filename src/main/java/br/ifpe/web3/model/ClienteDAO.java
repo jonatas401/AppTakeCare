@@ -11,6 +11,8 @@ public interface ClienteDAO extends JpaRepository<UsuarioCliente, Integer> {
 	
 	@Query("SELECT c from UsuarioCliente c where c.empresa.id like :id")
 	public List<UsuarioCliente> listaClientesCadastrados(Integer id);
+
+	public UsuarioCliente findByEmail(String email);
 	
 
 }

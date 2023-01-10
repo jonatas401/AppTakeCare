@@ -23,7 +23,6 @@ public class UsuarioEmpresa {
 	private String email;
 	@NotBlank(message ="deve ser preenchido")
 	private String senha;
-	@NotBlank(message ="deve ser preenchido")
 	private String nomeEmpresa;
 	@JoinColumn
 	@OneToOne
@@ -35,10 +34,16 @@ public class UsuarioEmpresa {
 	@Lob
 	@Column(columnDefinition="mediumblob")
 	private byte[] fotoPerfil;
+	private String codigoRecSenha;
 	
 	
 	
-	
+	public String getCodigoRecSenha() {
+		return codigoRecSenha;
+	}
+	public void setCodigoRecSenha(String codigoRecSenha) {
+		this.codigoRecSenha = codigoRecSenha;
+	}
 	public Endereco getEndereco() {
 		return endereco;
 	}

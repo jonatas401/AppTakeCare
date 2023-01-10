@@ -50,9 +50,9 @@ public class ControllerCliente {
 	
 	
 	@GetMapping("/dadosCliente")
-	public String meusDados() throws LoginExceptions {
-	
-		System.out.println();
+	public String meusDados(HttpSession session) throws LoginExceptions {
+		UsuarioCliente chave =(UsuarioCliente) session.getAttribute("usuarioLogado");
+		System.out.println(chave.getFotoPerfil());
 		return "cliente/dadosCliente";
 	}
 	

@@ -1,13 +1,18 @@
 package br.ifpe.web3.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,11 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ifpe.web3.model.ClienteDAO;
 import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Endereco;
-import br.ifpe.web3.model.Planos;
 import br.ifpe.web3.model.PlanosDAO;
 import br.ifpe.web3.model.TipoEmpresaDAO;
+
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
+import br.ifpe.web3.util.UsuarioEmail;
 
 @Controller
 public class Controler {
@@ -32,6 +38,11 @@ public class Controler {
 	private TipoEmpresaDAO tipoEmpresaDao;
 	@Autowired
 	private PlanosDAO planosDao;
+	@Autowired
+	private UsuarioEmail usuarioEmail;
+	@Autowired
+	UsuarioEmail usuarioemail;
+	
 	//*******Rotas de acesso geral***********
 	
 	
@@ -67,10 +78,80 @@ public class Controler {
 	}
 	
 	
+	
+	
 	@GetMapping("/esqueciSenha")
 	public String esqueciSenha(Model model) {
 		return "esqueciSenha";
 	}
+	
+	@GetMapping("/pinConfirmacao")
+	public String pinConfirmacao(String email,RedirectAttributes ra, Model model) {
+		
+		List<String> lista = Arrays.asList("1","2","3","4","5","6");
+		Collections.shuffle(lista);
+
+		String codigo = String.join("", lista);
+		
+		try {
+			System.out.println("confirmacao codigo");
+			this.usuarioEmail.enviarEmailEsqueceuSenha(email, codigo);
+			UsuarioEmpresa usuarioEmpresa = this.empresaDao.findByEmail(email);
+			usuarioEmpresa.setCodigoRecSenha(codigo);
+			System.out.println(codigo);
+			
+			model.addAttribute("usuario", usuarioEmpresa);
+						
+			this.empresaDao.save(usuarioEmpresa);
+			return "recuperarSenha";
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ra.addFlashAttribute("msg", "Usuario não encontrado");
+			return "redirect:/login";
+		}
+	}
+	@PostMapping("/confirmarCod")
+	public String confirmarPin(String email,String codigo,Model model, UsuarioEmpresa usuarioEmpresa, RedirectAttributes ra,HttpSession sessao) {
+		if(this.empresaDao.existsByEmailAndCodigoRecSenha(email, codigo)) {
+			UsuarioEmpresa user = this.empresaDao.findByEmail(email);
+			model.addAttribute("usuario", user);
+						
+			return "acesso";
+			
+		}
+		else if(usuarioEmpresa.getEmail()=="" || usuarioEmpresa.getSenha()=="") {
+			ra.addFlashAttribute("msg", "Preencha todos os campos");
+			return "redirect:/recuperarSenha";
+		}
+		else {
+			ra.addFlashAttribute("msg", "Codigo invalido, tente novamente");
+			return "redirect:/recuperarSenha";
+		
+		}
+	}
+	
+	@PostMapping("/alterarSenha")
+	public String alterarSenha(@Validated UsuarioEmpresa usuarioEmpresa, String email,String senha, RedirectAttributes ra) {
+		System.out.println(email);
+		System.out.println(senha);
+		
+		usuarioEmpresa = this.empresaDao.findByEmail(email);
+		usuarioEmpresa.setSenha(senha);
+		
+		this.empresaDao.save(usuarioEmpresa);
+		ra.addFlashAttribute("msg", "Senha alterada");
+		return "redirect:/login";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@PostMapping("/salvarUsuarioCliente")
 	public String salvarUsuarioCliente(UsuarioCliente cliente, Endereco endereco) {

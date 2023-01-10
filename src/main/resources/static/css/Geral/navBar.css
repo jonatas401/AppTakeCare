@@ -1,29 +1,28 @@
 #navConta {
     width: 20%;
-
     height: 100vh;
-
     min-width: 150px;
     min-height: 150px;
-
 
 }
 
 
 #navbarempresa {
-
     width: 20%;
     height: 100vh;
-
+    overflow-y:auto;
 
 }
-
-
 
 .nav-item {
     width: 40vh;
     padding: 5px;
+   
 
+}
+
+.nav-item a img{
+	 background-color:white;
 }
 
 #liLogo {
@@ -49,8 +48,6 @@ a#linkLogo:hover {
     min-width: 20vh;
 }
 
-
-
 a {
     color: white;
     text-decoration: none;
@@ -63,16 +60,11 @@ a:hover {
     background: black;
 }
 
-
-
-
 #list-tab {
     width: 400px;
     border-radius: 20px;
     text-align: center;
 }
-
-
 
 
 

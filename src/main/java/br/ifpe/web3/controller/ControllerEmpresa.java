@@ -113,8 +113,6 @@ public class ControllerEmpresa {
 	
 	@GetMapping("/removerNoticiaEmpresa")
 	public String removerNoticia(Integer codigo,Model model, HttpSession session, RedirectAttributes ra) {
-		
-		
 		noticiaDao.deleteById(codigo);	
 		ra.addFlashAttribute("msg", "Noticia removido com Sucesso!");
 		return "redirect:noticiaEmpresa";
@@ -406,6 +404,7 @@ public class ControllerEmpresa {
 	public String removerAgendamento(Integer codigo,Model model, RedirectAttributes ra) {
 		agendaDao.deleteById(codigo);
 		ra.addFlashAttribute("msg", "agendamento removido com Sucesso!");
+		
 		return"redirect:agendarEmpresa";
 	}
 	
@@ -460,7 +459,9 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/deletarUsuarioEmpresa")
-	public String deletarEmpresa(Integer Id, Model model, RedirectAttributes ra) throws LoginExceptions {
+	public String deletarEmpresa(Integer Id, Model model, RedirectAttributes ra, HttpSession session) throws LoginExceptions {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		if(empresa.getId() == Id) {
 		List<Agendamento> agenda = agendaDao.listarAgendamentosEmpresa(Id);
 		List<ServicoLoja> servico = servicoLojaDao.listaServico(Id);	
 		List<UsuarioCliente> cliente = clienteDao.listaClientesCadastrados(Id);
@@ -502,8 +503,11 @@ public class ControllerEmpresa {
 	 		
 		
 		empresaDao.deleteById(Id);
+		
+		}
 		ra.addFlashAttribute("msg" , "Sua conta foi apagada com sucesso!");
 		return "redirect:login";
+	
 	
 	}
 	
@@ -535,6 +539,8 @@ public class ControllerEmpresa {
 		empresaDao.save(empresa);
 		return "redirect:planosEmpresa";
 	}
+	
+	
 	
 
 }

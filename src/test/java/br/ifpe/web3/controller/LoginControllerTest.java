@@ -31,7 +31,7 @@ public class LoginControllerTest {
 			ControllerEmpresa empresa = new ControllerEmpresa();
 			
 			try {
-				empresa.deletarEmpresa(6, null, null);
+				empresa.deletarEmpresa(6, null, null, null);
 			} catch (LoginExceptions e) {
 				
 			Assertions.assertEquals("agenda nula",e.getMessage() );	

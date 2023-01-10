@@ -10,6 +10,12 @@ public interface EmpresaDAO extends JpaRepository<UsuarioEmpresa, Integer> {
 	//public UsuarioEmpresa findByNomeEmpresaAndId(String nomeEmpresa, Integer id);
 
 	public List<UsuarioEmpresa> findByNomeEmpresaContaining(String pesquisa);
+
+	public UsuarioEmpresa findByEmail(String email);
+
+	public boolean existsByEmailAndCodigoRecSenha(String email, String codigo);
+
+	
 	
 	
 	
