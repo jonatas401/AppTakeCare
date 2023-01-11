@@ -15,17 +15,17 @@
 	<link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}" />
 
 
-<script th:inline="javascript">
-     	function myFunction() {
-			  var txt;
-			  if (confirm("Você realmente deseja exluir sua conta ?")) {
-				   	document.getElementById("apagar").style.display = "block"
-				   	document.getElementById("solicitar").style.display = "none"
-			  } else {
-			 	 window.location.assign("http://localhost:8080/dadosEmpresa")
-			   }
-		 }
-    </script> 		
+	<script th:inline="javascript">
+		function myFunction() {
+			var txt;
+			if (confirm("Você realmente deseja exluir sua conta ?")) {
+				document.getElementById("apagar").style.display = "block"
+				document.getElementById("solicitar").style.display = "none"
+			} else {
+				window.location.assign("http://localhost:8080/dadosEmpresa")
+			}
+		}
+	</script>
 
 </head>
 
@@ -70,18 +70,21 @@
 					<label for="email">Email</label> <input type="email" th:value="${session.usuarioLogado.Email}"
 						class="form-control" id="email" placeholder="Seu Email" disabled>
 				</div>
-			
-				
-				<a id="apagar" class="btn btn-danger" style=" margin-left:20px; margin-top:20px; display: none;" th:href="@{'/deletarUsuarioEmpresa'(Id=${session.usuarioLogado.Id})}">deletar conta</a>
-				<button id="solicitar"  class="btn btn-danger" onclick="myFunction()"  style=" margin-left:20px; margin-top:20px;">Exclusão de conta</button>
-							
+
+
+				<a id="apagar" class="btn btn-danger" style=" margin-left:20px; margin-top:20px; display: none;"
+					th:href="@{'/deletarUsuarioEmpresa'(Id=${session.usuarioLogado.Id})}">Confirmar Exclusão</a>
+
+				<button id="solicitar" class="btn btn-light" onclick="myFunction()"
+					style=" margin-left:20px; margin-top:20px;">Excluir de conta</button>
+
 
 			</div>
 
 			<div id="segundoDados">
 
 				<div class="form-group">
-					<label for="cep">Cep</label> <input type="text" th:value="${session.usuarioLogado.endereco.cep}"
+					<label for="cep">CEP</label> <input type="text" th:value="${session.usuarioLogado.endereco.cep}"
 						class="form-control" id="cep" placeholder="cep" disabled>
 				</div>
 

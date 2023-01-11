@@ -24,7 +24,7 @@
 			document.getElementById("formAgenda").style.display = "none"
 
 		}
-		
+
 
 
 	</script>
@@ -36,27 +36,28 @@
 
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 
-	<h4 id="msg"  th:text="${msg}"></h4>
+	<h4 id="msg" th:text="${msg}"></h4>
 	<section class="agenda">
 
-	   	<div id="calendario">
-	   		<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar Cliente</button>
-	   		
-	   	</div>
-   		<div id="formAgenda">
-   			<form action="/salvarCadastroPessoasEmpresa" th:object="${cadastro}" method="post">
-   			<input class="inputAgenda" type="hidden" th:field="*{id}" >
-   			
-   			
+		<div id="calendario">
+			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar
+				Cliente</button>
+
+		</div>
+		<div id="formAgenda">
+			<form action="/salvarCadastroPessoasEmpresa" th:object="${cadastro}" method="post">
+				<input class="inputAgenda" type="hidden" th:field="*{id}">
+
+
 				<label>Cliente</label>
-				<input class="inputAgenda" id="setNome" type="text" th:field="*{nome}" placeholder="Nome"
-					required>
+				<input class="inputAgenda" id="setNome" type="text" th:field="*{nome}" placeholder="Nome" required>
 				<label>Contato</label>
 				<input class="inputAgenda" id="setNumero" type="text" th:field="*{numero}" placeholder="Numero"
 					required>
 
 				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
-			<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
+				<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"
+						th:src="@{/img/close-line.svg}" width="30px"></button>
 			</form>
 
 		</div>
@@ -64,16 +65,18 @@
 			<tr>
 				<th>Cliente</th>
 				<th>Contato</th>
-				
-				<th>Acões</th>
+
+				<th>Ações</th>
 			</tr>
 			<tr th:each="cont : ${cadastroCliente}">
 				<td id="nome" th:text="${cont.nome}"> </td>
 				<td id="numero" th:text="${cont.numero}"></td>
 				<td>
+
 				<a id="acoes" utton class="btn btn-light"
 							th:href="@{/removerCadastroPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></a>
 				<a  class="btn btn-light" th:href="@{/editarPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/edit.svg}" width="30px"></a>
+
 				</td>
 			</tr>
 
@@ -81,22 +84,9 @@
 		</table>
 
 	</section>
-	
-	
-	<script>function editarAgendamento() {
-			document.getElementById("formAgenda").style.display = "block"
-			let nome = document.getElementById("nome")
-			let numero = document.getElementById("numero")
-		
-			
-			console.log(numero);
-			console.log(nome);
 
-			document.getElementById("setNome").innerHTML = "jonatas"
-			document.getElementById("setNumero").innerHTML = numero.innerHTML;
-		
 
-		}</script>
+	
 </body>
 
 </html>
