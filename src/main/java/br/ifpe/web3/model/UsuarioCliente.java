@@ -1,7 +1,6 @@
 package br.ifpe.web3.model;
 
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,6 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-
 public class UsuarioCliente {
 	
 	
@@ -30,6 +28,16 @@ public class UsuarioCliente {
 	@JoinColumn
 	@ManyToOne
 	private UsuarioEmpresa empresa;
+	private String codigoRecSenha;
+	
+	
+	
+	public String getCodigoRecSenha() {
+		return codigoRecSenha;
+	}
+	public void setCodigoRecSenha(String codigoRecSenha) {
+		this.codigoRecSenha = codigoRecSenha;
+	}
 	
 	public UsuarioEmpresa getEmpresa() {
 		return empresa;

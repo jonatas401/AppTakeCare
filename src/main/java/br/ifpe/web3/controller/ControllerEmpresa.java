@@ -36,6 +36,7 @@ import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.TipoEmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
+import br.ifpe.web3.util.UsuarioEmail;
 
 @Controller
 public class ControllerEmpresa {
@@ -58,6 +59,8 @@ public class ControllerEmpresa {
 	private TipoEmpresaDAO tipoEmpresaDao;
 	@Autowired
 	private NoticiaDAO noticiaDao;
+	@Autowired
+	UsuarioEmail usuarioemail;
 	
 	
 	
@@ -120,10 +123,11 @@ public class ControllerEmpresa {
 	
 	@GetMapping("/editarNoticiaEmpresa")
 	public String editarNoticia(Model model,Integer codigo, RedirectAttributes ra)  {
-		
-		model.addAttribute("noticia",noticiaDao.findById(codigo));
-		ra.addFlashAttribute("msg", "Noticia editada com Sucesso!");
-		return "redirect:noticiaEmpresa";
+		Noticia noticia = noticiaDao.findById(codigo).orElse(null);
+		model.addAttribute("noticia",noticia);
+	
+		//ra.addFlashAttribute("msg", "Noticia editada com Sucesso!");
+		return "empresa/noticiaEmpresa";
 	}
 	
 	
@@ -215,23 +219,23 @@ public class ControllerEmpresa {
 		return "redirect:/profissionalEmpresa";
 	}
 	
-	@PostMapping("/pesquisaProfissionalEmpresa")
-	public String pesquisaProfissional(String numero, Model model, HttpSession session)  {	
-		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
-		System.out.println(numero);
-		System.out.println(chaveId.getId());
-		Profissional profissional = profissionalDao.pesquisaProfissional(numero, chaveId.getId());
-		if(profissional == null){
-			 profissional =  new Profissional();
-			 model.addAttribute("msg", "Profissional Não Encontrado");
-		}
-	
-		model.addAttribute("listaServicos", lista);
-		 model.addAttribute("profissional",profissional);
-		return "empresa/profissionalEmpresa";
-	}
-	
+//	@PostMapping("/pesquisaProfissionalEmpresa")
+//	public String pesquisaProfissional(String numero, Model model, HttpSession session)  {	
+//		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+//		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
+//		System.out.println(numero);
+//		System.out.println(chaveId.getId());
+//		Profissional profissional = profissionalDao.pesquisaProfissional(numero, chaveId.getId());
+//		if(profissional == null){
+//			 profissional =  new Profissional();
+//			 model.addAttribute("msg", "Profissional Não Encontrado");
+//		}
+//	
+//		model.addAttribute("listaServicos", lista);
+//		 model.addAttribute("profissional",profissional);
+//		return "empresa/profissionalEmpresa";
+//	}
+//	
 	@PostMapping("/salvarProfissionalServicoEmpresa")
 	public String salvarProfissionalServico(Profissional profissional,ServicoLoja servicoLoja, Model model, HttpSession session, RedirectAttributes ra) throws LoginExceptions {	
 	
@@ -281,7 +285,7 @@ public class ControllerEmpresa {
 		}
 		
 		
-		ra.addFlashAttribute("msg", "Verifique se o profissional não etá sendo usado!");
+		ra.addFlashAttribute("msg", "Verifique se o profissional não está sendo usado!");
 		return "redirect:profissionalEmpresa";
 		
 	}
@@ -322,16 +326,9 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/editarPessoaEmpresa")
-	public String editarPessoasEmpresa( Model model , HttpSession session)  {
-		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-		List<UsuarioCliente> cliente = clienteDao.listaClientesCadastrados(empresa.getId());
-		
-		for(UsuarioCliente lista : cliente) {
-			UsuarioCliente cadastro = clienteDao.findById(lista.getId()).orElse(null);
-			model.addAttribute("cadastro", cadastro);
-		}
-		
-	
+	public String editarPessoasEmpresa(Integer codigo, Model model , HttpSession session)  {
+		UsuarioCliente cliente = clienteDao.findById(codigo).orElse(null);
+		model.addAttribute("cadastro", cliente);
 		return "empresa/cadastrarPessoasEmpresa";
 	}
 	
@@ -401,7 +398,15 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/removerAgendamentoEmpresa")
-	public String removerAgendamento(Integer codigo,Model model, RedirectAttributes ra) {
+	public String removerAgendamento(Integer codigo, String email,Model model, RedirectAttributes ra, HttpSession session) {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		try {
+			usuarioemail.enviarEmailNotificacao(empresa.getEmail(),email, "Agendamento Cancelado", "O Estabelecimento "+ empresa.getNomeEmpresa()+" cancelou seu agendamento"
+																														+ "para mais Informações contate o estabelecimento: "+empresa.getNumero());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		agendaDao.deleteById(codigo);
 		ra.addFlashAttribute("msg", "agendamento removido com Sucesso!");
 		
@@ -409,7 +414,15 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/confirmarAgendamentoEmpresa")
-	public String confirmarAgendamento(Integer codigo,Model model) {
+	public String confirmarAgendamento(Integer codigo,String email,Model model,HttpSession session) {
+		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		try {
+			usuarioemail.enviarEmailNotificacao(empresa.getEmail(),email, "Agendamento confirmado", "O Estabelecimento "+ empresa.getNomeEmpresa()+" confirmou seu agendamento,"
+																														+ " você pode comparecer ao local no horario marcado"
+																														+ " para mais Informações contate o estabelecimento: "+empresa.getNumero());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println(codigo);
 		Agendamento agenda = agendaDao.findById(codigo).orElse(null);
 		agenda.setStatus(true);
@@ -418,8 +431,15 @@ public class ControllerEmpresa {
 	}
 	
 	@GetMapping("/editarAgendamentoEmpresa")
-	public String editarAgendamento(Integer codigo,Model model , HttpSession session) {
+	public String editarAgendamento(Integer codigo,String email,Model model , HttpSession session) {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		
+		try {
+			usuarioemail.enviarEmailNotificacao(empresa.getEmail(),email, "Agendamento editado", "O Estabelecimento "+ empresa.getNomeEmpresa()+" editou seu agendamento, entre no site para verificar o agendamento "
+																														+ " para mais Informações contate o estabelecimento: "+empresa.getNumero());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(empresa.getId());
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());

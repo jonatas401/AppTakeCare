@@ -50,35 +50,41 @@ input#fotoPortifolio {
 
 
 #listaportifolio {
-
-  height: 50%;
+  width: 70%;
+  min-height: 50vh;
+  height: 600px;
   margin-left: 25%;
   margin-right: 10%;
   margin-top: 2%;
-
+  
+  overflow-y: auto;
   background-image: linear-gradient(to bottom right, #283547, black);
   border-radius: 5%;
 }
 
-.row .card {
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 10%;
-  box-shadow: 5px 5px 20px rgb(190, 189, 189);
+#listaportifolio .card {
+	width: 200px;
+  	height: 260px;
+    margin-top: 5%;
+    margin-left:4%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgb(190, 189, 189);
 }
 
-.row img {
+#listaportifolio .card img{
 
-  width: 260px;
-  height: 200px;
+ 	width: 170px;
+  	height: 150px;
 
-  border-radius: 5%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 6px 5px 15px black;
+    border-top: 2%;
+    border-bottom: 5%;
+    margin-right: 5%;
+    border-radius: 10px;
+    box-shadow: 6px 5px 15px black;
 }
-
+#listaportifolio .card-body{
+	margin-left:-10%;
+}
 .row p {
 
   text-align: center;

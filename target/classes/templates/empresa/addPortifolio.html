@@ -22,10 +22,7 @@
     <div id="listaportifolio">
 
       <div class="row">
-
-
-
-        <div class="card" style="width: 18rem;" th:each="cont : ${servicoLoja}">
+        <div class="card"  th:each="cont : ${servicoLoja}">
 
           <img class="card-img-top" alt="imagem" th:src="|imagem/${cont.id}|">
           <div class="card-body">

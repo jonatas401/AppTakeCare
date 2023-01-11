@@ -22,25 +22,41 @@ public class EmailService {
 
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(emailTo);
-			helper.setSubject(subject);
-			helper.setText("<p>troca de senha</p>",
-					true);
+			helper.setSubject("Codigo de recuperação");
+			helper.setText("<p>troca de senha seu codigo:</p>"+ subject
+					,true);
 			mailSender.send(mail);
 			System.out.println("email enviado com sucesso");
 			
-			
-//			SimpleMailMessage message =  new SimpleMailMessage();
-//			
-//			message.setFrom("takecareeeeeeeeee@gmail.com");
-//			message.setTo(emailTo);
-//			message.setSubject(subject);
-//			
-//			mailSender.send(message);
+	
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
+	
+	public void enviarNotificacao(String emailFrom,String emailTo, String subject, String texto) {
+
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+
+			MimeMessageHelper helper = new MimeMessageHelper(mail);
+			helper.setFrom(emailFrom);
+			helper.setTo(emailTo);
+			helper.setSubject(subject);
+			helper.setText(texto
+					,true);
+			mailSender.send(mail);
+			System.out.println("email enviado com sucesso");
+			
+	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	
 }

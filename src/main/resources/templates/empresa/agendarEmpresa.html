@@ -132,13 +132,13 @@
 				<td th:if="${cont.status == false}"> Pendente </td>
 				<td th:if="${cont.status == true}"> Confirmado </td>
 				<td>
-				<button style="width: 50px; padding:2px;" class="btn btn-light"><a id="acoes"
-							th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="37px" alt="Apagar"></a></button>
-				<button id="confirmar" class="btn btn-light" > <a id="acoes" 
-						th:href="@{/confirmarAgendamentoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/check-circled.svg}" width="30px" alt="confirmar"></a></button>
+				<a id="acoes"  style="width: 50px; padding:2px;" class="btn btn-light"
+							th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img th:src="@{/img/bin.svg}" width="37px" alt="Apagar"></a>
+				  <a id="acoes" class="btn btn-light"
+						th:href="@{/confirmarAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img th:src="@{/img/check-circled.svg}" width="30px" alt="confirmar"></a>
 					
-				<button id="editar" class="btn btn-light" ><a id="acoes" 
-						th:href="@{/editarAgendamentoEmpresa(codigo=${cont.id})}" ><img th:src="@{/img/edit.svg}" width="30px"  alt="editar"></button>
+			 <a id="acoes" class="btn btn-light" 
+						th:href="@{/editarAgendamentoEmpresa(codigo=${cont.id} ,email=${cont.cliente.email})}" ><img th:src="@{/img/edit.svg}" width="30px"  alt="editar"></a>
 				</td>
 
 

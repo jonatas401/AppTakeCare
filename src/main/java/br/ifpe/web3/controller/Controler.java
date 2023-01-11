@@ -90,19 +90,26 @@ public class Controler {
 		
 		List<String> lista = Arrays.asList("1","2","3","4","5","6");
 		Collections.shuffle(lista);
-
 		String codigo = String.join("", lista);
 		
 		try {
 			System.out.println("confirmacao codigo");
 			this.usuarioEmail.enviarEmailEsqueceuSenha(email, codigo);
+			UsuarioCliente usuarioCliente = this.clienteDao.findByEmail(email);
 			UsuarioEmpresa usuarioEmpresa = this.empresaDao.findByEmail(email);
-			usuarioEmpresa.setCodigoRecSenha(codigo);
-			System.out.println(codigo);
 			
-			model.addAttribute("usuario", usuarioEmpresa);
-						
-			this.empresaDao.save(usuarioEmpresa);
+			System.out.println(codigo);
+			if(usuarioCliente != null) {
+				model.addAttribute("usuario", usuarioCliente);
+				usuarioCliente.setCodigoRecSenha(codigo);
+				this.clienteDao.save(usuarioCliente);
+			}
+			if(usuarioEmpresa != null) {
+				model.addAttribute("usuario", usuarioEmpresa);
+				usuarioEmpresa.setCodigoRecSenha(codigo);
+				this.empresaDao.save(usuarioEmpresa);
+			}
+			
 			return "recuperarSenha";
 			
 		} catch (Exception e) {
@@ -113,11 +120,10 @@ public class Controler {
 		}
 	}
 	@PostMapping("/confirmarCod")
-	public String confirmarPin(String email,String codigo,Model model, UsuarioEmpresa usuarioEmpresa, RedirectAttributes ra,HttpSession sessao) {
+	public String confirmarPin(String email,String codigo,Model model, UsuarioEmpresa usuarioEmpresa,UsuarioCliente usuarioCliente, RedirectAttributes ra,HttpSession sessao) {
 		if(this.empresaDao.existsByEmailAndCodigoRecSenha(email, codigo)) {
 			UsuarioEmpresa user = this.empresaDao.findByEmail(email);
 			model.addAttribute("usuario", user);
-						
 			return "acesso";
 			
 		}
@@ -125,6 +131,19 @@ public class Controler {
 			ra.addFlashAttribute("msg", "Preencha todos os campos");
 			return "redirect:/recuperarSenha";
 		}
+		
+		if(this.clienteDao.existsByEmailAndCodigoRecSenha(email, codigo)) {
+			UsuarioCliente user = this.clienteDao.findByEmail(email);
+			model.addAttribute("usuario", user);
+			return "acesso";
+			
+		}
+		else if(usuarioCliente.getEmail()=="" || usuarioCliente.getSenha()=="") {
+			ra.addFlashAttribute("msg", "Preencha todos os campos");
+			return "redirect:/recuperarSenha";
+		}
+		
+		
 		else {
 			ra.addFlashAttribute("msg", "Codigo invalido, tente novamente");
 			return "redirect:/recuperarSenha";
@@ -133,14 +152,27 @@ public class Controler {
 	}
 	
 	@PostMapping("/alterarSenha")
-	public String alterarSenha(@Validated UsuarioEmpresa usuarioEmpresa, String email,String senha, RedirectAttributes ra) {
+	public String alterarSenha(@Validated UsuarioEmpresa usuarioEmpresa,@Validated  UsuarioCliente usuarioCliente, String email,String senha, RedirectAttributes ra) {
 		System.out.println(email);
 		System.out.println(senha);
 		
+		usuarioCliente = this.clienteDao.findByEmail(email);
 		usuarioEmpresa = this.empresaDao.findByEmail(email);
-		usuarioEmpresa.setSenha(senha);
 		
-		this.empresaDao.save(usuarioEmpresa);
+		if(usuarioCliente != null) {
+			usuarioCliente.setSenha(senha);
+			usuarioCliente.setCodigoRecSenha(null);
+			this.clienteDao.save(usuarioCliente);
+			
+		}
+		
+		if(usuarioEmpresa != null) {
+			usuarioEmpresa.setSenha(senha);
+			usuarioEmpresa.setCodigoRecSenha(null);
+			this.empresaDao.save(usuarioEmpresa);
+			
+		}
+		
 		ra.addFlashAttribute("msg", "Senha alterada");
 		return "redirect:/login";
 	}

@@ -13,6 +13,8 @@ public interface ClienteDAO extends JpaRepository<UsuarioCliente, Integer> {
 	public List<UsuarioCliente> listaClientesCadastrados(Integer id);
 
 	public UsuarioCliente findByEmail(String email);
+
+	public boolean existsByEmailAndCodigoRecSenha(String email, String codigo);
 	
 
 }

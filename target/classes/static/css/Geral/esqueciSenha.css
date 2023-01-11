@@ -9,13 +9,26 @@ body{
 
 
 .esqueci-senhaSection {
-
     margin-top: 10%;
 }
 
 #esqueciSenha {
-    margin-left: 25%;
+    margin-left: 30%;
     margin-top: 20%;
+    background-color: #283555;
+    width:30%;
+    border-radius:20px;
+}
+#esqueciSenha #email{
+	width:300px;
+}
+#esqueciSenha #codigo{
+	width:300px;
+}
 
-
+#esqueciSenha #senha{
+	width:300px;
+}
+#esqueciSenha h3{
+	color:white;
 }
