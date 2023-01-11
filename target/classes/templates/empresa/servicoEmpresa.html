@@ -13,18 +13,7 @@
           
           
           
-      <script th:inline="javascript">
-     	 function agendar(){
-      		document.getElementById("formAgenda").style.display = "block"
-  
-      		}
-      	function agendarCancela(){
-      		document.getElementById("formAgenda").style.display = "none"
-      		
-      		}
-      		
-           
-        </script>
+    
 	
 </head>
 <body>
@@ -41,7 +30,7 @@
    		<div id="formAgenda">
    			<form action="/servicoEmpresa" th:object="${servico}" method="post" enctype="multipart/form-data">
    				
-	   			<input type="hidden" th:field="*{id}">	
+	   			<input type="hidden" id="cod" th:field="*{id}">	
 	   			<label>servico</label>
 	   			<input class="inputAgenda"  type="text" th:field="*{descricao}"  placeholder=" Nome Servico" required>	
 	   			<label>Valor</label>
@@ -86,5 +75,23 @@
   			</table>
  
   	</section>
+  	
+  	  <script th:inline="javascript">
+     	 function agendar(){
+      		document.getElementById("formAgenda").style.display = "block"
+  
+      		}
+      	function agendarCancela(){
+      		document.getElementById("formAgenda").style.display = "none"
+      		
+      		}
+      	let cod = document.getElementById("cod").value
+		console.log(cod)
+		if(cod){
+			document.getElementById("formAgenda").style.display = "block"
+		}
+      		
+           
+        </script>
 </body>
 </html>

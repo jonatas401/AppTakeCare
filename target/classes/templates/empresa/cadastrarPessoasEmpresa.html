@@ -15,19 +15,7 @@
 
 
 
-	<script th:inline="javascript">
-		function agendar() {
-			document.getElementById("formAgenda").style.display = "block"
-
-		}
-		function agendarCancela() {
-			document.getElementById("formAgenda").style.display = "none"
-
-		}
-
-
-
-	</script>
+	
 
 </head>
 
@@ -44,23 +32,28 @@
 				Cliente</button>
 
 		</div>
-		<div id="formAgenda">
-			<form action="/salvarCadastroPessoasEmpresa" th:object="${cadastro}" method="post">
-				<input class="inputAgenda" type="hidden" th:field="*{id}">
+		
+		
+		<div id="formAgenda" >
+			
+				<form action="/salvarCadastroPessoasEmpresa" th:object="${cadastro}" method="post">
+					<input class="inputAgenda" id="cod" type="hidden" th:field="*{id}">
+	
+	
+					<label>Cliente</label>
+					<input class="inputAgenda" id="setNome" type="text" th:field="*{nome}" placeholder="Nome" required>
+					<label>Contato</label>
+					<input class="inputAgenda" id="setNumero" type="text" th:field="*{numero}" placeholder="Numero"
+						required>
+	
+					<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+					<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"
+							th:src="@{/img/close-line.svg}" width="30px"></button>
+				</form>
 
-
-				<label>Cliente</label>
-				<input class="inputAgenda" id="setNome" type="text" th:field="*{nome}" placeholder="Nome" required>
-				<label>Contato</label>
-				<input class="inputAgenda" id="setNumero" type="text" th:field="*{numero}" placeholder="Numero"
-					required>
-
-				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
-				<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"
-						th:src="@{/img/close-line.svg}" width="30px"></button>
-			</form>
-
-		</div>
+			</div>
+		
+		
 		<table id="table" class="table table-dark table-striped-columns">
 			<tr>
 				<th>Cliente</th>
@@ -75,7 +68,7 @@
 
 				<a id="acoes" utton class="btn btn-light"
 							th:href="@{/removerCadastroPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></a>
-				<a  class="btn btn-light" th:href="@{/editarPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/edit.svg}" width="30px"></a>
+				<a   class="btn btn-light" th:href="@{/editarPessoaEmpresa(codigo=${cont.id})}"><img th:src="@{/img/edit.svg}" width="30px"></a>
 
 				</td>
 			</tr>
@@ -85,7 +78,26 @@
 
 	</section>
 
+	<script th:inline="javascript">
+		function agendar() {
+			document.getElementById("formAgenda").style.display = "block"
+		
 
+		}
+		function agendarCancela() {
+			document.getElementById("formAgenda").style.display = "none"
+
+		}
+		let cod = document.getElementById("cod").value
+		console.log(cod)
+		if(cod){
+			document.getElementById("formAgenda").style.display = "block"
+		}
+		
+
+
+
+	</script>
 	
 </body>
 
