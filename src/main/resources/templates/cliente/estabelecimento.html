@@ -22,265 +22,264 @@
 
 <body>
 
-<script th:inline="javascript">
-     	 function agendamento(){
-	      		document.getElementById("carouselExampleIndicators").style.display = "none"
-	      		document.getElementById("tabelaAgenda").style.display = "block"
-	      		document.getElementById("informacoes").style.display = "block"
-	      		document.getElementById("imagens").style.display = "none"
-	      		document.getElementById("todasNoticias").style.display = "none"
-	      		document.getElementById("tableNoticia").style.display = "block"
-      		
-      		}
-      		function portifolio(){
-	      		document.getElementById("carouselExampleIndicators").style.display = "none"
-	      		document.getElementById("tabelaAgenda").style.display = "none"
-	      		document.getElementById("informacoes").style.display = "none"
-	      		document.getElementById("imagens").style.display = "block"
-	      		document.getElementById("todasNoticias").style.display = "none"
-	      		document.getElementById("tableNoticia").style.display = "none"
-      	
-      		}	
-      		function agendar(){
-      				document.getElementById("formAgenda").style.display = "block"
-      		
-      		}
-      		function agendarCancela(){
-      				document.getElementById("formAgenda").style.display = "none"
-      		
-      		}
-      		function noticia(){
-					document.getElementById("carouselExampleIndicators").style.display = "none"
-		      		document.getElementById("tabelaAgenda").style.display = "none"
-		      		document.getElementById("informacoes").style.display = "none"
-		      		document.getElementById("imagens").style.display = "none"
-		      		document.getElementById("todasNoticias").style.display = "block"
-		      		document.getElementById("tableNoticia").style.display = "none"
-		      		
-				       
-			}	
-			
-        </script>
+	<script th:inline="javascript">
+		function agendamento() {
+			document.getElementById("carouselExampleIndicators").style.display = "none"
+			document.getElementById("tabelaAgenda").style.display = "block"
+			document.getElementById("informacoes").style.display = "block"
+			document.getElementById("imagens").style.display = "none"
+			document.getElementById("todasNoticias").style.display = "none"
+			document.getElementById("tableNoticia").style.display = "block"
 
-	
-	
-			<div th:replace="cliente/navBarCliente :: #navConta"></div>
-		
-	<section id="paginaLoja" >
-			
-			<div   th:each="cont : ${loja}"  >
-			
-				<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
-			<div id="portifolio" > 	
-									
-				  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true" >
-				    <div class="carousel-indicators">
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-				        aria-current="true" aria-label="Slide 1"></button>
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"class="active"
-				         aria-current="true" aria-label="Slide 1"></button>
-				      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-				        aria-current="true" aria-label="Slide 1"></button>
-				    </div>
-				    <div class="carousel-inner" >
-				      <div class="carousel-item active" th:each="servico : ${Servico}" >
-				        <img  th:src="|/imagem/${servico.id}|" width="500px" height="250px">
-				      </div>
-				      
-				    </div>
-				    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-				      data-bs-slide="prev">
-				      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				      <span class="visually-hidden">Previous</span>
-				    </button>
-				    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-				      data-bs-slide="next">
-				      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				      <span class="visually-hidden">Next</span>
-				    </button>
-				  </div>
+		}
+		function portifolio() {
+			document.getElementById("carouselExampleIndicators").style.display = "none"
+			document.getElementById("tabelaAgenda").style.display = "none"
+			document.getElementById("informacoes").style.display = "none"
+			document.getElementById("imagens").style.display = "block"
+			document.getElementById("todasNoticias").style.display = "none"
+			document.getElementById("tableNoticia").style.display = "none"
+
+		}
+		function agendar() {
+			document.getElementById("formAgenda").style.display = "block"
+
+		}
+		function agendarCancela() {
+			document.getElementById("formAgenda").style.display = "none"
+
+		}
+		function noticia() {
+			document.getElementById("carouselExampleIndicators").style.display = "none"
+			document.getElementById("tabelaAgenda").style.display = "none"
+			document.getElementById("informacoes").style.display = "none"
+			document.getElementById("imagens").style.display = "none"
+			document.getElementById("todasNoticias").style.display = "block"
+			document.getElementById("tableNoticia").style.display = "none"
+
+
+		}
+
+	</script>
+
+
+
+	<div th:replace="cliente/navBarCliente :: #navConta"></div>
+
+	<section id="paginaLoja">
+
+		<div th:each="cont : ${loja}">
+
+			<!-- ----------- parte de fotos parcial do portifolio  ---------------- -->
+			<div id="portifolio">
+
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+							class="active" aria-current="true" aria-label="Slide 1"></button>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item active" th:each="servico : ${Servico}">
+							<img th:src="|/imagem/${servico.id}|" width="500px" height="250px">
+						</div>
+
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+						data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
 			</div>
-				
-				<!-- ----------- parte de agendamento  ---------------- -->
-				
-	<div id="tabelaAgenda">
-					
-			<div id="buttonAgenda">
-	   			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">agendar</button>
-	   		
-	   		</div>
-   		<div id="formAgenda">
-   			<form action="fazerAgendamento" th:object="${agendamento}" method="post">
-   			
-   			<input name="id" th:value="${cont.id}" type="hidden">
-   			<input th:field="*{cliente.nome}" type="hidden">
-   			
-   			
-  			<label>profissional</label>
-   			<select th:field="*{profissional}"  id="inputAgenda" required>
-				<option th:value="''">selecione</option>
-				<option id="prof" th:each="profissional :  ${profissionalServico}" 
-					onclick="trazerServicos('${profissional.id}')"
-					th:text="${profissional.nome}" 
-					th:value="${profissional.nome}">
-				</option>
-			</select>
-			
-			
-			
-			<label>servico</label>
-   			<select th:field="*{servico.id}"  class="inputAgenda" required>
-				<option th:value="''">selecione</option>
-				<option th:each="servico :  ${Servico}"
-					th:text="${servico.descricao}"
-					 th:value="${servico.id}">
-					</option>
-			</select>
-			<br>
-			
-			
-   			<label>Dia</label>
-   			<input id="inputAgenda"  type="date" th:field="*{data}">	
-   			<label>Hora</label>
-   			<input type="time"  th:field="*{hora}">	
-   			<button type="submit" class="btn btn-light">Salvar</button>
-   			<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
-   			</form>
-   			
-   		</div>
-   		
-   		<table id="table"  class="table table-dark table-striped-columns">
-  				<tr>
-  					<th>Empresa</th>
-  					<th>Profissional</th>
-					<th>Contato</th>
-  					<th> Dia </th>
-  					<th> hora </th>
-					<th>Serviço</th>
-					<th>Status</th>
-					
-  				</tr>
-  				<tr th:each="cont : ${listaAgendamento}">
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td>
-  					<td th:text="${cont.profissional}"> </td>
-					<th th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span></th>
-  					<td th:text="${cont.data}"> </td>
-  					<td th:text="${cont.hora}">  </td>
-					<th th:text="${cont.servico.descricao}"></th>
-					<td th:if="${cont.status == false}"> Pendente </td>
-					<td th:if="${cont.status == true}"> Confirmado </td>
-  				</tr>
-  			</table>
+
+			<!-- ----------- parte de agendamento  ---------------- -->
+
+			<div id="tabelaAgenda">
+
+				<div id="buttonAgenda">
+					<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;"
+						class="btn btn-light">agendar</button>
+
+				</div>
+				<div id="formAgenda">
+					<form action="fazerAgendamento" th:object="${agendamento}" method="post">
+
+						<input name="id" th:value="${cont.id}" type="hidden">
+						<input th:field="*{cliente.nome}" type="hidden">
 
 
-	</div>
-					 
-		<!--************* todas as noticias ***************-->			
-		<div id="todasNoticias">
-			<h5 style="margin-left: 25%; color:white;">Notícias</h5>
-			
-		<table  class="table table-dark table-striped-columns" >
-		
-			<tr>
-				<th>Titulo</th>
-				<th>Descrição</th>
-				<th>Data</th>
-				<th> Hora </th>
-				
-			</tr>
-			<tr th:each="cont : ${todasNoticias}">
-				
-				<td th:text="${cont.titulo}"></td>
-				<td th:text="${cont.descricao}"></td>
-				<td id="data" th:text="${cont.data}"> </td>
-				<td id="hora" th:text="${cont.hora}"> </td>
-			</tr>
+						<label>profissional</label>
+						<select th:field="*{profissional}" id="inputAgenda" required>
+							<option th:value="''">selecione</option>
+							<option id="prof" th:each="profissional :  ${profissionalServico}"
+								onclick="trazerServicos('${profissional.id}')" th:text="${profissional.nome}"
+								th:value="${profissional.nome}">
+							</option>
+						</select>
 
-		</table>
 
-		</div >
+
+						<label>servico</label>
+						<select th:field="*{servico.id}" class="inputAgenda" required>
+							<option th:value="''">selecione</option>
+							<option th:each="servico :  ${Servico}" th:text="${servico.descricao}"
+								th:value="${servico.id}">
+							</option>
+						</select>
+						<br>
+
+
+						<label>Dia</label>
+						<input id="inputAgenda" type="date" th:field="*{data}">
+						<label>Hora</label>
+						<input type="time" th:field="*{hora}">
+						<button type="submit" class="btn btn-light">Salvar</button>
+						<input type="button" id="cancela" onclick="agendarCancela()" class="btn btn-light" value="X">
+					</form>
+
+				</div>
+
+				<table id="table" class="table table-dark table-striped-columns">
+					<tr>
+						<th>Empresa</th>
+						<th>Profissional</th>
+						<th>Contato</th>
+						<th> Dia </th>
+						<th> hora </th>
+						<th>Serviço</th>
+						<th>Status</th>
+
+					</tr>
+					<tr th:each="cont : ${listaAgendamento}">
+						<td th:text="${cont.empresa.nomeEmpresa}"> </td>
+						<td th:text="${cont.profissional}"> </td>
+						<th th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span></th>
+						<td th:text="${cont.data}"> </td>
+						<td th:text="${cont.hora}"> </td>
+						<th th:text="${cont.servico.descricao}"></th>
+						<td th:if="${cont.status == false}"> Pendente </td>
+						<td th:if="${cont.status == true}"> Confirmado </td>
+					</tr>
+				</table>
+
+
+			</div>
+
+			<!--************* todas as noticias ***************-->
+			<div id="todasNoticias">
+				<h5 style="margin-left: 25%; color:white;">Notícias</h5>
+
+				<table class="table table-dark table-striped-columns">
+
+					<tr>
+						<th>Titulo</th>
+						<th>Descrição</th>
+						<th>Data</th>
+						<th> Hora </th>
+
+					</tr>
+					<tr th:each="cont : ${todasNoticias}">
+
+						<td th:text="${cont.titulo}"></td>
+						<td th:text="${cont.descricao}"></td>
+						<td id="data" th:text="${cont.data}"> </td>
+						<td id="hora" th:text="${cont.hora}"> </td>
+					</tr>
+
+				</table>
+
+			</div>
 
 
 			<!-- ----------- parte de portifolio  ---------------- -->
-		
+
 			<div id="imagens">
-				
+
 				<div id="">
 					<div class="row">
-					
-						<h3 style="margin-left:200px; color:white; ">Portifólio</h3>
-		
-						<div class="card"  th:each="servico : ${Servico}">
+
+						<h3 style="margin-left:200px; color:white; ">Portfólio</h3>
+
+						<div class="card" th:each="servico : ${Servico}">
 							<img th:src="|/imagem/${servico.id}|" width="100px">
 							<span>Serviço: </span> <span class="card-text" th:text="${servico.descricao}"></span> <br>
 							<span>Valor: </span> <span class="card-text" th:text="'R$ ' + ${servico.valor}"></span> <br>
 							<span>Duração: </span> <span th:text="${servico.duracao} + ' min'"></span> <br>
 						</div>
-					</div>	
+					</div>
 				</div>
-				
+
 			</div>
 
 
 
 			<div class="row col" id="left">
 
-				<div id="nomeLoja" th:if="${cont.fotoPerfil == null}" >
-		  			<h5 ><a th:href="@{/estabelecimentoCliente(id=${cont.id})}" th:text="${cont.nomeEmpresa}"></a></h5>	
-			 	</div>
-			 	
-			 	<div  th:if="${cont.fotoPerfil != null}" class="col">
-			 		<a th:href="@{/estabelecimentoCliente(id=${cont.id})}" >
-		  		 		<img id="imagemPerfil"  th:src="|/fotoPerfil/${cont.id}|" >
-		  		 	</a>
-			 	</div>
+				<div id="nomeLoja" th:if="${cont.fotoPerfil == null}">
+					<h5><a th:href="@{/estabelecimentoCliente(id=${cont.id})}" th:text="${cont.nomeEmpresa}"></a></h5>
+				</div>
+
+				<div th:if="${cont.fotoPerfil != null}" class="col">
+					<a th:href="@{/estabelecimentoCliente(id=${cont.id})}">
+						<img id="imagemPerfil" th:src="|/fotoPerfil/${cont.id}|">
+					</a>
+				</div>
 
 
 				<div id="listaServ">
 
-						<div id="buttonServ">
-						<a class="linkAgendamentos btn btn-secondary"  onclick="portifolio()">Portifólio</a>
-						</div>
-						<div id="buttonServ">
-						<a class="linkAgendamentos  btn btn-secondary " onclick="agendamento()">Agendar  </a>
-						</div>
-						<div>
-						<a class="linkAgendamentos  btn btn-secondary " onclick="noticia()">Notícias  </a>
-						</div>
+					<div id="buttonServ">
+						<a class="linkAgendamentos btn btn-secondary" onclick="portifolio()">Portfólio</a>
+					</div>
+					<div id="buttonServ">
+						<a class="linkAgendamentos  btn btn-secondary " onclick="agendamento()">Agendar </a>
+					</div>
+					<div>
+						<a class="linkAgendamentos  btn btn-secondary " onclick="noticia()">Notícias </a>
+					</div>
 
 				</div>
 
-				
+
 				<div style="margin-left:20px; margin-top:10px;">
-						<a th:href="@{/listarEstabelecimentosCliente}" class="btn btn-light">Voltar</a>
+					<a th:href="@{/listarEstabelecimentosCliente}" class="btn btn-light">Voltar</a>
 				</div>
 
 			</div>
-		
-		<!--***********tabela de noticias Ugerntes**************** -->
-		
-		<div id="tableNoticia">
-			<h5 style="margin-left: 25%; color:white;">Notícias Urgentes</h5>
-				<table  class="table table-dark table-striped-columns" >
-				
+
+			<!--***********tabela de noticias Ugerntes**************** -->
+
+			<div id="tableNoticia">
+				<h5 style="margin-left: 25%; color:white;">Notícias Urgentes</h5>
+				<table class="table table-dark table-striped-columns">
+
 					<tr>
 						<th>Titulo</th>
 						<th>Descrição</th>
 						<th>Data</th>
 						<th> Hora </th>
-						
+
 					</tr>
 					<tr th:each="cont : ${listaNoticia}">
-						
+
 						<td th:text="${cont.titulo}"></td>
 						<td th:text="${cont.descricao}"></td>
 						<td id="data" th:text="${cont.data}"> </td>
 						<td id="hora" th:text="${cont.hora}"> </td>
 					</tr>
 				</table>
-		</div>
-	
-			
+			</div>
+
+
 
 			<section id="informacoes">
 
