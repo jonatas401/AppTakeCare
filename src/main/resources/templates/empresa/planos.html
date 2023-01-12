@@ -46,8 +46,8 @@
                       </h4>
                       <p class="" th:text="${listPlanos.detalhes}">
                       </p>
-                     <p class="" >
-                     	 <span>$<span th:text=" ${listPlanos.valor}"> </span></span>
+                     <p class="p">
+                     	 <span>$<span  th:text=" ${listPlanos.valor}"> </span></span>
                      	
                       </p>
                       <div th:if="${session.usuarioLogado.plano != null } ">

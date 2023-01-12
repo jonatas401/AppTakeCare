@@ -64,7 +64,7 @@ input#fotoPortifolio {
 
 #listaportifolio .card {
 	width: 200px;
-  	height: 260px;
+  	height: 280px;
     margin-top: 5%;
     margin-left:4%;
     border-radius: 10px;
@@ -84,6 +84,7 @@ input#fotoPortifolio {
 }
 #listaportifolio .card-body{
 	margin-left:-10%;
+	margin-top:-10px
 }
 .row p {
 
