@@ -14,50 +14,58 @@
 	<nav id="navConta" class="navbar navbar-dark bg-dark fixed-top">
 
 		<div class="offcanvas-body">
+
 			<ul style="position:fixed; top:0px; margin-top:20px;"
 				class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
 
-				<li id="liLogo">
-					<a id="linkLogo" style="margin-left: 20px; " class="navbar-brand nav-link"
-						href="/listarEstabelecimentosCliente"><img id="imagemLogo" th:src="@{/img/logoCnome.png}"> </a>
-				</li>
+				<ul id="navbarempresa" style="position:fixed; top:0px; margin-top:20px; "
+					class="navbar-nav scrollbar-primary">
+
+
+					<li id="liLogo">
+						<a id="linkLogo" style="margin-left: 20px; " class="navbar-brand nav-link"
+							href="/listarEstabelecimentosCliente"><img id="imagemLogo" th:src="@{/img/logoCnome.png}">
+						</a>
+					</li>
 
 
 
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page"
-						href="/listarEstabelecimentosCliente">Estabelecimentos</a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page"
+							href="/listarEstabelecimentosCliente">Estabelecimentos</a>
+					</li>
 
 
 
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/agendamentosCliente">Agendamentos</a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/agendamentosCliente">Agendamentos</a>
+					</li>
 
 
-				<li class="nav-item dropdown ">
-					<a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">
-						Configurações
-					</a>
-					<ul class="dropdown-menu dropdown-menu-dark">
-						<li><a class="dropdown-item" href="/dadosCliente">Meus Dados</a></li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-					</ul>
-				</li>
+					<li class="nav-item dropdown ">
+						<a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							Configurações
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark">
+							<li><a class="dropdown-item" href="/dadosCliente">Meus Dados</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+						</ul>
+					</li>
 
 
 
 
-				<li class="nav-item">
-					<a class=" nav-link active" aria-current="page" href="/logoff">
-						<img th:src="@{/img/logout.svg} " width="30px"> sair</a>
-				</li>
+					<li class="nav-item">
+						<a class=" nav-link active" aria-current="page" href="/logoff">
+							<img th:src="@{/img/logout.svg} " width="30px"> sair</a>
+					</li>
 
+
+				</ul>
 
 			</ul>
 
