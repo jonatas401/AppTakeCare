@@ -19,10 +19,10 @@
   <main>
     <div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 
-    <div id="listaportifolio">
+    <div id="listaportifolio" class="scrollbar-primary">
 
       <div class="row">
-        <div class="card"  th:each="cont : ${servicoLoja}">
+        <div class="card" th:each="cont : ${servicoLoja}">
 
           <img class="card-img-top" alt="imagem" th:src="|imagem/${cont.id}|">
           <div class="card-body">
@@ -35,6 +35,8 @@
         </div>
 
       </div>
+
+    </div>
 
   </main>
 </body>

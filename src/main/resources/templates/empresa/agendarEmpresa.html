@@ -15,7 +15,7 @@
 
 
 
-	
+
 
 </head>
 
@@ -25,7 +25,7 @@
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
 
 	<h4 id="msg" th:text="${msg}"></h4>
-	<section class="agenda">
+	<section class="agenda scrollbar-primary">
 
 		<div id="calendario">
 			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Agendar</button>
@@ -33,9 +33,9 @@
 		</div>
 
 
-		
-			<div id="formAgenda"  >
-	
+
+		<div id="formAgenda">
+
 			<form action="/fazerAgendamento" th:object="${agendamento}" method="post">
 				<input type="hidden" id="cod" th:field="*{id}">
 
@@ -108,13 +108,16 @@
 				<td th:if="${cont.status == true}"> Confirmado </td>
 				<td>
 
-				<a id="acoes"  style="width: 50px; padding:2px;" class="btn btn-light"
-							th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img th:src="@{/img/bin.svg}" width="37px" alt="Apagar"></a>
-				  <a id="acoes" class="btn btn-light"
-						th:href="@{/confirmarAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img th:src="@{/img/check-circled.svg}" width="30px" alt="confirmar"></a>
-					
-				 <a id="acoes" class="btn btn-light" 
-						th:href="@{/editarAgendamentoEmpresa(codigo=${cont.id} ,email=${cont.cliente.email})}" ><img th:src="@{/img/edit.svg}" width="30px"  alt="editar"></a>
+					<a id="acoes" style="width: 50px; padding:2px;" class="btn btn-light"
+						th:href="@{/removerAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img
+							th:src="@{/img/bin.svg}" width="37px" alt="Apagar"></a>
+					<a id="acoes" class="btn btn-light"
+						th:href="@{/confirmarAgendamentoEmpresa(codigo=${cont.id}, email=${cont.cliente.email})}"><img
+							th:src="@{/img/check-circled.svg}" width="30px" alt="confirmar"></a>
+
+					<a id="acoes" class="btn btn-light"
+						th:href="@{/editarAgendamentoEmpresa(codigo=${cont.id} ,email=${cont.cliente.email})}"><img
+							th:src="@{/img/edit.svg}" width="30px" alt="editar"></a>
 
 
 				</td>
@@ -126,7 +129,7 @@
 		</table>
 
 	</section>
-	
+
 	<script th:inline="javascript">
 		function agendar() {
 			document.getElementById("formAgenda").style.display = "block"
@@ -146,7 +149,7 @@
 		}
 		let cod = document.getElementById("cod").value
 		console.log(cod)
-		if(cod){
+		if (cod) {
 			document.getElementById("formAgenda").style.display = "block"
 		}
 
