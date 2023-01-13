@@ -55,24 +55,22 @@
 
 	<main>
 		<section class="cadastro">
-		
+
 
 			<div id="formCad" Style="margin-left:25%; margin-top:5%;"
 				class="container col-sm-12 col-md-6 col-md-offset-2">
-				
-				<h4 id="msg"  th:text="${msg}"></h4>
+
+				<h4 id="msg" th:text="${msg}"></h4>
 				<form action="/salvarUsuarioEmpresa" th:object="${empresa}" method="post" enctype="multipart/form-data">
 					<input type="hidden" th:field="*{Id}">
 
 					<div id='primeiro'>
-					
-					<select th:field="*{plano}" class="form-control" id="TipoEmpresa" style="display: none;">
-								<option th:each="pl :  ${planos}"
-									th:text="${pl.nome}"
-									th:value="${pl.id}"></option>
 
-							</select>
-					
+						<select th:field="*{plano}" class="form-control" id="TipoEmpresa" style="display: none;">
+							<option th:each="pl :  ${planos}" th:text="${pl.nome}" th:value="${pl.id}"></option>
+
+						</select>
+
 						<div class="form-group">
 							<label id="labelCadastro" for="nome">Nome</label> <input type="text" th:field="*{nome}"
 								class="form-control" id="nome" placeholder="Seu Nome" required>
@@ -106,18 +104,19 @@
 
 							<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" required>
 								<option th:value="''">selecione</option>
-								<option th:each="empresa :  ${tipoEmpresa}"
-									th:text="${empresa.nome}" th:value="${empresa.id}"></option>
+								<option th:each="empresa :  ${tipoEmpresa}" th:text="${empresa.nome}"
+									th:value="${empresa.id}"></option>
 
 							</select>
 						</div>
-						
+
 						<div class="form-group">
-							<label for="fotoPerfil">Essa foto irá aparecer na listagem para os clientes</label> 
-							<input type="file" name="fileImage" 
-								class="form-control">
-								<span style="color: white;">Tamanho Maximo 1MB
-								</span>
+
+							<label for="fotoPerfil">Essa foto irá aparecer na listagem para os clientes</label>
+							<input type="file" name="fileImage" class="form-control">
+							<span style="color: white;">Tamanho Maximo 1MB
+							</span>
+
 						</div>
 
 					</div>
@@ -125,7 +124,7 @@
 					<div id="segundo">
 
 						<div class="form-group">
-							<label id="labelCadastro" for="cep">Cep</label> <input type="text"
+							<label id="labelCadastro" for="cep">CEP</label> <input type="text"
 								onblur="pesquisaCep(this.value)" th:field="*{endereco.cep}" class="form-control"
 								id="cep" placeholder="cep" required>
 						</div>
