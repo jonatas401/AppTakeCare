@@ -1,189 +1,198 @@
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Agendamentos</title>
+	<meta charset="UTF-8">
+	<title>Agendamentos</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	
-      <link rel="stylesheet" type="text/css" media="all" 
-          th:href="@{/css/style.css}" />     
-          
-		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  
-          
-      <script th:inline="javascript">
-     	 function cadastrar(){
-      		document.getElementById("formProf").style.display = "block"
-      		
-      		}
-      	function cadastrarServico(){
-      		document.getElementById("formProfServico").style.display = "block"
-      		
-      		}	
-      	function agendarCancela(){
-      		document.getElementById("formProf").style.display = "none"
-      		
-      		}
-      	function agendarCancelaServ(){
-      		document.getElementById("formProfServico").style.display = "none"
-      		
-      		}
-      	function listaProf(){
-      		document.getElementById("tableProf").style.display = "block"
-      		document.getElementById("tableServ").style.display = "none"
-      		
-      		}
-      	function listaServ(){
-      		document.getElementById("tableProf").style.display = "none"
-      		document.getElementById("tableServ").style.display = "block"
-      		
-      		}	
-      		
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 
-           
-        </script>
-	
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+	<script th:inline="javascript">
+		function cadastrar() {
+			document.getElementById("formProf").style.display = "block"
+
+		}
+		function cadastrarServico() {
+			document.getElementById("formProfServico").style.display = "block"
+
+		}
+		function agendarCancela() {
+			document.getElementById("formProf").style.display = "none"
+
+		}
+		function agendarCancelaServ() {
+			document.getElementById("formProfServico").style.display = "none"
+
+		}
+		function listaProf() {
+			document.getElementById("tableProf").style.display = "block"
+			document.getElementById("tableServ").style.display = "none"
+
+		}
+		function listaServ() {
+			document.getElementById("tableProf").style.display = "none"
+			document.getElementById("tableServ").style.display = "block"
+
+		}
+
+
+
+	</script>
+
 </head>
+
 <body>
-	
-	
+
+
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
-			
-			<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="true">
-			  <div class="toast-header">
-				    <img src="..." class="rounded me-2" alt="...">
-				    <strong class="me-auto">Bootstrap</strong>
-				    <small>11 mins ago</small>
-				    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-				  </div>
-				  <div class="toast-body">
-				   <h4 id="msg"  th:text="${msg}"></h4>
-			  </div>
-			</div>
-	
-		
-		
-		 <h4 id="msg"  th:text="${msg}"></h4>
-		
-		
-	<section class="agenda">
-	   	<div id="calendario">
-	   		<button onclick="cadastrar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Cadastrar</button>
-	   		<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Alocar Servico Ao Profissional</button>
-	   		<select  style="margin-top: 5px; margin-left:5px;" class="btn btn-light">
-	   		<option onclick="listaServ()">Listar Serviços dos Profissionais</option>
-	   		<option onclick="listaProf()">Listar Profissionais</option>
-	   		
-	   		
-	   		</select>
-	   		
-	   	</div>
-   		<div id="formProf">
 
-   			<form action="/salvarProfissionalEmpresa" th:object="${profissional}" method="post">
+	<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="true">
+		<div class="toast-header">
+			<img src="..." class="rounded me-2" alt="...">
+			<strong class="me-auto">Bootstrap</strong>
+			<small>11 mins ago</small>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body">
+			<h4 id="msg" th:text="${msg}"></h4>
+		</div>
+	</div>
 
-   			
-   			<label>Nome</label>
-   			<input class="inputAgenda" th:field="*{nome}"  type="text" required>	
-   			
-   			<label>contato</label>
-   			<input class="inputAgenda"  type="text" th:field="*{numero}" required>
-   			
-		<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
-   		<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
-   			</form>
-   			
-   		</div>
-   		
-   		<!-- ******************* alocar servico************************************* -->
-   		<div id="formProfServico">
+
+
+	<h4 id="msg" th:text="${msg}"></h4>
+
+
+	<section class="agenda scrollbar-primary">
+		<div id="calendario">
+			<button onclick="cadastrar()" style="margin-top: 5px; margin-left:5px;"
+				class="btn btn-light">Cadastrar</button>
+			<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Alocar
+				Servico Ao Profissional</button>
+			<select style="margin-top: 5px; margin-left:5px;" class="btn btn-light">
+				<option onclick="listaServ()">Listar Serviços dos Profissionais</option>
+				<option onclick="listaProf()">Listar Profissionais</option>
+
+
+			</select>
+
+		</div>
+		<div id="formProf">
+
+			<form action="/salvarProfissionalEmpresa" th:object="${profissional}" method="post">
+
+
+				<label>Nome</label>
+				<input class="inputAgenda" th:field="*{nome}" type="text" required>
+
+				<label>contato</label>
+				<input class="inputAgenda" type="text" th:field="*{numero}" required>
+
+				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+				<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"
+						th:src="@{/img/close-line.svg}" width="30px"></button>
+			</form>
+
+		</div>
+
+		<!-- ******************* alocar servico************************************* -->
+		<div id="formProfServico">
 
 
 			<div id="buscaProf">
 			</div>
-			
-   			<form action="/salvarProfissionalServicoEmpresa"  method="post">
-   			
-   			
-   			<label>Nome</label>
-   			<select class="btn btn-light" name="profissional">
-		   		<option th:each="cont : ${listaProfissional}"
-			   			th:text="${cont.nome}"
-			   			th:value="${cont.id}">
-		   		</option>
-	   		</select>
-	   		
-	   		
-	   		</select>
-   			
-   			<label>servico</label>
 
-   			<select name="servicoLoja" class="btn btn-light" id="inputAgenda" required="required">
-				<option  th:value="''">selecione</option>
-				
-				<option  th:each="servico :  ${listaServicos}"
-					th:text="${servico.descricao}" 
-					th:value="${servico.id}"></option>
-				
-			</select>
+			<form action="/salvarProfissionalServicoEmpresa" method="post">
 
-			
-		<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
-   		<button id="cancela" onclick="agendarCancelaServ()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
-   			</form>
-   			
-   		</div>
-   		
-   		<div id="tableServ">
-	   		<table id="table"  class="table table-dark table-striped-columns">
-	  				<tr>
-	  					
-						<th>Nome</th>
-						<th>Contato</th>
-						<th>Servicos</th>
-	                    <th>Empresa</th>
-	                    <th>Ações</th>
-	
-	  				</tr>
-	  				<tr th:each="cont : ${listaProfissionalServico}">
-	
-	  					<td th:text="${cont.profissional.nome}"> </td>
-						<td th:text="${cont.profissional.numero}"></td>
-						<td th:text="${cont.servico.descricao}">
-						</td>
-	  					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td> 
-						
-						<td>
-						<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalServicoEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
-						</td>
-	  				</tr>
-	  			</table>
-   		</div>		
-  			<!--***************** Lista de profissionais***************-->
-  		<div id="tableProf">
-  			<table id="table"   class="table table-dark table-striped-columns">
-  				<tr>
-  					
+
+				<label>Nome</label>
+				<select class="btn btn-light" name="profissional">
+					<option th:each="cont : ${listaProfissional}" th:text="${cont.nome}" th:value="${cont.id}">
+					</option>
+				</select>
+
+
+				</select>
+
+				<label>servico</label>
+
+				<select name="servicoLoja" class="btn btn-light" id="inputAgenda" required="required">
+					<option th:value="''">selecione</option>
+
+					<option th:each="servico :  ${listaServicos}" th:text="${servico.descricao}"
+						th:value="${servico.id}"></option>
+
+				</select>
+
+
+				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+				<button id="cancela" onclick="agendarCancelaServ()" class="btn btn-light"><img style="margin-left:-7px;"
+						th:src="@{/img/close-line.svg}" width="30px"></button>
+			</form>
+
+		</div>
+
+		<div id="tableServ">
+			<table id="table" class="table table-dark table-striped-columns">
+				<tr>
+
 					<th>Nome</th>
 					<th>Contato</th>
-                    <th>Empresa</th>
-                    <th>Ações</th>
+					<th>Servicos</th>
+					<th>Empresa</th>
+					<th>Ações</th>
 
-  				</tr>
-  				<tr th:each="cont : ${listaProfissional}">
+				</tr>
+				<tr th:each="cont : ${listaProfissionalServico}">
 
-  					<td th:text="${cont.nome}"> </td>
-					<td th:text="${cont.numero}"></td>
-  					<td th:text="${cont.empresa.nomeEmpresa}"> </td> 
-					<td>
-						<a id="acoes" class="btn btn-light" th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img  th:src="@{/img/bin.svg}" width="30px">
+					<td th:text="${cont.profissional.nome}"> </td>
+					<td th:text="${cont.profissional.numero}"></td>
+					<td th:text="${cont.servico.descricao}">
 					</td>
-  				</tr>
-  			</table>
-  		</div>
-  	</section>
+					<td th:text="${cont.profissional.empresa.nomeEmpresa}"> </td>
+
+					<td>
+						<a id="acoes" class="btn btn-light"
+							th:href="@{/removerProfissionalServicoEmpresa(codigo=${cont.id})}"><img
+								th:src="@{/img/bin.svg}" width="30px">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!--***************** Lista de profissionais***************-->
+		<div id="tableProf">
+			<table id="table" class="table table-dark table-striped-columns">
+				<tr>
+
+					<th>Nome</th>
+					<th>Contato</th>
+					<th>Empresa</th>
+					<th>Ações</th>
+
+				</tr>
+				<tr th:each="cont : ${listaProfissional}">
+
+					<td th:text="${cont.nome}"> </td>
+					<td th:text="${cont.numero}"></td>
+					<td th:text="${cont.empresa.nomeEmpresa}"> </td>
+					<td>
+						<a id="acoes" class="btn btn-light"
+							th:href="@{/removerProfissionalEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}"
+								width="30px">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
 </body>
+
 </html>
