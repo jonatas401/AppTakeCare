@@ -1,8 +1,10 @@
-package br.ifpe.web3.model;
+package br.ifpe.web3.DAO;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.ifpe.web3.model.UsuarioEmpresa;
 
 public interface EmpresaDAO extends JpaRepository<UsuarioEmpresa, Integer> {
 

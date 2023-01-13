@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.ifpe.web3.DAO.ClienteDAO;
+import br.ifpe.web3.DAO.EmpresaDAO;
 import br.ifpe.web3.exceptions.LoginExceptions;
-import br.ifpe.web3.model.ClienteDAO;
-import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 

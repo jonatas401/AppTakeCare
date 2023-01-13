@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ifpe.web3.model.ClienteDAO;
-import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.DAO.ClienteDAO;
+import br.ifpe.web3.DAO.EmpresaDAO;
+import br.ifpe.web3.DAO.PlanosDAO;
+import br.ifpe.web3.DAO.TipoEmpresaDAO;
 import br.ifpe.web3.model.Endereco;
-import br.ifpe.web3.model.PlanosDAO;
-import br.ifpe.web3.model.TipoEmpresaDAO;
-
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.util.UsuarioEmail;
@@ -186,8 +185,15 @@ public class Controler {
 	
 	
 	@PostMapping("/salvarUsuarioCliente")
-	public String salvarUsuarioCliente(UsuarioCliente cliente, Endereco endereco) {
+	public String salvarUsuarioCliente(UsuarioCliente cliente,@RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) {
 		System.out.println("cliente salvo!");
+		try {
+			cliente.setFotoPerfil(file.getBytes());
+		} catch (IOException e) {
+			ra.addFlashAttribute("msg", "Selecione uma foto Com até 1Mb");
+			return "redirect:/UsuarioEmpresa";
+			
+		}	
 		clienteDao.save(cliente);	
 		return "redirect:/login";
 	}

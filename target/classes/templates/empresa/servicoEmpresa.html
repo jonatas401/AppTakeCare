@@ -38,8 +38,8 @@
 	            <label>duração</label>
 	   			<input class="inputAgenda"  type="number" th:field="*{duracao}" required>
 	            <label>Imagem ilustrativa</label>
-	   			<input class="inputAgenda"  type="file" name="fileImage"   th:if="*{id == null}">
-	   			<input class="inputAgenda" id="foto"  type="file" th:if="*{id != null}" name="fileImage" value="|imagem/*{id}|">
+	   			<input class="inputAgenda"  type="file" name="fileImage"  >
+	   		
 	   			<img id="imagemServico" th:if="*{id != null}"  th:src="|imagem/*{id}|" name="fileImage"> 
 	   	
    				

@@ -3,6 +3,7 @@ package br.ifpe.web3.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,22 +19,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ifpe.web3.DAO.AgendamentoDAO;
+import br.ifpe.web3.DAO.ClienteAgendadoDAO;
+import br.ifpe.web3.DAO.ClienteDAO;
+import br.ifpe.web3.DAO.EmpresaDAO;
+import br.ifpe.web3.DAO.NoticiaDAO;
+import br.ifpe.web3.DAO.PlanosDAO;
+import br.ifpe.web3.DAO.ProfissionalDAO;
+import br.ifpe.web3.DAO.ProfissionalServicoDAO;
+import br.ifpe.web3.DAO.ServicoLojaDAO;
+import br.ifpe.web3.DAO.TipoEmpresaDAO;
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
-import br.ifpe.web3.model.AgendamentoDAO;
-import br.ifpe.web3.model.ClienteDAO;
-import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Noticia;
-import br.ifpe.web3.model.NoticiaDAO;
 import br.ifpe.web3.model.Planos;
-import br.ifpe.web3.model.PlanosDAO;
 import br.ifpe.web3.model.Profissional;
-import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ProfissionalServico;
-import br.ifpe.web3.model.ProfissionalServicoDAO;
 import br.ifpe.web3.model.ServicoLoja;
-import br.ifpe.web3.model.ServicoLojaDAO;
-import br.ifpe.web3.model.TipoEmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.util.UsuarioEmail;
@@ -41,10 +43,11 @@ import br.ifpe.web3.util.UsuarioEmail;
 @Controller
 public class ControllerEmpresa {
 	
-	@Autowired
-	private EmpresaDAO empresaDao;
+	
 	@Autowired
 	private ClienteDAO clienteDao;
+	@Autowired
+	private EmpresaDAO empresaDao;
 	@Autowired
 	private AgendamentoDAO agendaDao;
 	@Autowired
@@ -61,6 +64,8 @@ public class ControllerEmpresa {
 	private NoticiaDAO noticiaDao;
 	@Autowired
 	UsuarioEmail usuarioemail;
+	@Autowired
+	private ClienteAgendadoDAO clienteAgendadoDao;
 	
 	
 	
@@ -144,13 +149,19 @@ public class ControllerEmpresa {
 	@PostMapping("/servicoEmpresa")
 	public String salvarServico(ServicoLoja servico, Model model, HttpSession session, @RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) {
 		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
+		byte[] arquivo = null;
 		servico.setEmpresa(chaveId);
-		servico.getEmpresa().setId(chaveId.getId());
+		if(servico.getId() != null) {
+		arquivo = this.exibirImagem(servico.getId());
+		}
 		try {
 			servico.setFoto(file.getBytes());
 		} catch (IOException e) {
 			
 			e.printStackTrace();
+		}
+		if(file.isEmpty()) {
+			servico.setFoto(arquivo);
 		}
 		servicoLojaDao.save(servico);
 		ra.addFlashAttribute("msg", "Servico salvo com Sucesso!");
@@ -342,11 +353,29 @@ public class ControllerEmpresa {
 		List<UsuarioCliente> listaClienteEmpresa = clienteDao.listaClientesCadastrados(empresa.getId());
 		List<ServicoLoja> listaServico = servicoLojaDao.listaServico(empresa.getId());
 		List<Profissional> profissional = profissionalDao.listaProfissional(empresa.getId());
+		List<Agendamento> list = new ArrayList<Agendamento>();
+		Integer pr = 0;
 		
-		for(UsuarioCliente agenda : listaClienteEmpresa) {
-			System.out.println(agenda.getEmpresa().getNomeEmpresa());
+		for(Agendamento i : listaAgendamento) {
+			int pri = i.getCliente().getId();
+			
+			int a = i.getCliente().getId().compareTo(pr);
+			pr = pri;
+			
+			if(a != 0) {
+				System.out.println("apareceu");
+				list.add(i);
+			
+			}
+			for(UsuarioCliente cli : listaClienteEmpresa) {
+				if(cli.getId().compareTo(pr) == 0) {
+					list.remove(i);
+				}
+			}
+			
+			
 		}
-		
+		model.addAttribute("listaClientes", list);
 		model.addAttribute("agendamento", agendamento);
 		model.addAttribute("listaServico", listaServico);
 		model.addAttribute("listaAgendamento", listaAgendamento);
@@ -386,6 +415,7 @@ public class ControllerEmpresa {
 			System.out.println(chave.getNome());
 			agendamento.setEmpresa(empresa);
 			agendamento.setCliente(chave);
+			//clienteAgendadoDao.save(chave);
 			agendaDao.save(agendamento);
 			return"redirect:agendamentosCliente";
 			
@@ -418,7 +448,6 @@ public class ControllerEmpresa {
 		UsuarioEmpresa empresa =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
 		try {
 			usuarioemail.enviarEmailNotificacao(empresa.getEmail(),email, "Agendamento confirmado", "O Estabelecimento "+ empresa.getNomeEmpresa()+" confirmou seu agendamento,"
-																														+ " você pode comparecer ao local no horario marcado"
 																														+ " para mais Informações contate o estabelecimento: "+empresa.getNumero());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -465,11 +494,15 @@ public class ControllerEmpresa {
 	
 	@PostMapping("/UsuarioEmpresaEditado")
 	public String CadastroEmpresaEditado(UsuarioEmpresa empresa, @RequestParam("fileImage") MultipartFile file, HttpSession session, RedirectAttributes ra) {
+		byte[] arq = this.exibirFotoPerfil(empresa.getId());
 		try {
 			empresa.setFotoPerfil(file.getBytes());
 		} catch (IOException e) {
 			ra.addFlashAttribute("msg", "Selecione uma foto Com até 1Mb");
 			return "redirect:editarUsuarioEmpresa";
+		}
+		if(file.isEmpty()) {
+			empresa.setFotoPerfil(arq);
 		}
 		
 		empresaDao.save(empresa);	

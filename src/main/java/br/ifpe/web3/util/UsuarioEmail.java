@@ -3,8 +3,8 @@ package br.ifpe.web3.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ifpe.web3.model.ClienteDAO;
-import br.ifpe.web3.model.EmpresaDAO;
+import br.ifpe.web3.DAO.ClienteDAO;
+import br.ifpe.web3.DAO.EmpresaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 

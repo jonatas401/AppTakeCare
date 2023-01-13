@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ifpe.web3.DAO.AgendamentoDAO;
+import br.ifpe.web3.DAO.ClienteDAO;
+import br.ifpe.web3.DAO.EmpresaDAO;
+import br.ifpe.web3.DAO.NoticiaDAO;
+import br.ifpe.web3.DAO.ProfissionalDAO;
+import br.ifpe.web3.DAO.ServicoLojaDAO;
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
-import br.ifpe.web3.model.AgendamentoDAO;
-import br.ifpe.web3.model.ClienteDAO;
-import br.ifpe.web3.model.EmpresaDAO;
 import br.ifpe.web3.model.Noticia;
-import br.ifpe.web3.model.NoticiaDAO;
 import br.ifpe.web3.model.Profissional;
-import br.ifpe.web3.model.ProfissionalDAO;
 import br.ifpe.web3.model.ServicoLoja;
-import br.ifpe.web3.model.ServicoLojaDAO;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 
@@ -133,13 +133,16 @@ public class ControllerCliente {
 
 	@PostMapping("/UsuarioClienteEditado")
 	public String UsuarioClienteEditado(UsuarioCliente cliente,@RequestParam("fileImage") MultipartFile file, HttpSession session) {
+		byte[] arquivo = this.exibirFotoPerfilCliente(cliente.getId());
 		try {
 			cliente.setFotoPerfil(file.getBytes());
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
-		
+		if(file.isEmpty()) {
+			cliente.setFotoPerfil(arquivo);
+		}
 		clienteDao.save(cliente);	
 		session.setAttribute("usuarioLogado", cliente);
 		return "cliente/dadosCliente";
@@ -169,6 +172,7 @@ public class ControllerCliente {
 
 	@GetMapping("/editarUsuarioCliente")
 	public String editarCliente(Integer Id, Model model) {
+		
 		UsuarioCliente cliente = clienteDao.findById(Id).orElse(null);
 		model.addAttribute("cliente", cliente);
 		return "cliente/editarUsuarioCliente";
