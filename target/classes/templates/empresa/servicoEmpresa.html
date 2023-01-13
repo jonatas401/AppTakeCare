@@ -20,59 +20,64 @@
 </head>
 
 <body>
-	
-	
+
+
 	<div th:replace="empresa/navBarEmpresa :: #navConta"></div>
-	
-			<h4 id="msg" th:text="${msg}"></h4>
-	<section class="servico">
-	   	<div id="calendario">
-	   		<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Criar Serviço</button>
-	   		
-	   	</div>
-   		<div id="formAgenda">
-   			<form action="/servicoEmpresa" th:object="${servico}" method="post" enctype="multipart/form-data">
-   				
-	   			<input type="hidden" id="cod" th:field="*{id}">	
-	   			<label>servico</label>
-	   			<input class="inputAgenda"  type="text" th:field="*{descricao}"  placeholder=" Nome Servico" required>	
-	   			<label>Valor</label>
-	   			<input class="inputAgenda" th:field="*{valor}"  type="text" required>	
-	            <label>duração</label>
-	   			<input class="inputAgenda"  type="number" th:field="*{duracao}" required>
-	            <label>Imagem ilustrativa</label>
-	   			<input class="inputAgenda"  type="file" name="fileImage"  >
-	   		
-	   			<img id="imagemServico" th:if="*{id != null}"  th:src="|imagem/*{id}|" name="fileImage"> 
-	   	
-   				
-	   			<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
-	   			<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;" th:src="@{/img/close-line.svg}" width="30px"></button>
-   			</form>
-   			
-   		</div>
-   		<table id="table"  class="table table-dark table-striped-columns">
-  				<tr>
-					<th>Serviço</th>
-					<th>valor</th>
-					<th>duração</th>
-                    <th>imagem</th>
-					<th>acões</th>
-  				</tr>
-  				<tr th:each="cont : ${listaServicos}">
-  					<td th:text="${cont.descricao}"> </td>
-					<td th:text="${cont.valor}"></td>
-  					<td th:text="${cont.duracao} + ' min'"></td>
-  					<td ><img id="imagemServico"  th:src="|imagem/${cont.id}|"> </td> 
-					<td>
-					<button class="btn btn-light" ><a id="acoes" th:href="@{/removerServicoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}" width="30px"></button> 
-					<button id="editar" class="btn btn-light" ><a id="acoes" 
-						th:href="@{/editarServicoEmpresa(codigo=${cont.id})}" ><img th:src="@{/img/edit.svg}" width="30px"  alt="editar"></button>
-				
-					</td>
-					
-					
-  				</tr>
+
+	<h4 id="msg" th:text="${msg}"></h4>
+	<section class="servico scrollbar-primary">
+		<div id="calendario">
+			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Criar
+				Serviço</button>
+
+		</div>
+		<div id="formAgenda">
+			<form action="/servicoEmpresa" th:object="${servico}" method="post" enctype="multipart/form-data">
+
+				<input type="hidden" id="cod" th:field="*{id}">
+				<label>servico</label>
+				<input class="inputAgenda" type="text" th:field="*{descricao}" placeholder=" Nome Servico" required>
+				<label>Valor</label>
+				<input class="inputAgenda" th:field="*{valor}" type="text" required>
+				<label>duração</label>
+				<input class="inputAgenda" type="number" th:field="*{duracao}" required>
+				<label>Imagem ilustrativa</label>
+				<input class="inputAgenda" type="file" name="fileImage">
+
+				<img id="imagemServico" th:if="*{id != null}" th:src="|imagem/*{id}|" name="fileImage">
+
+
+				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
+				<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"
+						th:src="@{/img/close-line.svg}" width="30px"></button>
+			</form>
+
+		</div>
+		<table id="table" class="table table-dark table-striped-columns">
+			<tr>
+				<th>Serviço</th>
+				<th>valor</th>
+				<th>duração</th>
+				<th>imagem</th>
+				<th>acões</th>
+			</tr>
+			<tr th:each="cont : ${listaServicos}">
+				<td th:text="${cont.descricao}"> </td>
+				<td th:text="${cont.valor}"></td>
+				<td th:text="${cont.duracao} + ' min'"></td>
+				<td><img id="imagemServico" th:src="|imagem/${cont.id}|"> </td>
+				<td>
+					<button class="btn btn-light"><a id="acoes"
+							th:href="@{/removerServicoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/bin.svg}"
+								width="30px"></button>
+					<button id="editar" class="btn btn-light"><a id="acoes"
+							th:href="@{/editarServicoEmpresa(codigo=${cont.id})}"><img th:src="@{/img/edit.svg}"
+								width="30px" alt="editar"></button>
+
+				</td>
+
+
+			</tr>
 
 		</table>
 
