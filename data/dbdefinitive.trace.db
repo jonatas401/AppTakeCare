@@ -1706,3 +1706,6 @@ INSERT INTO "PUBLIC"."PLANOS"("ID","DETALHES","NOME","VALOR")VALUES(?,?,?,?) [22
 2023-01-13 00:16:40 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (PLANOS: ""VALOR"" INTEGER NOT NULL)"; SQL statement:
 INSERT INTO "PUBLIC"."PLANOS"("ID","DETALHES","NOME","VALOR")VALUES(?,?,?,?) [22018-214]
+2023-01-13 15:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SERVICO_LOJA ORDDER [*]BY ID DESC LIMIT 1"; SQL statement:
+SELECT * FROM SERVICO_LOJA ORDDER BY ID DESC LIMIT 1 [42000-214]

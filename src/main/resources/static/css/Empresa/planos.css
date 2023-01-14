@@ -12,58 +12,83 @@
 
 
 }
+
 .cartoes {
     display: block;
-	line-height: 1.42857143;
-	background-color: #fff;
-	border-radius: 2px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 11px 0 rgba(0, 0, 0, 0.12);
-	transition: box-shadow .25s;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 11px 0 rgba(0, 0, 0, 0.12);
+    transition: box-shadow .25s;
     position: relative;
     right: 120px;
     width: 200px;
-    height:250px;
+    height: 250px;
     margin: 500px;
-   	top:-15%;
+    top: -15%;
     align-items: center;
- 
-   
 
-  }
-  
-  .row .card {
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 
-  border-radius: 10%;
-  box-shadow: 5px 5px 20px rgb(190, 189, 189);
+
+}
+
+.card-content .detalhes {
+    text-align: left;
+}
+
+.card-content .valor {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-content .botao-seuplano .botao-assineja {
+    margin-top: 20px;
+}
+
+
+.row h1 {
+    color: white;
+    margin-top: -10%;
+    margin-bottom: 10%;
+    margin-left: -30%;
+}
+
+
+.row .card {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    border-radius: 10%;
+    box-shadow: 5px 5px 20px rgb(190, 189, 189);
 }
 
 .row img {
 
-  border-radius: 5%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+    border-radius: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
-  box-shadow: 6px 5px 15px black;
+    box-shadow: 6px 5px 15px black;
 }
-#cards{
+
+#cards {
     position: relative;
     right: 700px;
     bottom: 200px;
     height: 500px;
 }
 
-.card-content a{
+.card-content a {
     margin-left: 33px;
-    margin-top:-15px;
+    margin-top: -15px;
 }
 
-.card-content .p{
+.card-content .p {
     margin-top: -10px;
 }
-.card-content h3 img{
+
+.card-content h3 img {
     height: 100px;
     width: 100px;
     border-radius: 30px;
