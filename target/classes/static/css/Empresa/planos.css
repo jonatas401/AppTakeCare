@@ -63,14 +63,6 @@
     box-shadow: 5px 5px 20px rgb(190, 189, 189);
 }
 
-.row img {
-
-    border-radius: 5%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    box-shadow: 6px 5px 15px black;
-}
 
 #cards {
     position: relative;

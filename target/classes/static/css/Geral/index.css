@@ -87,6 +87,8 @@ body {
 	vertical-align: middle;
 }
 
+
+
 .fostrap-logo {
 	width: 100px;
 	margin-bottom: 15px
@@ -180,4 +182,69 @@ h1.heading {
 	padding: 10px;
 	font-weight: 600;
 	text-transform: uppercase
+}
+
+
+
+
+footer {
+	margin-top: auto;
+	background: #173457;
+	color: white;
+}
+
+.container .row h3 {
+	margin-top: 20px;
+}
+
+
+
+#contact-area {
+	text-align: center;
+}
+
+.contact-box {
+	padding-bottom: 50px;
+	margin-bottom: 50px;
+	border-bottom: 1px solid #3EC1D5;
+}
+
+
+.contact-box img {
+
+
+	width: 55px;
+	height: 55px;
+	line-height: 55px;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+
+.contact-box p {
+	font-size: 16px;
+}
+
+.contact-tile {
+	font-weight: bold;
+	color: #3EC1D5;
+}
+
+#msg-box p {
+	font-size: 22px;
+}
+
+#contact-form input[type="text"],
+#contact-form textarea {
+	margin-bottom: 15px;
+	border-radius: 0;
+}
+
+#contact-form .main-btn {
+	width: 120px;
+	height: 50px;
+}
+
+#contact-form .main-btn:hover {
+	color: #3EC1D5;
 }
