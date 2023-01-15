@@ -62,14 +62,7 @@
 					
 				 	<div class="form-group">
 						<label for="TipoEmpresa"> Tipo da Empresa</label>
-						
-						<select th:field="*{tipoEmpresa}" class="form-control" id="TipoEmpresa" disabled>
-						
-							<option th:each="empresa :  ${tipo}" 
-							 th:text="${empresa.nome}" 
-							 th:value="${empresa.id}" checked></option>
-							
-						</select>
+						<input th:field="*{tipoEmpresa.nome}" class="form-control" id="TipoEmpresa" disabled>
 					</div> 
 			
 			</div>

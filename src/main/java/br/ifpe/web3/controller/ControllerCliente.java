@@ -22,11 +22,13 @@ import br.ifpe.web3.DAO.EmpresaDAO;
 import br.ifpe.web3.DAO.NoticiaDAO;
 import br.ifpe.web3.DAO.ProfissionalDAO;
 import br.ifpe.web3.DAO.ServicoLojaDAO;
+import br.ifpe.web3.DAO.TipoEmpresaDAO;
 import br.ifpe.web3.exceptions.LoginExceptions;
 import br.ifpe.web3.model.Agendamento;
 import br.ifpe.web3.model.Noticia;
 import br.ifpe.web3.model.Profissional;
 import br.ifpe.web3.model.ServicoLoja;
+import br.ifpe.web3.model.TipoEmpresa;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 
@@ -45,6 +47,8 @@ public class ControllerCliente {
 	private ProfissionalDAO profissionalDao;
 	@Autowired
 	private NoticiaDAO noticiaDao;
+	@Autowired
+	private TipoEmpresaDAO tipoEmpresaDao;
 
 
 	
@@ -82,11 +86,17 @@ public class ControllerCliente {
 	}
 
 	@PostMapping("pesquisaEstabelecimentoCliente")
-	public String pesquisaEstabelecimento(String pesquisa, Model model) {
+	public String pesquisaEstabelecimento(String pesquisa, Model model , Integer id) {
 		
-		model.addAttribute("listarLojas", new UsuarioEmpresa());
-		List<UsuarioEmpresa >nomeEmpresas = empresaDao.findByNomeEmpresaContaining(pesquisa);
+		List<UsuarioEmpresa>nomeEmpresas = empresaDao.findByNomeEmpresaContaining(pesquisa);
+		List<UsuarioEmpresa> tipoEmpresa = empresaDao.findByTipoEmpresaId(id);
+		System.out.println(id);
+		
 		model.addAttribute("listarLojas", nomeEmpresas);
+		if(id != null) {
+			model.addAttribute("listarLojas", tipoEmpresa); 
+		}
+		model.addAttribute("tipoEmpresa", tipoEmpresaDao.findAll());
 		
 		return "cliente/listarEstabelecimentos";
 	}
@@ -94,6 +104,7 @@ public class ControllerCliente {
 	@GetMapping("/listarEstabelecimentosCliente")
 	public String listEstabelecimentos(UsuarioEmpresa empresa, Model model,String pesquisa, HttpSession session, Integer id)  {
 
+		model.addAttribute("tipoEmpresa", tipoEmpresaDao.findAll());
 		model.addAttribute("listarLojas", empresaDao.findAll());
 		
 		return "cliente/listarEstabelecimentos";

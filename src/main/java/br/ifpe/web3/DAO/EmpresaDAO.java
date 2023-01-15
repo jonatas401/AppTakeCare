@@ -17,7 +17,7 @@ public interface EmpresaDAO extends JpaRepository<UsuarioEmpresa, Integer> {
 
 	public boolean existsByEmailAndCodigoRecSenha(String email, String codigo);
 
-	
+	public List<UsuarioEmpresa> findByTipoEmpresaId(Integer id);
 	
 	
 	

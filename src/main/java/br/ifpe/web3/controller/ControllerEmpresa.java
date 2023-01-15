@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ifpe.web3.DAO.AgendamentoDAO;
-import br.ifpe.web3.DAO.ClienteAgendadoDAO;
 import br.ifpe.web3.DAO.ClienteDAO;
 import br.ifpe.web3.DAO.EmpresaDAO;
 import br.ifpe.web3.DAO.NoticiaDAO;
@@ -64,8 +63,8 @@ public class ControllerEmpresa {
 	private NoticiaDAO noticiaDao;
 	@Autowired
 	UsuarioEmail usuarioemail;
-	@Autowired
-	private ClienteAgendadoDAO clienteAgendadoDao;
+
+
 	
 	
 	
@@ -196,7 +195,6 @@ public class ControllerEmpresa {
 	@ResponseBody
 	public byte[] exibirImagem(@PathVariable("idFoto") Integer idFoto) {
 		System.out.println(idFoto);
-		System.out.println("imagem");
 		ServicoLoja servicoLoja = servicoLojaDao.findById(idFoto).orElse(null);
 		return servicoLoja.getFoto();
 	}
@@ -230,23 +228,7 @@ public class ControllerEmpresa {
 		return "redirect:/profissionalEmpresa";
 	}
 	
-//	@PostMapping("/pesquisaProfissionalEmpresa")
-//	public String pesquisaProfissional(String numero, Model model, HttpSession session)  {	
-//		UsuarioEmpresa chaveId =(UsuarioEmpresa) session.getAttribute("usuarioLogado");
-//		List<ServicoLoja> lista = servicoLojaDao.listaServico(chaveId.getId());
-//		System.out.println(numero);
-//		System.out.println(chaveId.getId());
-//		Profissional profissional = profissionalDao.pesquisaProfissional(numero, chaveId.getId());
-//		if(profissional == null){
-//			 profissional =  new Profissional();
-//			 model.addAttribute("msg", "Profissional Não Encontrado");
-//		}
-//	
-//		model.addAttribute("listaServicos", lista);
-//		 model.addAttribute("profissional",profissional);
-//		return "empresa/profissionalEmpresa";
-//	}
-//	
+	
 	@PostMapping("/salvarProfissionalServicoEmpresa")
 	public String salvarProfissionalServico(Profissional profissional,ServicoLoja servicoLoja, Model model, HttpSession session, RedirectAttributes ra) throws LoginExceptions {	
 	
@@ -260,22 +242,7 @@ public class ControllerEmpresa {
 		return "redirect:/profissionalEmpresa";
 	}
 	
-//	@GetMapping("/editarProfissionalEmpresa")
-//	public String editarProfissional(Profissional profissional, Model model, Integer codigo, ServicoLoja servicoLoja) throws LoginExceptions {
-//		profissional =  profissionalDao.findById(codigo).orElse(null);
-//		List<ProfissionalServico> profissionalServico = profissionalServicoDao.findByProfissional(profissional);
-//		 List<ServicoLoja> servico = new ArrayList<>();
-//		for(ProfissionalServico prof : profissionalServico) {
-//			servico.add(prof.getServico());
-//			System.out.println(prof.getServico().getId());
-//		}
-//		
-//		model.addAttribute("listaServicos", servico);
-//		model.addAttribute("profissional",profissional);
-//		return "empresa/profissionalEmpresa";
-//	}
-//	
-	
+
 	@GetMapping("/removerProfissionalServicoEmpresa")
 	public String removerServicoProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
 	
@@ -358,14 +325,10 @@ public class ControllerEmpresa {
 		
 		for(Agendamento i : listaAgendamento) {
 			int pri = i.getCliente().getId();
-			
 			int a = i.getCliente().getId().compareTo(pr);
 			pr = pri;
-			
 			if(a != 0) {
-				System.out.println("apareceu");
 				list.add(i);
-			
 			}
 			for(UsuarioCliente cli : listaClienteEmpresa) {
 				if(cli.getId().compareTo(pr) == 0) {
@@ -570,7 +533,6 @@ public class ControllerEmpresa {
 	@ResponseBody
 	public byte[] exibirFotoPerfil(@PathVariable("idFoto") Integer idFoto) {
 		System.out.println(idFoto);
-		System.out.println("imagem");
 		UsuarioEmpresa empresa = empresaDao.findById(idFoto).orElse(null);
 		return empresa.getFotoPerfil();
 	}

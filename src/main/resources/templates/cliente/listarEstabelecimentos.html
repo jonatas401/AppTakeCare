@@ -27,15 +27,25 @@
 	<div id="listaEstabelecimento" class="scrollbar-primary">
 
 
-		<div id="busca">
+		<div class="busca">
 
 			<form action="/pesquisaEstabelecimentoCliente" method="post">
 
 				<label>Nome:</label> <input class="form-control" name="pesquisa" id="pesquisa" />
+				
+				<select class="btn btn-light"  name="id" id="tipoEmpresa">
+					<option value="">
+						Todos
+					</option>
+					
+					<option th:each="cont : ${tipoEmpresa}"
+							th:text="${cont.nome}"
+							th:value=${cont.id}>
+					
+					</option>
+				</select>
 				<button class="btn btn-light"> pesquisar</button>
 			</form>
-
-
 		</div>
 
 
