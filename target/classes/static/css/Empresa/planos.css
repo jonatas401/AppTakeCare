@@ -32,6 +32,10 @@
 
 }
 
+.card-content {
+	margin-top:-10%
+}
+
 .card-content .detalhes {
     text-align: left;
 }
@@ -39,7 +43,10 @@
 .card-content .valor {
     text-align: center;
     margin-bottom: 20px;
+    margin-top:-5%
+
 }
+
 
 .card-content .botao-seuplano .botao-assineja {
     margin-top: 20px;
