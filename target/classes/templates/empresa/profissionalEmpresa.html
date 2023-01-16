@@ -79,8 +79,8 @@
 			<button onclick="cadastrarServico()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Alocar
 				Servico Ao Profissional</button>
 			<select style="margin-top: 5px; margin-left:5px;" class="btn btn-light">
-				<option onclick="listaServ()">Listar Serviços dos Profissionais</option>
-				<option onclick="listaProf()">Listar Profissionais</option>
+				<option onclick="listaServ()">Listar profissionais com serviços</option>
+				<option onclick="listaProf()">Listar profissionais</option>
 
 
 			</select>
@@ -95,7 +95,7 @@
 				<input class="inputAgenda" th:field="*{nome}" type="text" required>
 
 				<label>contato</label>
-				<input class="inputAgenda" type="text" th:field="*{numero}" required>
+				<input class="inputAgenda" type="tel" th:field="*{numero}" required>
 
 				<button type="submit" class="btn btn-light"><img th:src="@{/img/save.svg}" width="25px"></button>
 				<button id="cancela" onclick="agendarCancela()" class="btn btn-light"><img style="margin-left:-7px;"

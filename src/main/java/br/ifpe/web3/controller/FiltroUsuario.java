@@ -20,7 +20,7 @@ public class FiltroUsuario implements Filter {
 									,"/UsuarioCliente" ,"/UsuarioEmpresa","/h2-console(.*)", "/css/(.*)", "/img/(.*)", "/logoff"
 									, "/fazerAgendamento", "/removerAgendamentoCliente", "/salvarUsuarioEmpresa"
 									, "/salvarUsuarioCliente", "/imagem/(.*)", "/fotoPerfil/(.*)", "/pinConfirmacao"
-									,"/confirmarCod","/alterarSenha"
+									,"/confirmarCod","/alterarSenha", "/cadastroPlano", "/salvarPlano","/fotoPlano/(.*)"
 										};
 	
 	@Override
@@ -45,7 +45,7 @@ public class FiltroUsuario implements Filter {
 		
 		if(session != null && session.getAttribute("usuarioLogado") != null ) {
 			System.out.println("URL " + path);
-			System.out.println("fora");
+			
 			
 			if(path.contains("Cliente")  && session.getAttribute("tipo").equals("Cliente")) {
 				chain.doFilter(request, response);

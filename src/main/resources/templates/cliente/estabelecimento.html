@@ -124,7 +124,7 @@
 							<option th:value="''">selecione</option>
 							<option id="prof" th:each="profissional :  ${profissionalServico}"
 								onclick="trazerServicos('${profissional.id}')" th:text="${profissional.nome}"
-								th:value="${profissional.nome}">
+								th:value="${profissional.id}">
 							</option>
 						</select>
 
@@ -163,7 +163,7 @@
 					</tr>
 					<tr th:each="cont : ${listaAgendamento}">
 						<td th:text="${cont.empresa.nomeEmpresa}"> </td>
-						<td th:text="${cont.profissional}"> </td>
+						<td th:text="${cont.profissional.nome}"> </td>
 						<th th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span></th>
 						<td th:text="${cont.data}"> </td>
 						<td th:text="${cont.hora}"> </td>

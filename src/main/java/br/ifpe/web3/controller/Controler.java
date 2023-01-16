@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,7 +23,7 @@ import br.ifpe.web3.DAO.ClienteDAO;
 import br.ifpe.web3.DAO.EmpresaDAO;
 import br.ifpe.web3.DAO.PlanosDAO;
 import br.ifpe.web3.DAO.TipoEmpresaDAO;
-import br.ifpe.web3.model.Endereco;
+import br.ifpe.web3.model.Planos;
 import br.ifpe.web3.model.UsuarioCliente;
 import br.ifpe.web3.model.UsuarioEmpresa;
 import br.ifpe.web3.util.UsuarioEmail;
@@ -181,9 +183,6 @@ public class Controler {
 	
 	
 	
-	
-	
-	
 	@PostMapping("/salvarUsuarioCliente")
 	public String salvarUsuarioCliente(UsuarioCliente cliente,@RequestParam("fileImage") MultipartFile file, RedirectAttributes ra) {
 		System.out.println("cliente salvo!");
@@ -215,8 +214,41 @@ public class Controler {
 		return "redirect:/login";
 	}
 	
+	@GetMapping("/cadastroPlano")
+	public String cadastroPlano(Planos plano,  Model model) {
+		model.addAttribute("plano", plano);
+		return "cadastroPlanos";
+	}
 	
+	@PostMapping("/salvarPlano")
+	public String salvarPlano(Planos plano,@RequestParam("fileImage") MultipartFile file,  Model model, RedirectAttributes ra) {
+		
+		try {
+			
+			plano.setFotoPlano(file.getBytes());
+		} catch (IOException e) {
+			ra.addFlashAttribute("msg", "Selecione uma foto Com até 1Mb");
+			return "redirect:cadastroPlano";
+			
+		}	
+		
+		planosDao.save(plano);
+		ra.addFlashAttribute("msg", "Plano salvo com sucesso!");
+		return "redirect:cadastroPlano";
+	}
 	
+
+
+	
+	@GetMapping("/fotoPlano/{idFoto}")
+	@ResponseBody
+	public byte[] exibirImagemPlano(@PathVariable("idFoto") Integer idFoto) {
+		System.out.println(idFoto);
+		Planos plano = planosDao.findById(idFoto).orElse(null);
+		System.out.println(plano.getFotoPlano());
+		return plano.getFotoPlano();
+	}
+
 	
 
 }

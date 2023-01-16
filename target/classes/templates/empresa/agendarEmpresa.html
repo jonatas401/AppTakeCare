@@ -15,8 +15,6 @@
 
 
 
-
-
 </head>
 
 <body>
@@ -31,8 +29,6 @@
 			<button onclick="agendar()" style="margin-top: 5px; margin-left:5px;" class="btn btn-light">Agendar</button>
 
 		</div>
-
-
 
 		<div id="formAgenda">
 
@@ -63,7 +59,7 @@
 				<select th:field="*{profissional}" class="inputAgenda" required>
 					<option th:value="''">selecione</option>
 					<option id="prof" th:each="profissional :  ${profissionalServico}" th:text="${profissional.nome}"
-						th:value="${profissional.nome}">
+						th:value="${profissional.id}">
 					</option>
 				</select>
 
@@ -106,7 +102,7 @@
 			<tr th:each="cont : ${listaAgendamento}">
 				<td id="nome" th:if="${cont.cliente != null}"> <span th:text="${cont.cliente.nome}"></span></td>
 				<td id="numero" th:if="${cont.cliente != null}"><span th:text="${cont.cliente.numero}"></span> </td>
-				<th id="profissional" th:text="${cont.profissional}"></th>
+				<th id="profissional" th:text="${cont.profissional.nome}"></th>
 				<td id="data" th:text="${cont.data}"> </td>
 				<td id="hora" th:text="${cont.hora}"> </td>
 				<td id="servico" th:text="${cont.servico.descricao}"></td>

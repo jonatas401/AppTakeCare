@@ -21,15 +21,32 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 11px 0 rgba(0, 0, 0, 0.12);
     transition: box-shadow .25s;
     position: relative;
-    right: 120px;
-    width: 200px;
-    height: 250px;
+    right: 170px;
+    width: 250px;
+    height: 300px;
     margin: 500px;
-    top: -15%;
+    top: -20%;
     align-items: center;
 
 
 
+}
+#formPlano{
+	background:  rgb(85, 87, 83);
+	width:30%;
+	border-radius: 20px;
+	align-content: center;
+}
+labelPlano{
+	width:50%;
+}
+
+
+
+.fotoPlano{
+	width:250px;
+	margin-left: -5%;
+	margin-top:-8%;
 }
 
 .card-content {
@@ -38,24 +55,21 @@
 
 .card-content .detalhes {
     text-align: left;
+    margin-top:-5%;
 }
 
 .card-content .valor {
     text-align: center;
     margin-bottom: 20px;
-    margin-top:-5%
+    margin-top:-8%
 
 }
 
-
-.card-content .botao-seuplano .botao-assineja {
-    margin-top: 20px;
-}
 
 
 .row h1 {
     color: white;
-    margin-top: -10%;
+    margin-top: -13%;
     margin-bottom: 10%;
     margin-left: -30%;
 }
@@ -79,8 +93,8 @@
 }
 
 .card-content a {
-    margin-left: 33px;
-    margin-top: -15px;
+    margin-left: 30%;
+    margin-top: -20px;
 }
 
 .card-content .p {

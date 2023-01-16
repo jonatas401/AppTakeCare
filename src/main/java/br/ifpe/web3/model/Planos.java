@@ -1,9 +1,11 @@
 package br.ifpe.web3.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Planos {
@@ -13,6 +15,18 @@ public class Planos {
 	private String nome;
 	private int valor;
 	private String detalhes;
+	@Lob
+	@Column(columnDefinition="mediumblob")
+	private byte[] fotoPlano;
+	
+	public byte[] getFotoPlano() {
+		return fotoPlano;
+	}
+	
+	public void setFotoPlano(byte[] fotoPlano) {
+		this.fotoPlano = fotoPlano;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -33,7 +33,7 @@
   				</tr>
   				<tr th:each="cont : ${listaAgendamento}">
   					<td th:text="${cont.empresa.nomeEmpresa}"> </td>
-  					<th th:text="${cont.profissional}"></th>
+  					<th th:text="${cont.profissional.nome}"></th>
 					<th th:text="${cont.empresa.numero}"></th>
   					<td th:text="${cont.data}"> </td>
   					<td th:text="${cont.hora}">  </td>

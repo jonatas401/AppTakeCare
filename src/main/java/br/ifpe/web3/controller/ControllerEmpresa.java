@@ -67,7 +67,6 @@ public class ControllerEmpresa {
 
 	
 	
-	
 	@GetMapping("/dadosEmpresa")
 	public String dadosEmpresa() {
 		System.out.println();
@@ -255,8 +254,10 @@ public class ControllerEmpresa {
 	@GetMapping("/removerProfissionalEmpresa")
 	public String removerProfissional(Profissional profissional, Integer codigo, RedirectAttributes ra) throws LoginExceptions {	
 		List<ProfissionalServico> listaServ = profissionalServicoDao.findByProfissionalId(codigo);
+		List<Agendamento> listAgenda = agendaDao.findByProfissionalId(codigo);
 		
-		if(listaServ.isEmpty()) {
+		
+		if(listaServ.isEmpty() && listAgenda.isEmpty()) {
 			profissionalDao.deleteById(codigo);	
 			ra.addFlashAttribute("msg", " profissional removido com Sucesso!");
 			return "redirect:profissionalEmpresa";
@@ -368,7 +369,7 @@ public class ControllerEmpresa {
 		}
 		
 		else if(session.getAttribute("tipo").equals("Cliente")) {
-			if(agendamento.getProfissional() == "") {
+			if(agendamento.getProfissional() ==  null) {
 				System.out.println("nome vazio");
 				return"redirect:estabelecimentoCliente?id=" + id;
 			}
